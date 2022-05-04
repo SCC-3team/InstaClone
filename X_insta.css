@@ -1,0 +1,1534 @@
+.body {
+    display: block;
+    overflow-y: scroll;
+}
+
+/*---------------------  modal ---------------------------*/
+
+.popup-wrap{
+  background-color:rgba(0,0,0,.3);
+  /*배경색과 투명도로 살짝 어둡지만 투명한 배경*/
+  /*허공에 붕 떠있는 느낌을 주고 싶으면 안넣어도 무방*/
+  justify-content:center;
+    /*수평 중앙정렬*/
+  align-items:center;
+    /*수직 중앙정렬*/
+  position:fixed;
+    /*포지션 픽스, 화면이 스크롤되더라도 고정되기 위함*/
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+    /*모든 방향에 0을 주면 화면에 꽉차게 됩니다.*/
+  display:none;
+  /*이벤트가 발생할 때 띄우기 위해 숨김*/
+  /*처음부터 보이게 하는 상황이라면 display:flex;*/
+  padding:15px;
+  /*반응형의 경우 padding이 없으면 박스가 화면에 붙어서 안이뻐짐*/
+}
+
+.popup{
+  width:100%;
+    /*반응형 이기 때문에 가로값은 100%*/
+  max-width:400px;
+    /*팝업의 최대 크기지정*/
+  border-radius:10px;
+    /*둥글둥글한 디자인을 위해 각을 없앱니다.*/
+  overflow:hidden;
+    /*각을 없앴을 때 내부 영역이 튀어나오는걸 방지*/
+  background-color:#264db5; //배경색
+  /*팝업이 허공에 떠있는 듯한 느낌을 주기 위한 그림자 효과.*/
+  box-shadow: 5px 10px 10px 1px rgba(0,0,0,.3);
+}
+
+.popup-head{
+  width:100%;
+  /*부모요소를 따라가기 때문에 굳이 가로값을 주지 않아도 되지만 일부 ie에서 인식 못하는 문제가 있음*/
+  height:50px;
+    /*헤드 영역 높이*/
+  display:flex;
+    /*로고 이미지나 텍스트를 중앙 정렬하기 위한 flex 및 정렬*/
+  align-items:center;
+  justify-content:center;
+}
+
+.popup-body{
+  width:100%;
+  background-color:#ffffff;
+    /*컨텐츠 영역의 배경색*/
+}
+
+.body-content{
+    /*몸통 내부 컨텐츠 영역*/
+  width:100%;
+  padding:30px;
+    /*좌우에 내용이 붙으면 보기 안좋기 때문에 간격 띄움*/
+}
+.body-titlebox{
+    /*컨텐츠 타이틀 영역*/
+  text-align:center;
+    /*제목 중앙정렬*/
+  width:100%;
+  height:40px;
+  margin-bottom:10px;
+    /*내용과 간격 조정*/
+}
+.body-contentbox{
+    /*컨텐츠 내용 영역*/
+  word-break:break-word;
+    /*단어가 짤리지 않음*/
+  overflow-y:auto;
+    /*내부요소가 지정한 세로 값보다 클 경우 스크롤 생성*/
+  min-height:100px;
+    /*최소 높이*/
+  max-height:200px;
+    /*최대 높이*/
+}
+
+.popup-foot{
+  width:100%;
+  height:50px;
+}
+.pop-btn{ //각각의 버튼
+  display:inline-flex;
+    /*한줄로 나열하기 위한 inline속성과 flex속성 혼합*/
+  width:50%;
+  height:100%;
+  justify-content:center;
+    /*수평정렬*/
+  align-items:center;
+    /*수직정렬*/
+  float:left;
+    /*좌측배치*/
+  color:#ffffff;
+    /*글자색*/
+  cursor:pointer;
+    /*마우스 포인터 효과*/
+}
+
+.pop-btn.confirm{
+  border-right:1px solid #3b5fbf;
+    /*오른쪽 줄*/
+}
+
+/*----------------------------------------------------------*/
+/* -------------------  header design   --------------------*/
+
+
+.react {
+    align-items: stretch;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    position: relative;
+    z-index: 0;
+
+    -webkit-box-align: stretch;
+    -webkit-box-direction: normal;
+    -webkit-box-orient: vertical;
+}
+
+.section {
+    align-items: stretch;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    flex-shrink: 0;
+
+    overflow-x: hidden;
+    overflow-y: hidden;
+    position: relative;
+
+    -webkit-box-align: stretch;
+    -webkit-box-direction: normal;
+    -webkit-box-flex: 1;
+    -webkit-box-orient: vertical;
+}
+
+
+/* -------------------  header design   --------------------*/
+/*----------------------------------------------------------*/
+
+
+/* ---------------------------------------------------------*/
+/* ------------------ nav header design   ------------------*/
+
+
+.nav {
+    align-items: stretch;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    position: relative;
+
+    -webkit-box-align: stretch;
+    -webkit-box-direction: normal;
+    -webkit-box-ordinal-group: 1;
+    -webkit-box-orient: vertical;
+}
+
+.nav2 {
+    align-items: stretch;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    position: relative;
+
+    -webkit-box-align: stretch;
+    -webkit-box-direction: normal;
+    -webkit-box-orient: vertical;
+}
+
+.header-wrap {
+    align-items: center;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    width: 100%;
+    height: 80px;
+    position: fixed;
+    top: 0px;
+
+    background-color: rgb(255, 255, 255);
+    border-bottom: 0.5mm solid rgb(150, 150, 150);
+
+    z-index: 3;
+
+    -webkit-box-align: center;
+    -webkit-box-direction: normal;
+    -webkit-box-orient: vertical;
+}
+
+/* header의 배경임. 밑에 라인효과주고 배경 컬러는 흰색, 포지션 pixed, 반응형을 위해 width 100% */
+/* z-index 를 주어서 맨 위로 끌어올리고 */
+
+.header {
+    max-width: 1300px;
+    width: 100%;
+    height: 100%;
+    margin: 0 auto 0 auto;
+
+    align-items: center;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    flex-shrink: 0;
+    position: relative;
+
+    background-color: rgb(255, 255, 255);
+
+    z-index: 10;
+    /*flex-direction은 안에 아이콘을 row로 두겠다는 것.*/
+    /* 포지션을 fixed로 하고 z-index 속성을 추가해서 순서를 정해주면 화면에서 고정된 상태로 있음.*/
+    /*숫자를 변경해서 뒤로 보낼 수도 있음.*/
+
+    -webkit-box-align: center;
+    /* 박스에서 가운데 정렬 */
+    -webkit-box-direction: normal;
+    -webkit-box-orient: horizontal;
+    /* 박스 안에 내용을 수평으로 나열 */
+    -webkit-box-pack: center;
+}
+
+/* ---------------------------------------------------------*/
+/*------------------ Instagram logo design ---------------- */
+
+
+.logo-area {
+    align-items: stretch;
+    box-sizing: border-box;
+    display: flex;
+    flex-basis: 250px;
+    flex-direction: column;
+    flex-grow: 1;
+    flex-shrink: 0;
+    position: relative;
+
+    -webkit-box-align: stretch;
+    -webkit-box-direction: normal;
+    -webkit-box-flex: 1;
+    -webkit-box-orient: vertical;
+}
+
+.logo-area2 {
+    align-items: center;
+    align-content: stretch;
+    box-sizing: border-box;
+    display: flex;
+    flex-basis: auto;
+    flex-direction: row;
+    flex-grow: 0;
+    flex-shrink: 0;
+    margin-left: 15px;
+
+    justify-content: flex-start;
+    position: relative;
+
+    -webkit-box-align: center;
+    -webkit-box-direction: normal;
+    -webkit-box-flex: 0;
+    -webkit-box-orient: horizontal;
+    -webkit-box-pack: start;
+}
+
+.logo-area3 {
+    align-items: stretch;
+    box-sizing: border-box;
+    display: flex;
+    flex-shrink: 0;
+    position: relative;
+    padding-bottom: 16px;
+
+    -webkit-box-align: stretch;
+    -webkit-box-direction: normal;
+    -webkit-box-orient: vertical;
+}
+
+.logo-design {
+    font-size: 50px;
+}
+
+.logo-align {
+    align-items: stretch;
+    box-sizing: border-box;
+    display: flex;
+    flex-basis: 240px;
+    flex-direction: column;
+    flex-grow: 1;
+    position: relative;
+
+    font-size: 70px;
+    text-align: left;
+
+    width: 120px;
+    height: 100%;
+
+    margin-top: 14px;
+
+    text-decoration: none;
+    outline: none;
+    color: rgb(80, 80, 80);
+
+    object-fit: contain;
+    -webkit-box-direction: normal;
+}
+
+.logo-align:hover {
+    width: 120px;
+    height: 100%;
+    color: rgb(0, 0, 0);
+    text-decoration-line: none;
+}
+
+/*----------------   hyukstagram logo design  ----------------*/
+/* -----------------------------------------------------------*/
+
+/* -----------------------------------------------------------*/
+/* --------------------  search area  ------------------------*/
+
+
+input:focus {
+    outline: none;
+}
+
+.search-area {
+    align-items: center;
+    box-sizing: border-box;
+    display: flex;
+    flex-basis: auto;
+    flex-direction: column;
+    flex-grow: 0;
+    flex-shrink: 1;
+
+    height: 40px;
+    width: 100%;
+    max-width: 340px;
+
+    position: relative;
+
+    z-index: 2;
+
+    -webkit-box-align: center;
+    -webkit-box-direction: normal;
+    -webkit-box-flex: 0;
+    -webkit-box-orient: vertical;
+}
+
+.input {
+    box-sizing: border-box;
+    display: block;
+    padding-left: 16px;
+    padding-right: 16px;
+
+    z-index: 2;
+
+    max-width: 340px;
+    width: 100%;
+    height: 40px;
+    margin: auto;
+
+    background-color: rgb(250, 250, 250);
+    border: 0px solid rgb(80, 80, 80);
+    border-radius: 15px;
+    font-size: 18px;
+    color: rgb(80, 80, 80);
+
+    -webkit-box-direction: normal;
+    -webkit-rtl-ordering: logical;
+    -webkit-border-image: none;
+    appearance: none;
+}
+
+.input:hover {
+    width: 400px;
+    background: rgb(240, 240, 240);
+    border: 0px solid rgb(0, 0, 0);
+}
+
+
+/* -------------- search button -----------------------*/
+/* ----------------------------------------------------*/
+
+
+/* ----------------------------------------------------*/
+/* -------------- nav-icon button ---------------------*/
+
+.nav-layout {
+    align-content: center;
+    align-items: center;
+    box-sizing: border-box;
+
+    display: flex;
+    flex-basis: 150px;
+    flex-direction: row;
+    flex-grow: 1;
+    flex-shrink: 0;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    position: relative;
+
+    -webkit-box-align: center;
+    -webkit-box-direction: normal;
+    -webkit-box-flex: 1;
+    -webkit-box-orient: horizontal;
+    -webkit-box-pack: end;
+
+}
+
+.nav-icons {
+    align-items: stretch;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    flex-shrink: 0;
+
+    position: relative;
+
+    -webkit-box-align: stretch;
+    -webkit-box-direction: normal;
+    -webkit-box-orient: horizontal;
+
+}
+
+.icons {
+    align-items: center;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    position: relative;
+
+    margin: 2px 15px 0 15px;
+
+    -webkit-box-align: stretch;
+    -webkit-box-direction: normal;
+    -webkit-box-orient: vertical;
+
+}
+
+.icon {
+    align-items: center;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    position: relative;
+
+    -webkit-box-align: center;
+    -webkit-box-direction: normal;
+    -webkit-box-orient: vertical;
+
+}
+
+.icon2 {
+    align-items: center;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+
+    -webkit-box-direction: normal;
+
+}
+
+.icon3 {
+    display: block;
+    height: 40px;
+    width: 40px;
+
+    overflow-x: hidden;
+    overflow-y: hidden;
+    position: relative;
+
+    padding-top: 10px;
+
+    -webkit-box-direction: normal;
+
+}
+
+.icon-deco {
+    icon3-decoration: none;
+    outline: none;
+    color: rgb(80, 80, 80);
+    -webkit-box-flex: 0;
+
+    -webkit-box-direction: normal;
+}
+
+.icon-deco:hover {
+    width: 40px;
+    height: 100%;
+    color: rgb(0, 0, 0);
+    text-decoration-line: none;
+}
+
+/* -------------- nav-icon button ----------------------*/
+/* -------------------  header design   --------------------*/
+/* ---------------------------------------------------------*/
+
+
+/* ---------------------------------------------------------*/
+/* -------------------  content design   -------------------*/
+/* ---------------------  main layout   -------------------*/
+
+.main {
+    align-items: stretch;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    flex-shrink: 0;
+    order: 4;
+    top: 100px;
+    position: relative;
+
+    -webkit-box-align: stretch;
+    -webkit-box-direction: normal;
+    -webkit-box-flex: 1;
+    -webkit-box-ordinal-group: 5;
+    -webkit-box-orient: vertical;
+}
+
+/* ---------------------  main layout   -------------------*/
+/* ---------------------------------------------------------*/
+
+
+/* ------------------------------------------------------*/
+/* -------------------  feed design   -------------------*/
+
+
+.section-feed {
+    align-items: stretch;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    flex-grow: 1;
+    flex-shrink: 0;
+    flex-wrap: nowrap;
+
+    max-width: 1300px;
+    width: 100%;
+    padding: 30px 0 0 0;
+    position: relative;
+    margin: auto;
+
+    -webkit-box-align: stretch;
+    -webkit-box-direction: normal;
+    -webkit-box-flex: 1;
+    -webkit-box-orient: horizontal;
+}
+
+.feedback-line {
+    align-items: stretch;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 0;
+    float: left;
+
+    max-width: 900px;
+    width: 100%;
+    height: 9000px;
+    position: relative;
+    margin-right: 25px;
+
+    transform: matrix(1, 0, 0, 1, 0, -36);
+    -webkit-box-align: stretch;
+    -webkit-box-direction: normal;
+    -webkit-box-orient: vertical;
+}
+
+.feedback-style {
+    align-items: stretch;
+    align-content: stretch;
+    box-sizing: border-box;
+    display: flex;
+    flex-basis: auto;
+    flex-direction: column;
+    flex-shrink: 0;
+    flex-grow: 0;
+
+    max-width: 900px;
+    width: 100%;
+    height: 9000px;
+    position: relative;
+    justify-content: flex-start;
+
+    -webkit-box-align: stretch;
+    -webkit-box-direction: normal;
+    -webkit-box-flex: 0;
+    -webkit-box-orient: vertical;
+    -webkit-box-pack: start;
+}
+
+.feedback {
+    align-items: stretch;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+
+    max-width: 900px;
+    width: 100%;
+    height: 9000px;
+    position: relative;
+
+    background-color: rgb(255, 255, 255);
+    border: 1px solid rgb(210, 210, 210);
+
+    -webkit-box-align: stretch;
+    -webkit-box-direction: normal;
+    -webkit-box-orient: vertical;
+}
+
+.feedback2 {
+    align-items: stretch;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+
+    position: relative;
+    height: 9000px;
+    justify-content: center;
+    padding-bottom: 7700px;
+    max-width: 900px;
+    width: 100%;
+
+    -webkit-box-align: stretch;
+    -webkit-box-direction: normal;
+    -webkit-box-orient: vertical;
+}
+
+/* -------------------------------------------------------*/
+
+.article {
+    align-items: stretch;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    height: 1200px;
+    margin: 0 0px 90px 0px;
+    max-height: none;
+
+    position: relative;
+    max-width: 900px;
+    width: 100%;
+
+    -webkit-box-align: stretch;
+    -webkit-box-direction: normal;
+    -webkit-box-orient: vertical;
+
+}
+
+.article1 {
+    align-content: stretch;
+    align-items: stretch;
+    box-sizing: border-box;
+    display: flex;
+    flex-basis: auto;
+    flex-direction: column;
+    flex-grow: 0;
+    flex-shrink: 0;
+    justify-content: center;
+    margin: 0 0 50px 0;
+    max-height: none;
+    max-width: none;
+    padding: 0 0 0 0;
+    position: relative;
+    width: 100%;
+
+    -webkit-box-align: stretch;
+    -webkit-box-direction: normal;
+    -webkit-box-flex: 0;
+    -webkit-box-orient: vertical;
+    -webkit-box-pack: center;
+}
+
+/*------------------------------------------------------------*/
+
+.feedback-name {
+    align-items: stretch;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    position: relative;
+
+    height: 90px;
+    max-width: 900px;
+    width: 100%;
+
+    -webkit-box-align: stretch;
+    -webkit-box-direction: normal;
+    -webkit-box-orient: vertical;
+}
+
+.feedback-name2 {
+    align-content: stretch;
+    align-items: center;
+    box-sizing: border-box;
+    display: flex;
+    flex-basis: auto;
+    flex-direction: row;
+    flex-grow: 0;
+    flex-shrink: 0;
+
+    justify-content: space-between;
+    position: relative;
+
+    height: 90px;
+    border-bottom: 1px solid rgb(210, 210, 210);
+
+    -webkit-box-align: center;
+    -webkit-box-direction: normal;
+    -webkit-box-flex: 0;
+    -webkit-box-orient: horizontal;
+    -webkit-box-pack: justify;
+}
+
+.feedback-name-header {
+    align-items: center;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    flex-grow: 1;
+    flex-shrink: 1;
+
+    height: 90px;
+    max-width: calc(100% - 60px);
+    padding: 15px 4px 14px 30px;
+    position: relative;
+
+    -webkit-box-align: center;
+    -webkit-box-direction: normal;
+    -webkit-box-flex: 1;
+    -webkit-box-orient: horizontal;
+}
+
+/*------------------------------------------------------------*/
+
+.feedback-name-tag {
+    align-items: stretch;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+
+    font-size: 18px;
+
+    justify-content: center;
+    padding-right: 30px;
+    position: relative;
+    background-color: rgb(255, 255, 255);
+    border-style: none;
+
+    -webkit-box-align: stretch;
+    -webkit-box-direction: normal;
+    -webkit-box-orient: vertical;
+    -webkit-box-pack: center;
+}
+
+.fnt-btn {
+    align-items: center;
+    box-sizing: border-box;
+    display: flex;
+    height: 40px;
+    justify-content: center;
+
+    padding: 8px 8px 8px 8px;
+    width: 40px;
+
+    text-transform: none;
+    text-indent: 0px;
+    text-shadow: none;
+    word-spacing: 0px;
+    cursor: pointer;
+
+    background-color: rgb(255, 255, 255);
+    background-attachment: scroll;
+    background-clip: border-box;
+    background-image: none;
+    background-origin: padding-box;
+
+    border-style: none;
+
+
+    text-rendering: auto;
+    writing-mode: horizontal-tb;
+    appearance: auto;
+
+    -webkit-border-image: none;
+    -webkit-box-align: center;
+    -webkit-box-direction: normal;
+    -webkit-box-pack: center;
+}
+
+.fnt-btn-1 {
+    align-items: center;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    height: 24px;
+    justify-content: center;
+
+    position: relative;
+    width: 24px;
+    text-rendering: auto;
+    writing-mode: horizontal-tb;
+
+    -webkit-box-align: center;
+    -webkit-box-direction: normal;
+    -webkit-box-orient: vertical;
+    -webkit-box-pack: center;
+}
+
+.fnt-btn-2 {
+    align-content: stretch;
+    align-items: center;
+    box-sizing: border-box;
+    display: flex;
+    flex-basis: auto;
+    flex-direction: column;
+    flex-grow: 0;
+    flex-shrink: 0;
+    height: 24px;
+    justify-content: center;
+
+    position: relative;
+    width: 24px;
+
+    text-rendering: auto;
+    writing-mode: horizontal-tb;
+    -webkit-box-align: center;
+    -webkit-box-direction: normal;
+    -webkit-box-flex: 0;
+    -webkit-box-orient: vertical;
+    -webkit-box-pack: center;
+}
+
+.fnt-btn-svg {
+    display: block;
+    height: 24px;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    position: relative;
+    width: 24px;
+    text-rendering: auto;
+    writing-mode: horizontal-tb;
+    fill: rgb(38, 38, 38);
+    -webkit-box-direction: normal;
+    outline: none;
+    text-decoration: none;
+}
+
+/*------------------------------------------------------------*/
+
+.fnt-btn-modal {
+    align-items: center;
+    bottom: 0px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    height: 596px;
+    justify-content: space-around;
+
+    overflow-y: auto;
+    position: fixed;
+
+    width: 1518px;
+    z-index: 100;
+    background-color: rgba(0, 0, 0, 0.65);
+    border-style: solid;
+
+    -webkit-box-align: center;
+    -webkit-box-direction: normal;
+    -webkit-box-orient: vertical;
+    -webkit-tap-highlight-color: rgb(0, 0, 0);
+}
+
+.fnt-btn-modal-1 {
+    align-items: stretch;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 1;
+    height: 336px;
+    justify-content: center;
+    margin: 20px 20px 20px 20px;
+    max-height: calc(100% - 40px);
+
+    position: relative;
+    width: 400px;
+
+    -webkit-box-align: stretch;
+    -webkit-box-direction: normal;
+    -webkit-box-orient: vertical;
+    -webkit-box-pack: center;
+    -webkit-tap-highlight-color: rgb(0, 0, 0);
+
+    animation-delay: 0s;
+    animation-direction: normal;
+    animation-duration: 0.1s;
+    animation-fill-mode: none;
+    animation-iteration-count: 1;
+    animation-name: IGCoreModalShow;
+    animation-play-state: running;
+    animation-timing-function: ease-out;
+}
+
+.fnt-btn-modal-2 {
+    align-items: stretch;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    height: 336px;
+    max-height: 100%;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    position: relative;
+    width: 400px;
+    border-radius: 12px;
+
+    -webkit-box-align: stretch;
+    -webkit-box-direction: normal;
+    -webkit-box-orient: vertical;
+    -webkit-tap-highlight-color: rgb(0, 0, 0);
+}
+
+.ftn-btn-modal-3 {
+    align-items: stretch;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    height: 336px;
+    justify-content: center;
+    position: relative;
+    width: 400px;
+
+    -webkit-box-align: stretch;
+    -webkit-box-direction: normal;
+    -webkit-box-orient: vertical;
+    -webkit-box-pack: center;
+    -webkit-tap-highlight-color: rgb(0, 0, 0);
+}
+
+.ftn-btn-modal-4 {
+    align-items: stretch;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    height: 336px;
+
+    position: relative;
+    width: 400px;
+
+    -webkit-box-align: stretch;
+    -webkit-box-direction: normal;
+    -webkit-box-orient: vertical;
+    -webkit-tap-highlight-color: rgb(0, 0, 0);
+}
+
+.ftn-btn-modal-up-button-red {
+    align-items: flex-start;
+    box-sizing: border-box;
+    display: block;
+    height: 48px;
+    color: rgb(237, 73, 86);
+    background-color: rgb(255, 255, 255);
+    cursor: pointer;
+
+    min-height: 48px;
+    width: 400px;
+
+    text-rendering: auto;
+    writing-mode: horizontal-tb;
+    appearance: auto;
+    border-style: none;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    border-bottom: 0.5px solid rgb(150, 150, 150);
+    user-select: none;
+
+    -webkit-border-image: none;
+    -webkit-box-direction: normal;
+    -webkit-tap-highlight-color: rgb(0, 0, 0);
+}
+
+.ftn-btn-modal-button-red {
+    align-items: flex-start;
+    box-sizing: border-box;
+    display: block;
+    height: 48px;
+    color: rgb(237, 73, 86);
+    background-color: rgb(255, 255, 255);
+    cursor: pointer;
+
+    min-height: 48px;
+    width: 400px;
+
+    text-rendering: auto;
+    writing-mode: horizontal-tb;
+    appearance: auto;
+    border-style: none;
+    border-bottom: 0.5px solid rgb(150, 150, 150);
+    user-select: none;
+
+    -webkit-border-image: none;
+    -webkit-box-direction: normal;
+    -webkit-tap-highlight-color: rgb(0, 0, 0);
+}
+
+.ftn-btn-modal-button {
+    align-items: flex-start;
+    box-sizing: border-box;
+    display: block;
+    height: 48px;
+    color: rgb(50, 50, 50);
+    background-color: rgb(255, 255, 255);
+    cursor: pointer;
+
+    min-height: 48px;
+    width: 400px;
+
+    text-rendering: auto;
+    writing-mode: horizontal-tb;
+    appearance: auto;
+    border-style: none;
+    border-bottom: 0.5px solid rgb(150, 150, 150);
+    user-select: none;
+
+    -webkit-border-image: none;
+    -webkit-box-direction: normal;
+    -webkit-tap-highlight-color: rgb(0, 0, 0);
+}
+
+.ftn-btn-modal-bottom-button {
+    display: block;
+    height: 48px;
+    color: rgb(50, 50, 50);
+    background-color: rgb(255, 255, 255);
+    cursor: pointer;
+
+    min-height: 48px;
+    width: 400px;
+
+    text-rendering: auto;
+    writing-mode: horizontal-tb;
+    appearance: auto;
+    border-style: none;
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+    user-select: none;
+
+    -webkit-border-image: none;
+    -webkit-box-direction: normal;
+    -webkit-tap-highlight-color: rgb(0, 0, 0);
+}
+
+
+
+/*------------------------------------------------------------*/
+
+
+.fn-b-pic {
+    align-items: center;
+    box-sizing: border-box;
+    display: block;
+    flex-direction: column;
+    flex-shrink: 0;
+    height: 50px;
+    position: relative;
+    width: 50px;
+    padding: 5px;
+
+    -webkit-box-align: stretch;
+    -webkit-box-direction: normal;
+    -webkit-box-orient: vertical;
+}
+
+.fb-n-pic1 {
+    align-items: center;
+    align-self: center;
+    box-sizing: border-box;
+    display: block;
+    flex-basis: auto;
+    flex-direction: column;
+    flex-grow: 0;
+    flex-shrink: 0;
+
+    height: 41px;
+    width: 41px;
+
+    justify-content: center;
+    position: relative;
+
+    -webkit-box-align: center;
+    -webkit-box-direction: normal;
+    -webkit-box-flex: 0;
+    -webkit-box-orient: vertical;
+    -webkit-box-pack: center;
+}
+
+.canvas-b {
+    display: block;
+    height: 41px;
+    position: absolute;
+    width: 41px;
+
+    aspect-ratio: auto 42 / 42;
+    user-select: none;
+    -webkit-box-direction: normal;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+.main-contents-nav-profile-pic {
+    box-sizing: border-box;
+    display: block;
+    flex-basis: auto;
+    flex-grow: 0;
+    flex-shrink: 0;
+    height: 41px;
+
+    overflow-x: hidden;
+    overflow-y: hidden;
+
+    position: relative;
+    width: 41px;
+    border-radius: 50%;
+
+    background-color: #3b5fbf;
+
+    -webkit-box-direction: normal;
+    -webkit-box-flex: 0;
+
+
+}
+
+/*---------------------------------------------*/
+
+.fb-n-title {
+    align-items: flex-start;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    flex-shrink: 1;
+
+    height: 53px;
+    position: relative;
+    width: 500px;
+    margin-left: 14px;
+
+    overflow-x: hidden;
+    overflow-y: hidden;
+
+    -webkit-box-align: start;
+    -webkit-box-direction: normal;
+    -webkit-box-flex: 1;
+    -webkit-box-orient: vertical;
+}
+
+.fb-n-title-up {
+    align-items: stretch;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    height: 28px;
+
+    max-width: 100%;
+
+    position: relative;
+    width: 300px;
+
+    -webkit-box-align: stretch;
+    -webkit-box-direction: normal;
+    -webkit-box-orient: vertical;
+}
+
+.fbntu-1 {
+    align-items: center;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    flex-grow: 1;
+    flex-shrink: 1;
+    height: 28px;
+
+    max-width: 100%;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    padding: 2px 2px 2px 2px;
+    position: relative;
+    top: 1px;
+    width: 300px;
+
+    -webkit-box-align: center;
+    -webkit-box-direction: normal;
+    -webkit-box-flex: 1;
+    -webkit-box-orient: horizontal;
+}
+
+.fbntu-2 {
+    align-items: stretch;
+    box-sizing: border-box;
+    display: block;
+    flex-direction: column;
+    flex-shrink: 0;
+    height: 28px;
+
+    position: relative;
+    width: 300px;
+
+    -webkit-box-align: stretch;
+    -webkit-box-direction: normal;
+    -webkit-box-orient: vertical;
+}
+
+.fbntu-span {
+    box-sizing: border-box;
+    display: inline-block;
+    height: 30px;
+    font-size: large;
+
+    fbntu-span-decoration: none;
+    outline: none;
+    color: rgb(80, 80, 80);
+
+    position: relative;
+    width: 300px;
+
+    appearance: none;
+    user-select: auto;
+    -webkit-box-direction: normal;
+}
+
+/*---------------------------------------------*/
+
+.fb-n-title-down {
+    align-items: stretch;
+    bottom: 1px;
+    box-sizing: border-box;
+    display: block;
+    flex-direction: column;
+    flex-shrink: 0;
+    height: 25px;
+
+    max-width: 100%;
+    position: relative;
+    width: 300px;
+
+    -webkit-box-align: stretch;
+    -webkit-box-direction: normal;
+    -webkit-box-orient: vertical;
+}
+
+.fbntd-1 {
+    align-items: stretch;
+    box-sizing: border-box;
+    display: block;
+    flex-direction: column;
+    flex-shrink: 0;
+    height: 25px;
+
+    position: relative;
+    width: 300px;
+
+    -webkit-box-align: stretch;
+    -webkit-box-direction: normal;
+    -webkit-box-orient: vertical;
+}
+
+.fbntd-2 {
+    align-items: stretch;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    height: 25px;
+
+    position: relative;
+    width: 300px;
+
+    -webkit-box-align: stretch;
+    -webkit-box-direction: normal;
+    -webkit-box-orient: vertical;
+}
+
+.fbntd-3 {
+    align-items: stretch;
+    box-sizing: border-box;
+    display: block;
+    flex-direction: column;
+    flex-shrink: 0;
+    height: 25px;
+    overflow-x: hidden;
+    overflow-y: hidden;
+
+    position: relative;
+    width: 300px;
+
+    -webkit-box-align: stretch;
+    -webkit-box-direction: normal;
+    -webkit-box-orient: vertical;
+}
+
+.fbntd-Atag {
+    display: inline;
+    height: auto;
+    width: auto;
+
+    fbntu-Atag-decoration: none;
+    outline: none;
+    color: rgb(80, 80, 80);
+
+    -webkit-box-direction: normal;
+}
+
+/* ----------------------------- carousel ------------------------------- */
+
+
+
+
+
+/* ----------------------------- carousel ------------------------------ */
+
+.feedback-contents {
+    align-items: stretch;
+    align-content: stretch;
+    box-sizing: border-box;
+    display: flex;
+    flex-basis: auto;
+    flex-direction: column;
+    flex-grow: 0;
+    flex-shrink: 0;
+
+    justify-content: flex-start;
+    position: relative;
+
+    height: 300px;
+    max-width: 900px;
+    width: 100%;
+
+    border: 1px solid rgb(210, 210, 210);
+    background-color: rgb(255, 255, 255);
+
+    -webkit-box-align: stretch;
+    -webkit-box-direction: normal;
+    -webkit-box-flex: 0;
+    -webkit-box-orient: vertical;
+    -webkit-box-pack: start;
+}
+
+.feedback-contents-layout {
+    align-items: stretch;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    height: 190px;
+    position: relative;
+    width: 900px;
+
+    pointer-events: auto;
+    -webkit-box-align: stretch;
+    -webkit-box-direction: normal;
+    -webkit-box-orient: vertical;
+}
+
+
+.content {
+    max-width: 614px;
+    padding: 10px;
+    margin: 40px auto 30px auto;
+    float: left;
+    border: 1px solid rgb(210, 210, 210);
+
+    position: relative;
+    width: 100%;
+
+    box-sizing: border-box;
+    /*    fixed         */
+}
+
+/* ---------------------------------------------------------*/
+/* -------------------  content design   -------------------*/
+/* ---------------------------------------------------------*/
+
+
+/* ---------------------------------------------------------*/
+/* -------------------  side bar design   ------------------*/
+/* ---------------------------------------------------------*/
+
+
+.main-side-bar {
+    align-items: stretch;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    height: 1122px;
+    left: 950px;
+    margin: 0 auto 0 auto;
+    max-width: 340px;
+    padding: 0 0 0 0;
+    position: fixed;
+    right: 0px;
+    top: 93px;
+    width: 340px;
+
+    background-color: #3B666B;
+
+    -webkit-box-align: stretch;
+    -webkit-box-direction: normal;
+    -webkit-box-orient: vertical;
+}
+
+.msb-profile {
+    align-items: center;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    flex-shrink: 0;
+    height: 56px;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    margin-top: 18px;
+
+    position: relative;
+    width: 340px;
+
+    -webkit-box-align: center;
+    -webkit-box-direction: normal;
+    -webkit-box-orient: horizontal;
+    -webkit-box-pack: justify;
+}
+
+.msb-profile-area {
+    align-content: stretch;
+    align-items: stretch;
+    box-sizing: border-box;
+    display: flex;
+    flex-basis: auto;
+    flex-direction: column;
+    flex-grow: 0;
+    flex-shrink: 0;
+    height: 56px;
+    justify-content: flex-start;
+
+    margin-right: 4px;
+    position: relative;
+    width: 340px;
+
+    -webkit-box-align: stretch;
+    -webkit-box-direction: normal;
+    -webkit-box-flex: 0;
+    -webkit-box-orient: vertical;
+    -webkit-box-pack: start;
+}
+
+.msb-suggest {
+    align-items: stretch;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    height: 291px;
+    margin-bottom: 12px;
+    margin-left: -16px;
+
+    position: relative;
+    width: 340px;
+
+    -webkit-box-align: stretch;
+    -webkit-box-direction: normal;
+    -webkit-box-orient: vertical;
+}
+
+.msb-footer {
+    align-items: stretch;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    flex-shrink: 0;
+    flex-wrap: wrap;
+    height: 111px;
+    justify-content: space-between;
+
+    padding-bottom: 38px;
+
+    position: relative;
+    width: 340px;
+
+    -webkit-box-align: stretch;
+    -webkit-box-direction: normal;
+    -webkit-box-orient: horizontal;
+    -webkit-box-pack: justify;
+}
+
+
+/* ---------------------------------------------------------*/
+/* -------------------  side bar design   ------------------*/
+/* ---------------------------------------------------------*/
+
+
+/*ul {*/
+/*    list-style: none;*/
+/*}*/
+
+/*a {*/
+/*    text-decoration: none;*/
+/*    outline: none;*/
+/*}*/
