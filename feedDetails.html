@@ -9,316 +9,402 @@
     <!-- Bootstrap Font Icon CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <script src="https://kit.fontawesome.com/452167c19f.js" crossorigin="anonymous"></script>
-</head>
-<meta charset="UTF-8">
-<title>modal2</title>
-<style>
-    body {
-        margin: 0px;
-    }
+    <meta charset="UTF-8">
+    <title>modal2</title>
+    <style>
+        body {
+            margin: 0px;
+            overflow: hidden;
+        }
 
-    .anchor {
-        text-decoration: none;
-        color: black;
-    }
+        .anchor {
+            text-decoration: none;
+            color: black;
+        }
 
-    .anchor:hover {
-        color: black;
-    }
+        .anchor:hover {
+            color: black;
+        }
 
-    .all_profile_img {
-        border-radius: 50%;
-        width: 34px;
-        height: 34px;
-    }
+        .all_profile_img {
+            border-radius: 50%;
+            width: 34px;
+            height: 34px;
+        }
 
-    .inputborder {
-        border: none;
-    }
+        .inputborder {
+            border: none;
+        }
 
-    .inputborder:focus {
-        outline: none;
-    }
+        .inputborder:focus {
+            outline: none;
+        }
 
-    .feed_details_wrap {
-        z-index: 100;
-        position: fixed;
-        background-color: rgba(0, 0, 0, 0.65);
-        width: 100%;
-        height: 100vh;
-        display: flex;
-        margin: 0px auto;
-        justify-content: center;
-        align-items: center;
-    }
+        .feed_details_wrap {
+            z-index: 100;
+            position: fixed;
+            background-color: rgba(0, 0, 0, 0.65);
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            margin: 0px auto;
+            justify-content: center;
+            align-items: center;
 
-    .feed_details {
-        background-color: rgba(0, 0, 0, 0.1);
-        width: 100%;
-        height: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        position: absolute;
-    }
+        }
 
-    .feed_details_box {
-        width: 1573px;
-        height: 1071px;
-        display: flex;
-        flex-direction: row;
-        background-color: white;
-    }
+        .feed_details_exit_btn {
+            z-index: 100;
+            position: fixed;
+            display: flex;
+            left: 95%;
+            bottom: 95%;
+            width: 40px;
+            height: 40px;
+            align-items: center;
+            justify-content: center;
+        }
 
-    .feed_details_box_left {
-        width: 100%;
-        height: 100%;
-        max-width: 1071px;
-        max-height: 1071px;
-        background-color: yellow;
-    }
+        .feed_details {
+            background-color: rgba(0, 0, 0, 0.1);
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: absolute;
 
-    .feed_details_box_right {
-        width: 100%;
-        height: 100%;
-        max-width: 503px;
-        max-height: 1071px;
-    }
+        }
 
-    .feed_details_box_writer {
-        display: flex;
-        width: 100%;
-        height: 100%;
-        max-width: 503px;
-        max-height: 63px;
-    }
+        .feed_details_box {
+            width: 1573px;
+            height: 1071px;
+            display: flex;
+            flex-direction: row;
+            background-color: white;
+            border-radius: 10px;
 
-    .feed_details_header {
-        display: flex;
-        width: 100%;
-        height: 100%;
-        max-width: 503px;
-        max-height: 63px;
-        align-items: center;
-        border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+        }
 
-    }
+        .feed_details_box_left {
+            width: 100%;
+            height: 100%;
+            max-width: 1071px;
+            max-height: 1071px;
+            background-color: yellow;
+        }
 
-    .feed_details_header_profile {
-        display: flex;
-        justify-content: flex-end;
-        align-items: center;
-        width: 100%;
-        height: 100%;
-        max-width: 455px;
-        max-height: 63px;
-    }
+        .feed_details_box_right {
+            width: 100%;
+            height: 100%;
+            max-width: 503px;
+            max-height: 1071px;
+        }
 
-    .feed_details_header_img {
-        display: flex;
-        width: 100%;
-        height: 100%;
-        max-width: 32px;
-        max-height: 32px;
-        margin-right: 15px;
-    }
+        .feed_details_box_writer {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            max-width: 503px;
+            max-height: 63px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.5);
+        }
 
-    .feed_details_profile_follow {
-        display: flex;
-        width: 100%;
-        height: 100%;
-        max-width: 380px;
-        max-height: 26px;
-        margin-right: 10px;
-        margin-top: 7px;
-        font-size: 15px;
-    }
-
-    .box_profile {
-        margin: 0 5px;
-    }
-
-    .feed_details_header_modal {
-        display: flex;
-        width: 100%;
-        height: 100%;
-        max-width: 48px;
-        max-height: 40px;
-        background-color: darkblue;
-
-    }
-
-    .feed_details_box_ct {
-        width: 100%;
-        height: 100%;
-        max-width: 503px;
-        max-height: 1008px;
-    }
+        .feed_details_header {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            max-width: 503px;
+            max-height: 63px;
+            align-items: center;
+            padding: 0 16px;
 
 
-    .feed_details_box_text {
-        display: flex;
-        background-color: deepskyblue;
-        width: 100%;
-        height: 100%;
-        max-width: 503px;
-        max-height: 844px;
-        padding: 0 16px;
+        }
 
-    }
+        .feed_details_header_profile {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+            max-width: 455px;
+            max-height: 63px;
+        }
 
-    .box_account_text {
-        display: flex;
-        width: 100%;
-        height: 100%;
-        max-width: 485px;
-        max-height: 185px;
-        background-color: purple;
-        word-break: break-all;
-    }
+        .feed_details_header_img {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            max-width: 32px;
+            max-height: 32px;
+            margin-right: 15px;
+        }
 
-    .account_text_left {
-        display: flex;
-        width: 50px;
-        height: 32px;
-        margin-left: 3px;
-    }
+        .feed_details_profile_follow {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            max-width: 380px;
+            max-height: 26px;
+            margin-right: 10px;
+            margin-top: 7px;
+            font-size: 15px;
+        }
 
-    .account_text_right {
-        display: flex;
-        width: 100%;
-        height: 100%;
-        max-width: 453px;
-        max-height: 185px;
+        .box_profile {
+            margin: 0 5px;
+        }
 
-    }
+        .feed_details_header_modal {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            max-width: 48px;
+            max-height: 40px;
+            background-color: darkblue;
 
-    .feed_details_box_btns {
-        display: flex;
-        width: 100%;
-        height: 100%;
-        max-width: 503px;
-        max-height: 55px;
-        padding: 0 16px;
-        align-items: center;
-    }
+        }
 
-    .box_btns {
-        display: flex;
-        align-items: center;
-        width: 40px;
-        height: 40px;
-    }
-
-    .box_i {
-        width: 24px;
-        height: 24px;
-        margin-top: 50%;
-    }
-
-    .feed_details_box_btn4 {
-        margin-left: auto;
-        margin-right: -10px;
-    }
-
-    .feed_details_box_likes {
-        display: flex;
-        width: 100%;
-        height: 100%;
-        max-width: 503px;
-        max-height: 18px;
-        padding-left: 16px;
-    }
-
-    .box_likes {
-        font-size: 14px;
-    }
-
-    .feed_details_box_date {
-        display: flex;
-        width: 100%;
-        height: 100%;
-        max-width: 503px;
-        max-height: 18px;
-        padding-left: 16px;
-        padding-top: 8px;
-    }
-
-    .box_date {
-        color: rgba(0, 0, 0, 0.5);
-        font-size: 10.1px;
-    }
-
-    .feed_details_box_comment_insert {
-        display: flex;
-        align-items: flex-end;
-        width: 100%;
-        height: 100%;
-        max-width: 503px;
-        max-height: 73px;
-
-    }
-
-    .feed_details_box_comment_pad {
-        display: flex;
-        width: 100%;
-        height: 100%;
-        max-width: 503px;
-        max-height: 53px;
-        justify-content: center;
-        align-items: center;
-
-    }
-
-    .feed_details_box_comment_form {
-        display: flex;
-        align-items: center;
-        width: 100%;
-        height: 100%;
-        max-width: 470px;
-        max-height: 40px;
-    }
-
-    .comment_imogy {
-        width: 40px;
-        height: 40px;
-        background-color: purple;
-    }
-
-    .comment_text {
-        display: flex;
-        align-items: center;
-        width: 404px;
-        height: 40px;
-    }
-
-    .comment_textt {
-        width: 404px;
-        height: 40px;
-    }
+        .feed_details_box_ct {
+            width: 100%;
+            height: 100%;
+            max-width: 503px;
+            max-height: 1008px;
+        }
 
 
-    .comment_writebtn {
-        display: flex;
-        width: 26px;
-        height: 18px;
-    }
+        .feed_details_box_text {
+            display: block;
+            width: 100%;
+            height: 100%;
+            max-width: 503px;
+            max-height: 844px;
+            padding: 0 16px;
+            align-items: center;
+        }
 
-    .comment_writebtnn {
-        display: flex;
-        width: 26px;
-        height: 18px;
-        font-size: 15px;
-        text-decoration: none;
-        color: rgb(0, 111, 255);
-    }
+        .box_account_text {
+            display: flex;
+            width: 100%;
+            height: auto;
+            max-width: 485px;
+            max-height: 185px;
+            padding-top: 30px;
+            margin-bottom: 40px;
+            word-break: break-all;
+        }
 
-</style>
+        .account_text_left {
+            display: flex;
+            width: 53px;
+            height: 32px;
+            margin-left: 3px;
+        }
+
+        .account_text_right {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            max-width: 450px;
+            max-height: 185px;
+            font-size: 13px;
+
+        }
+
+        .account_text_right_ac {
+            width: 100%;
+            max-width: 100px;
+            min-width: 70px;
+        }
+
+        .account_comment_list {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            min-height: 62px;
+            max-width: 485px;
+            max-height: 62px;
+            word-break: break-all;
+        }
+
+        .account_comment_list_img {
+            width: 50px;
+            height: 34px;
+            margin-left: 3px;
+        }
+
+        .account_comment_list_text {
+            display: block;
+            width: 100%;
+            height: 100%;
+            max-width: 453px;
+            max-height: 185px;
+            font-size: 13px;
+        }
+
+        .account_comment_list_id {
+            display: flex;
+            width: 100%;
+            height: 35%;
+        }
+
+        .account_comment_list_date {
+            display: flex;
+            width: 100%;
+            height: 50%;
+        }
+
+        .feed_details_box_btns {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            max-width: 503px;
+            max-height: 55px;
+            padding: 0 16px;
+            align-items: center;
+            border-top: 1px solid rgba(0, 0, 0, 0.5);
+        }
+
+        .box_btns {
+            display: flex;
+            align-items: center;
+            width: 40px;
+            height: 40px;
+        }
+
+        .box_i {
+            width: 24px;
+            height: 24px;
+            margin-top: 50%;
+        }
+
+        .feed_details_box_btn4 {
+            margin-left: auto;
+            margin-right: -10px;
+        }
+
+        .feed_details_box_likes {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            max-width: 503px;
+            max-height: 18px;
+            padding-left: 16px;
+        }
+
+        .box_likes {
+            font-size: 14px;
+        }
+
+        .feed_details_box_date {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            max-width: 503px;
+            max-height: 18px;
+            padding-left: 16px;
+            padding-top: 8px;
+        }
+
+        .box_date {
+            color: rgba(0, 0, 0, 0.5);
+            font-size: 10.1px;
+        }
+
+        .feed_details_box_comment_insert {
+            display: flex;
+            align-items: flex-end;
+            width: 100%;
+            height: 100%;
+            max-width: 503px;
+            max-height: 73px;
+
+        }
+
+        .feed_details_box_comment_pad {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            max-width: 503px;
+            max-height: 53px;
+            justify-content: center;
+            align-items: center;
+
+        }
+
+        .feed_details_box_comment_form {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            height: 100%;
+            max-width: 470px;
+            max-height: 40px;
+            padding: 0 16px;
+
+        }
+
+        .comment_text {
+            display: flex;
+            align-items: center;
+            width: 404px;
+            height: 40px;
+        }
+
+        .comment_textt {
+            width: 404px;
+            height: 40px;
+        }
+
+
+        .comment_writebtn {
+            display: flex;
+            width: 26px;
+            height: 18px;
+            padding-right: -10px;
+        }
+
+        .comment_writebtnn {
+            display: flex;
+            width: 26px;
+            height: 18px;
+            font-size: 15px;
+            text-decoration: none;
+            color: rgb(0, 111, 255);
+        }
+
+    </style>
+
+    <script>
+        import Modal from './Modal.vue'
+
+        export default {
+            components: {
+                Modal
+            },
+            data() {
+                return {
+                    showModal: false
+                }
+            }
+        }
+    </script>
+
+
 </head>
 <body>
 
 <div class="feed_details_wrap">
-    <div class="feed_details_btn"></div>
+    <div class="feed_details_btn">
+        <div class="feed_details_exit">
+            <div class="feed_details_exit_btn">
+                <a class="anchor" href="">
+                    <i class="fa-solid fa-x fa-2xl"></i>
+                </a>
+            </div>
+        </div>
+    </div>
     <div class="feed_details">
         <div class="feed_details_box">
             <div class="feed_details_box_left"></div> <!--모달 왼쪽 div-->
@@ -343,20 +429,18 @@
                             </div> <!--헤더 프로파일 팔로우 상태-->
                         </div>
                         <div class="feed_details_header_modal">
-                            <div class="feedback-name-tag">
-                                <button class="fnt-btn">
-                                    <div class="fnt-btn-1">
-                                        <div class="fnt-btn-2">
-                                            <svg class="fnt-btn-svg" aria-label="More options" role="img"
-                                                 viewBox="0 0 24 24">
-                                                <circle cx="4" cy="12" r="1.5"></circle>
-                                                <circle cx="12" cy="12" r="1.5"></circle>
-                                                <circle cx="20" cy="12" r="1.5"></circle>
-                                            </svg>
-                                        </div>
-                                    </div>
-                                </button>
-                            </div>
+                            <template>
+                                <button id="show-modal" @click="showModal = true">Show Modal</button>
+
+                                <Teleport to="body">
+                                    <!-- use the modal component, pass in the prop -->
+                                    <modal :show="showModal" @close="showModal = false">
+                                        <template #header>
+                                            <h3>custom header</h3>
+                                        </template>
+                                    </modal>
+                                </Teleport>
+                            </template>
                         </div>
                     </div>
                 </div>  <!-- 이미지 닉네임 모달버튼 --->
@@ -368,40 +452,63 @@
                                     <img class="all_profile_img" src="1.jpeg"/></a>
                             </div>
                             <div class="account_text_right">
-                                <div ><b>여기에계정</b></div>
+                                <div class="account_text_right_ac"><a class="anchor" href=""><b>여기에계정</b></a></div>
                                 <div>
                                     asldkfj;lasdfkas;ldkfas;dkfjlas;dkfjsal;dkfjs;lakfsla;dkfs;aldkfsal;dkfjsa;ldkfjsadl;kfjsda;lkfjsl;k
                                 </div>
                             </div>
                         </div>
+                        <div class="account_comment_list">
+                            <div class="account_comment_left_width">
+                                <div class="account_comment_list_img ">
+                                    <a class="anchor" href="1.jpeg">
+                                        <img class="all_profile_img" src="1.jpeg"/>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="account_comment_list_text">
+                                <div class="account_comment_list_id">
+                                    <div class="account_text_right_ac">
+                                        <a class="anchor" href=""><b>여기에계정</b></a>
+                                    </div>
+                                    <div>asldkjaoiufdj</div>
+                                </div>
+                                <div class="account_comment_list_date">
+                                    <div class="box_date">2일 전</div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+
                     <div class="feed_details_box_btns">
                         <div class="box_btns feed_details_box_btn1">
-                            <i class="box_i fa-solid fa-heart fa-lg icon-deco"></i>
+                            <a class="anchor" href=""><i class="box_i fa-solid fa-heart fa-lg icon-deco"></i></a>
                         </div>
                         <div class="box_btns feed_details_box_btn2">
-                            <i class="box_i fa-solid fa-heart fa-lg icon-deco"></i>
+                            <a class="anchor" href=""><i class="box_i fa-solid fa-comments fa-lg icon-deco"></i></a>
 
                         </div>
                         <div class="box_btns feed_details_box_btn3">
-                            <i class="box_i fa-solid fa-heart fa-lg icon-deco"></i>
+                            <a class="anchor" href=""><i class="box_i fa-solid fa-lg fa-paper-plane"></i></a>
 
                         </div>
                         <div class="box_btns feed_details_box_btn4">
-                            <i class="box_i fa-solid fa-heart fa-lg icon-deco"></i>
+                            <a class="anchor" href=""><i class="box_i fa-solid fa-heart fa-lg icon-deco"></i></a>
 
                         </div>
                     </div>
+
                     <div class="feed_details_box_likes">
-                        <span class="box_likes"><b>좋아요 12,231개</b></span>
+                        <a class="anchor" href="">
+                            <div class="box_likes"><b>좋아요 12,231개</b></div>
+                        </a> <!--모달 버튼-->
                     </div>
                     <div class="feed_details_box_date">
-                        <span class="box_date"><b>1일 전</b></span>
+                        <div class="box_date"><b>1일 전</b></div>
                     </div>
                     <div class="feed_details_box_comment_insert">
                         <div class="feed_details_box_comment_pad">
                             <div class="feed_details_box_comment_form">
-                                <div class="comment_imogy"></div>
                                 <div class="comment_text">
                                     <input class="inputborder comment_textt" type="text" placeholder="댓글을 입력하세요"/>
                                 </div>
