@@ -3,9 +3,7 @@ import jwt
 import datetime
 import hashlib
 from flask import Flask, render_template, jsonify, request, redirect, url_for
-from werkzeug.utils import secure_filename
 from datetime import datetime, timedelta
-
 
 app = Flask(__name__)
 app.config["TEMPLATES_AUTO_RELOAD"] = True
@@ -16,10 +14,12 @@ SECRET_KEY = 'SPARTA'
 client = MongoClient('mongodb+srv://test:sparta@cluster0.dpbtk.mongodb.net/myFirstDatabase?retryWrites=true&w=majority')
 db = client.dbsparta
 
+
 @app.route('/')
 def home():
     token_receive = request.cookies.get('mytoken')
     try:
+        # token을 시크릿키로 복호화
         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
         user_info = db.users.find_one({"username": payload["id"]})
         return render_template('mainpage.html', user_info=user_info)
@@ -34,11 +34,10 @@ def login():
     msg = request.args.get("msg")
     return render_template('loginpage.html', msg=msg)
 
+
 @app.route('/signup')
 def signup():
     return render_template('signup_page.html')
-
-
 
 
 @app.route('/user/<username>')
@@ -60,16 +59,23 @@ def sign_in():
     # 로그인
     username_receive = request.form['username_give']
     password_receive = request.form['password_give']
+    # 회원가입 때와 같은 방법으로 pw를 암호화한다.
     pw_hash = hashlib.sha256(password_receive.encode('utf-8')).hexdigest()
+    # id, 암호화된 pw를 가지고 해당 유저를 찾는다.
     result = db.users.find_one({'username': username_receive, 'password': pw_hash})
 
     if result is not None:
         payload = {
-         'id': username_receive,
-         'exp': datetime.utcnow() + timedelta(seconds=60 * 60 * 24)  # 로그인 24시간 유지
+            # JWT 토큰에는, payload와 시크릿키가 필요하다. (이게 필요한 이유는 상세하게 위에 소개한 링크에 나와있다.)
+            # 시크릿키가 있어야 토큰을 복호화해서 payload 값을 볼 수 있다.
+            # id와 exp를 담는다. JWT 토큰을 풀면 유저ID 값을 알 수 있다.
+            # exp에는 만료시간을 넣어준다. 만료시간이 지나면, 시크릿키로 토큰을 풀때 만료되었다고 에러가 난다.
+            'id': username_receive,
+            'exp': datetime.utcnow() + timedelta(seconds=60 * 60 * 24)  # 로그인 24시간 유지
         }
         token = jwt.encode(payload, SECRET_KEY, algorithm='HS256')
 
+        # 토큰을 줍니다.
         return jsonify({'result': 'success', 'token': token})
     # 찾지 못하면
     else:
@@ -84,7 +90,7 @@ def sign_up():
     password_hash = hashlib.sha256(password_receive.encode('utf-8')).hexdigest()
     doc = {
         "username": username_receive,
-        "usermail" : usermail_receive,
+        "usermail": usermail_receive,
         "password": password_hash,
         "profile_name": username_receive,
     }

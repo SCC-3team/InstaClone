@@ -11,6 +11,7 @@
 
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
             integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
             crossorigin="anonymous"></script>
@@ -31,14 +32,6 @@
                 let password2 = $("#input-password2").val()
                 console.log(username, usermail, password, password2)
 
-
-                if ($("#help-id").hasClass("is-danger")) {
-                    alert("아이디를 다시 확인해주세요.")
-                    return;
-                } else if (!$("#help-id").hasClass("is-success")) {
-                    alert("아이디 중복확인을 해주세요.")
-                    return;
-                }
                 $.ajax({
                     type: "POST",
                     url: "/sign_up/save",
