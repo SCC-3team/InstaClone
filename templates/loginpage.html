@@ -11,7 +11,6 @@
 
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
             integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
             crossorigin="anonymous"></script>
@@ -23,30 +22,7 @@
 
     <!--  insta css  -->
     <link rel="stylesheet" href="../static/loginpage.css">
-    <script>
-        function sign_in() {
-                let username = $("#input-username").val()
-                let password = $("#input-password").val()
-                $.ajax({
-                    type: "POST",
-                    url: "/sign_in",
-                    data: {
-                        username_give: username,
-                        password_give: password
-                    },
-                    success: function (response) {
-                        if (response['result'] == 'success') {
-                            $.cookie('mytoken', response['token'], {path:'/'});
-                            alert("로그인에 성공하셨습니다")
-                            window.location.replace("/")
 
-                        } else {
-                            alert(response['msg'])
-                        }
-                    }
-                });
-            }
-    </script>
 </head>
 
 <style>
@@ -61,29 +37,46 @@
                 <div class="loginpage-article">
                     <div class="loginpage-article-layout">
                         <div class="lpal-form">
+
+                            <!--            아이디 or 이메일 입력창          -->
+
                             <div class="mb-3" style="text-align:center;">
                                 <label for="exampleInputEmail1" class="form-label"></label>
-                                <input type="email" class="form-control" id="input-username"
+                                <input type="email" class="form-control" id="exampleInputEmail1"
                                        aria-describedby="emailHelp" placeholder="사용자 ID 또는 이메일">
                                 <div id="emailHelp" class="form-text">
                                 </div>
                             </div>
+
+                            <!--            비밀번호 입력창          -->
+
                             <div class="mb-3" style="text-align:center;">
                                 <label for="exampleInputPassword1" class="form-label"></label>
-                                <input type="password" class="form-control" id="input-password"
+                                <input type="password" class="form-control" id="exampleInputPassword1"
                                        placeholder="비밀번호">
                             </div>
+
+                            <!--            로그인 버튼 / 일단 클릭시 메인페이지로 이동         -->
+
                             <div class="login-btn" style="text-align:center;">
-                                <button onclick="sign_in()" type="button" class="btn btn-outline-primary">Login</button>
+                                <button type="button" class="btn btn-outline-primary" onclick="location.href='mainpage.html'">Login</button>
                             </div>
+
+
                             <hr style="width: 600px; border: 1px solid rgb(200, 200, 200)">
+
+                            <!--            회원가입 버튼 / 일단 클릭시 회원가입 페이지로 이동          -->
+
                             <div class="login-btn" style="text-align:center;">
-                                <button onclick=window.location.href='/signup' type="button" class="btn btn-outline-primary">Sign Up</button>
+                                <button type="button" class="btn btn-outline-primary" onclick="location.href='signup_page.html'">Sign Up</button>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+
+            <!--            쓸대없는 로그인 푸터          -->
+
             <div class="loginfooter">
                 <div class="loginfooter-article">
                     <div class="lga">
@@ -99,6 +92,9 @@
                         <a href="">해시태그 .</a>
                         <a href="">위치 .</a>
                     </div>
+
+                    <!--            쓸대없는 언어번환 - 기능 없음          -->
+
                     <div class="footer2">
                         <div class="language">
                             <select aria-label="표시언어변경" class="select" style="border-style: none">

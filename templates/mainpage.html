@@ -3,11 +3,14 @@
 <head>
 
     <title>Main Feed Page</title>
+
     <!-- Required meta tags -->
+
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
             integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
@@ -15,8 +18,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
             crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
-    <script src="{{ url_for('static', filename='myjs.js') }}"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined|Material+Icons+Two+Tone|Material+Icons+Round|Material+Icons+Sharp"
@@ -26,20 +27,19 @@
 
 
     <!--  CSS  -->
+
     <link rel="stylesheet" type="text/css" href="../static/mainpage.css">
     <link rel="stylesheet" href="../static/side_bar.css">
     <link rel="stylesheet" href="../static/header.css">
 
-
-    <!--  댓글 테스트 CSS  -->
-    <link rel="stylesheet" type="text/css" href="../static/body.css">
-
     <!--search bar link -->
+
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="fontawesome-free-5.15.1/css/all.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!--    fontawesome script-->
+
     <script src="https://kit.fontawesome.com/993c2cba92.js" crossorigin="anonymous"></script>
 
     <noscript>
@@ -47,49 +47,40 @@
     </noscript>
 
 
-    <script>
-      $(document).ready(function() {
-        get_comment('{{user_info.username}}');
-      })
-
-      <!--    로그아웃 함수-->
-      function logout(){
-        $.removeCookie('mytoken', {path: '/'});
-        alert('로그아웃 하셨습니다')
-        window.location.replace("/login")
-      }
-    </script>
-
 </head>
 
 <script>
 
 </script>
 
-
 <body class="body">
 <div class="react">
     <div class="section">
 
         <!--         네비게이션 헤더 바           -->
+
         <div class="nav">
             <div class="nav2">
                 <nav class="header-wrap">
 
                     <!--           헤더 바              -->
+
                     <header class="header">
 
                         <!--           인스타그램 로고        -->
+
                         <div class="logo-area">
                             <div class="logo-area2">
 
                                 <!--           인스타그램 로고 아이콘               -->
+
                                 <div class="icons">
                                     <div class="icon">
                                         <div class="icon2">
 
-                                            <!--           로고 아이콘 클릭시 어디로 이동할지 삽입해야함          -->
-                                            <li class="icon3"><a href="">
+                                            <!--           로고 아이콘 클릭시 메인페이지 소환          -->
+
+                                            <li class="icon3"><a href="mainpage.html">
                                                 <i class="fa-brands fa-instagram fa-2xl icon-deco"></i>
                                                 </i></a>
                                             </li>
@@ -98,34 +89,40 @@
                                 </div>
 
                                 <!--               인스타그램 로고 텍스트 디자인                  -->
-                                <!--               텍스트 클릭시 어디로 이동할지 삽입해야함          -->
+                                <!--               텍스트 클릭시 메인페이지 소환          -->
+
                                 <div class="logo-area3">
-                                    <a href=""><img alt="Instagram" class="s4Iyt logo-align"
-                                                    src="https://www.edigitalagency.com.au/wp-content/uploads/new-Instagram-logo-white-png-font.png"></a>
+                                    <a href="mainpage.html"><img alt="Instagram" class="s4Iyt logo-align"
+                                                                 src="https://www.edigitalagency.com.au/wp-content/uploads/new-Instagram-logo-white-png-font.png"></a>
                                 </div>
                             </div>
                         </div>
 
                         <!--           검색바               -->
+
                         <div class="search-area">
                             <input class="input" placeholder="Search...">
                         </div>
 
-                        <!--           네비게이션 아이콘       -->
+                        <!--           네비게이션 아이콘 부모 div       -->
+
                         <div class="nav-layout">
                             <div class="nav-icons">
 
                                 <!--               게시물 추가 아이콘                 -->
+                                <!--                  모달 추가                     -->
                                 <div class="icons">
                                     <div class="icon">
                                         <div class="icon2">
-                                            <li class="icon3"><a href=""><i
+                                            <li class="icon3"><a href="......"><i
                                                     class="fa-solid fa-square-plus fa-2xl icon-deco"></i></a></li>
                                         </div>
                                     </div>
                                 </div>
 
                                 <!--               좋아요 아이콘                     -->
+                                <!--             좋아요 카운트 추가                   -->
+
                                 <div class="icons">
                                     <div class="icon">
                                         <div class="icon2">
@@ -137,6 +134,8 @@
                                 </div>
 
                                 <!--               다이렉트 메세지 추가 아이콘           -->
+                                <!--               유저 간 메세지 보내기 기능           -->
+
                                 <div class="icons">
                                     <div class="icon">
                                         <div class="icon2">
@@ -148,19 +147,17 @@
                                 </div>
 
                                 <!--               마이 프로필 아이콘                 -->
+                                <!--               클릭시 개별 페이지 이동하도록 href 변경해야 함                 -->
+
                                 <div class="icons">
                                     <div class="icon">
                                         <div class="icon2">
-                                            <li class="icon3"><a href=""><i
+                                            <li class="icon3"><a href="profilepage_김혁진.html"><i
                                                     class="fa-solid fa-user fa-2xl icon-deco"></i></a>
                                             </li>
                                         </div>
                                     </div>
                                 </div>
-                                <!--               로그아웃  버튼                -->
-                               <div class="login-btn" style="text-align:center;">
-                                <button onclick=logout() type="button" class="btn btn-outline-primary">logout</button>
-                               </div>
                             </div>
                         </div>
                     </header>
@@ -169,57 +166,69 @@
         </div>
 
         <!--         메인 피드 + 사이드 바            -->
+
         <div class="main">
             <section class="section-feed">
 
                 <!--            피드백 라인             -->
+
                 <div class="feedback-line">
                     <div class="feedback-style">
                         <div class="feedback">
                             <div class="feedback2">
 
                                 <!--              캐러셀                  -->
+
                                 <div class="article1">
 
-                                    <!--              피드 창 프로필 표시                          -->
+                                    <!--              메인 피드 창 프로필 표시                          -->
+
                                     <div class="feedback-name">
                                         <div class="feedback-name2">
 
                                             <!--              피드 창 프로필 이름 해더                    -->
+
                                             <div class="feedback-name-header">
 
                                                 <!--              피드 창 프로필 사진                    -->
+                                                <!--              src를 변경할지 백그라운드 이미지를 변경할지 ??                    -->
+                                                <!--              백그라운드 이미지 변경일 경우 CSS를 바꾸는 JQuery필요한데 상당히 번거로움 CSS를 개별적으로 하나씩 다 붙여야 함               -->
+                                                <!--              scr를 변경할 경우 이미지 캔버스를 통째로 temp_html해야함                    -->
+
                                                 <div class="fn-b-pic">
                                                     <div class="fb-n-pic1">
                                                         <canvas class="canvas-b"></canvas>
-                                                        <span class="main-contents-nav-profile-pic" role="link"
+                                                        <span class="main-contents-nav-profile-pic1" role="link"
                                                               tabindex="-1">
-                                                                <img alt="..." class="main-contents-nave-profile-pic2"
+                                                                <img alt="" class="main-contents-nave-profile-pic2"
                                                                      crossorigin="anonymous" data-testid="user-avatar"
-                                                                     draggable="false" src="....">
+                                                                     draggable="false" src="">
                                                             </span>
                                                     </div>
                                                 </div>
 
                                                 <!--              피드 창 프로필 이름                    -->
                                                 <!--              피드 창 프로필 이름 Id                 -->
+
                                                 <div class="fb-n-title">
                                                     <div class="fb-n-title-up">
                                                         <div class="fbntu-1">
                                                             <div class="fbntu-2">
-                                                                <a class="fbntu-span" href=""
-                                                                   tabindex="0">LIVERPOOL</a>
+                                                                <a class="fbntu-span" href="profilepage_김혁진.html"
+                                                                   tabindex="0">h_genie7</a>
                                                             </div>
                                                         </div>
                                                     </div>
 
                                                     <!--              피드 창 프로필 이름 테그                -->
+
                                                     <div class="fb-n-title-down">
                                                         <div class="fbntd-1">
                                                             <div class="fbntd-2">
                                                                 <div class="fbntd-3">
-                                                                    <a class="fbntd-Atag" href="..." tabindex="0">AXA
-                                                                        Center</a>
+                                                                    <a class="fbntd-Atag"
+                                                                       href="https://www.jejusi.go.kr/index.ac"
+                                                                       tabindex="0">Jeju Island</a>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -228,6 +237,8 @@
                                             </div>
 
                                             <!--              피드 창 프로필 모달 쩜쩜쩜                   -->
+                                            <!--               기능은 없음                   -->
+
                                             <div class="feedback-name-tag">
                                                 <button class="fnt-btn">
                                                     <div class="fnt-btn-1">
@@ -245,45 +256,47 @@
                                         </div>
                                     </div>
 
-                                    <!--              피드 창 캐러셀 표시                          -->
+                                    <!--              피드 창 부트스트랩 캐러셀                          -->
+                                    <!--              아이디 값 바꿔주고 밑에 data-bs-target 아이디 같이 가줘야 작동함                     -->
+
                                     <div class="feed_img">
-                                        <div id="carouselExampleIndicators" class="carousel slide perimage"
-                                             data-bs-touch="true"
-                                             data-bs-interval="false">
-                                            <div class="carousel-indicators">
-                                                <button type="button" data-bs-target="#carouselExampleIndicators"
-                                                        data-bs-slide-to="0"
-                                                        class="active" aria-current="true"
-                                                        aria-label="Slide 1"></button>
-                                                <button type="button" data-bs-target="#carouselExampleIndicators"
-                                                        data-bs-slide-to="1"
-                                                        aria-label="Slide 2"></button>
-                                                <button type="button" data-bs-target="#carouselExampleIndicators"
-                                                        data-bs-slide-to="2"
-                                                        aria-label="Slide 3"></button>
-                                            </div>
+                                        <div id="carouselExampleControlsNoTouching" class="carousel slide"
+                                             data-bs-touch="false" data-bs-interval="false">
                                             <div class="carousel-inner">
+
+                                                <!--             첫번째 사진 src 경로 입력               -->
+
                                                 <div class="carousel-item active">
-                                                    <img src="https://i1.sndcdn.com/artworks-eyxk7s8jcnpNsdod-ePBpOg-t500x500.jpg"
+                                                    <img src="../static/h_genie7_image/정사각형/0B1CD144-A109-47D8-89B7-D5F4B9ABC55B.JPEG"
+                                                         class="d-block w-100" alt="...">
+                                                </div>
+
+                                                <!--             왠만하면 두번째 사진까지라도 같이 가져가서 temp_html 해야함               -->
+                                                <!--             div 클래스가 다르기 때문임.               -->
+
+                                                <div class="carousel-item">
+                                                    <img src="../static/h_genie7_image/정사각형/0DE8336F-48E1-47E2-99DD-813B10968B39.JPEG"
                                                          class="d-block w-100" alt="...">
                                                 </div>
                                                 <div class="carousel-item">
-                                                    <img src="https://i.pinimg.com/originals/0b/2f/8a/0b2f8a51314ab1ebe0505aee843a33b1.jpg"
-                                                         class="d-block w-100" alt="...">
-                                                </div>
-                                                <div class="carousel-item">
-                                                    <img src="https://upload.wikimedia.org/wikipedia/commons/5/5b/IU_at_%27dlwlrma%27_concert_in_Jeju_on_January_5%2C_2019_%283%29.jpg"
+                                                    <img src="../static/h_genie7_image/정사각형/5A009CC3-9B62-440C-AA7C-7B32B06A358B.JPEG"
                                                          class="d-block w-100" alt="...">
                                                 </div>
                                             </div>
+
+                                            <!--             캐러셀 사진 이동 버튼임               -->
+                                            <!--             data-bs-target을 해당 캐러셀과 같은 값을 줘야함               -->
+                                            <!--             보통 타겟아이디 뒤에 숫자를 붙이는게 쉬움               -->
+                                            <!--             ex) target1 , target1-1, target1-2               -->
+
                                             <button class="carousel-control-prev" type="button"
-                                                    data-bs-target="#carouselExampleIndicators"
+                                                    data-bs-target="#carouselExampleControlsNoTouching"
                                                     data-bs-slide="prev">
                                                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                                 <span class="visually-hidden">Previous</span>
                                             </button>
                                             <button class="carousel-control-next" type="button"
-                                                    data-bs-target="#carouselExampleIndicators"
+                                                    data-bs-target="#carouselExampleControlsNoTouching"
                                                     data-bs-slide="next">
                                                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                                                 <span class="visually-hidden">Next</span>
@@ -292,32 +305,120 @@
                                     </div>
 
                                     <!--              피드 창 컨텐츠 표시                          -->
+
                                     <div class="feedback-contents">
                                         <div class="feedback-contents-layout">
+                                            <section class="fsl-buttons">
 
-                                            <!-- 댓글달기 테스트 -->
-                                            <div class="inputContainer">
-                                                <input class="inputBox" type="text" id="textarea-comment" placeholder="댓글 달기...">
-                                            </div>
-                                            <span>
-                                                <button onclick="comment()" class="buttonBox">게시</button>
-                                            </span>
+                                                <!--                   좋아요 버튼 - 기능없음                           -->
 
-                                            <section>
-                                                <h4>11111111</h4>
+                                                <span class="span-like">
+                                                        <button class="like-btn">
+                                                            <i class="fa-regular fa-heart fa-2xl">
+                                                        </i>
+                                                        </button>
+                                                    </span>
+
+                                                <!--                   메세지보내기 버튼 - 생각없이 만듬                            -->
+
+                                                <span class="span-like">
+                                                        <button class="like-btn">
+                                                            <i class="fa-regular fa-envelope fa-2xl"></i>
+                                                            </i>
+                                                        </button>
+                                                    </span>
+
+                                                <!--                   댓글 달기 버튼 - 피드 모달 창 띄워주기                             -->
+
+                                                <span class="span-like">
+                                                        <button class="like-btn">
+                                                            <i class="fa-regular fa-comment fa-2xl"></i>
+                                                            </i>
+                                                        </button>
+                                                    </span>
+
+                                                <!--                   POST 버튼 - 기능 없음                             -->
+
+                                                <div class="span-post1">
+                                                        <span class="span-post">
+                                                        <button class="like-btn">
+                                                            <i class="fa-regular fa-bookmark fa-2xl"></i>
+                                                            </i>
+                                                        </button>
+                                                    </span>
+                                                </div>
                                             </section>
-                                            <div>
-                                                <h4>1111111</h4>
+
+                                            <!--                     좋아요 카운트                        -->
+
+                                            <section class="like-count">
+                                                <div class="like-count1">
+                                                    <a href="">60 likes</a>
+                                                </div>
+                                            </section>
+
+                                            <!--                     컨텐츠 텍스트랑 설명                        -->
+
+                                            <div class="comments">
+                                                <div class="explanation">
+
+                                                    <!--                     등록 유저 아이디랑 설명                        -->
+
+                                                    <div>
+                                                        <div class="explan-ID"><a href="">h_genie7</a></div>
+                                                        <div class="comment-explanation">부트캠프 끝나면 비행기타고 제일 먼저 제주도 갈거야
+                                                        </div>
+                                                    </div>
+
+                                                    <!--                     첫번째 댓글란                       -->
+                                                    <!--          여기부턴 temp_html해서 하나씩 붙여 나가기           -->
+                                                    <!--            팬명록 프로젝트 참고하면 좋을 듯                  -->
+
+                                                    <div>
+                                                        <div><a href="">lcolb987</a></div>
+                                                        <div class="comment-explanation2">잘가라
+                                                        </div>
+                                                    </div>
+
+                                                    <!--                     두번째 댓글란                        -->
+
+                                                    <div>
+                                                        <div>hosang_111</div>
+                                                        <div class="comment-explanation2">형 잘 지내시죠??
+                                                        </div>
+                                                    </div>
+
+                                                    <!--                     더보기 테그 - 피드 모달 띄워주기                        -->
+
+                                                    <span>...
+                                                            <div aria-disabled="false" role="button" tabindex="0">more
+                                                            </div>
+                                                        </span>
+                                                </div>
                                             </div>
-                                            <div>
-                                                <h4>11111111</h4>
-                                            </div>
-                                            <section>
-                                                <h4>11111111</h4>
+
+                                            <!--                     댓글입력 창                        -->
+
+                                            <section class="comments-input">
+                                                <div class="comment-input">
+                                                    <input class="form-control form-control-sm comment-input"
+                                                           type="text" placeholder="Post your comments"
+                                                           aria-label=".form-control-sm example">
+                                                </div>
+
+                                                <!--                     댓글 달기 버튼                        -->
+
+                                                <div class="comment-post">
+                                                    <a href="" class="comment-post-icon"><i
+                                                            class="fa-solid fa-angles-up fa-2xl"></i></a>
+                                                </div>
                                             </section>
                                         </div>
                                     </div>
                                 </div>
+
+
+
                                 <div class="article1">
 
                                     <!--              피드 창 프로필 표시                          -->
@@ -329,36 +430,42 @@
 
                                                 <!--              피드 창 프로필 사진                    -->
                                                 <div class="fn-b-pic">
+
+                                                <!--                       마찬가지로 아이디값 중복 안되게 해야함                             -->
+                                                <!--                       유저 프로필 페이지 사진을 불러오는 식으로 해야 할 듯                             -->
+
                                                     <div class="fb-n-pic1">
                                                         <canvas class="canvas-b"></canvas>
-                                                        <span class="main-contents-nav-profile-pic" role="link"
+                                                        <span class="main-contents-nav-profile-pic2" role="link"
                                                               tabindex="-1">
-                                                                <img alt="..." class="main-contents-nave-profile-pic2"
+                                                                <img alt="" class="main-contents-nave-profile-pic2"
                                                                      crossorigin="anonymous" data-testid="user-avatar"
-                                                                     draggable="false" src="....">
+                                                                     draggable="false" src="">
                                                             </span>
                                                     </div>
                                                 </div>
 
                                                 <!--              피드 창 프로필 이름                    -->
                                                 <!--              피드 창 프로필 이름 Id                 -->
+
                                                 <div class="fb-n-title">
                                                     <div class="fb-n-title-up">
                                                         <div class="fbntu-1">
                                                             <div class="fbntu-2">
                                                                 <a class="fbntu-span" href=""
-                                                                   tabindex="0">LIVERPOOL</a>
+                                                                   tabindex="0">Tottenham Hotspur</a>
                                                             </div>
                                                         </div>
                                                     </div>
 
                                                     <!--              피드 창 프로필 이름 테그                -->
+
                                                     <div class="fb-n-title-down">
                                                         <div class="fbntd-1">
                                                             <div class="fbntd-2">
                                                                 <div class="fbntd-3">
-                                                                    <a class="fbntd-Atag" href="..." tabindex="0">AXA
-                                                                        Center</a>
+                                                                    <a class="fbntd-Atag" href="..." tabindex="0">Tottenham
+                                                                        Hotspur Stadium</a>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -367,6 +474,7 @@
                                             </div>
 
                                             <!--              피드 창 프로필 모달 쩜쩜쩜                   -->
+
                                             <div class="feedback-name-tag">
                                                 <button class="fnt-btn">
                                                     <div class="fnt-btn-1">
@@ -384,45 +492,31 @@
                                         </div>
                                     </div>
 
-                                    <!--              피드 창 캐러셀 표시                          -->
+                                    <!--              피드 창 캐러셀                          -->
+
                                     <div class="feed_img">
-                                        <div id="carouselExampleIndicators1" class="carousel slide perimage"
-                                             data-bs-touch="true"
-                                             data-bs-interval="false">
-                                            <div class="carousel-indicators">
-                                                <button type="button" data-bs-target="#carouselExampleIndicators"
-                                                        data-bs-slide-to="0"
-                                                        class="active" aria-current="true"
-                                                        aria-label="Slide 1"></button>
-                                                <button type="button" data-bs-target="#carouselExampleIndicators"
-                                                        data-bs-slide-to="1"
-                                                        aria-label="Slide 2"></button>
-                                                <button type="button" data-bs-target="#carouselExampleIndicators"
-                                                        data-bs-slide-to="2"
-                                                        aria-label="Slide 3"></button>
-                                            </div>
+                                        <div id="carouselExampleControlsNoTouching1" class="carousel slide"
+                                             data-bs-touch="false" data-bs-interval="false">
+
+                                            <!--                       손흥민 사진 하나만 넣음                             -->
+
                                             <div class="carousel-inner">
                                                 <div class="carousel-item active">
-                                                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQe4W1WYZPsMqeA7_DX7xgWkK3FwVr4pao8hw&usqp=CAU"
-                                                         class="d-block w-100" alt="...">
-                                                </div>
-                                                <div class="carousel-item">
-                                                    <img src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2FbldgOd%2FbtrANTSA3DZ%2FpruEYkkT3LekrnMpuulyr0%2Fimg.jpg"
-                                                         class="d-block w-100" alt="...">
-                                                </div>
-                                                <div class="carousel-item">
-                                                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRcTR4Q1o5modKSjWSMpJw0ubPHm7HSpYcm4g&usqp=CAU"
+                                                    <img src="http://res.heraldm.com/content/image/2022/04/04/20220404000101_0.jpg"
                                                          class="d-block w-100" alt="...">
                                                 </div>
                                             </div>
+
+                                            <!--                       마찬가지로 아이디값 중복 안되게 해야함                             -->
+
                                             <button class="carousel-control-prev" type="button"
-                                                    data-bs-target="#carouselExampleIndicators1"
+                                                    data-bs-target="#carouselExampleControlsNoTouching1"
                                                     data-bs-slide="prev">
                                                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                                                 <span class="visually-hidden">Previous</span>
                                             </button>
                                             <button class="carousel-control-next" type="button"
-                                                    data-bs-target="#carouselExampleIndicators1"
+                                                    data-bs-target="#carouselExampleControlsNoTouching1"
                                                     data-bs-slide="next">
                                                 <span class="carousel-control-next-icon" aria-hidden="true"></span>
                                                 <span class="visually-hidden">Next</span>
@@ -431,27 +525,122 @@
                                     </div>
 
                                     <!--              피드 창 컨텐츠 표시                          -->
+
                                     <div class="feedback-contents">
                                         <div class="feedback-contents-layout">
-                                            <section>
-                                                <h4>111111111</h4>
+                                            <section class="fsl-buttons">
+
+                                                <!--                       좋아요 버튼                             -->
+                                                <!--                       좋아요 카운트 해야함                             -->
+
+                                                <span class="span-like">
+                                                    <button class="like-btn">
+                                                        <i class="fa-regular fa-heart fa-2xl">
+                                                    </i>
+                                                    </button>
+                                                </span>
+
+                                                <!--                       메세지 보내기 버튼 - 기능 없음                             -->
+
+                                                <span class="span-like">
+                                                    <button class="like-btn">
+                                                        <i class="fa-regular fa-envelope fa-2xl"></i>
+                                                        </i>
+                                                    </button>
+                                                </span>
+
+                                                <!--                       댓글 달기 버튼 - 피드 모달창 띄우도록 해야 함                             -->
+
+                                                <span class="span-like">
+                                                    <button class="like-btn">
+                                                        <i class="fa-regular fa-comment fa-2xl"></i>
+                                                        </i>
+                                                    </button>
+                                                </span>
+
+                                                <!--                       포스트 버튼 - 기능 없음                            -->
+
+                                                <div class="span-post1">
+                                                    <span class="span-post">
+                                                    <button class="like-btn">
+                                                        <i class="fa-regular fa-bookmark fa-2xl"></i>
+                                                        </i>
+                                                    </button>
+                                                </span>
+                                                </div>
                                             </section>
-                                            <section>
-                                                <h4>11111111</h4>
+
+                                            <!--                       좋아요 카운트                             -->
+                                            <!--                       클릭 시 피드 모달창 띄워주기                             -->
+
+                                            <section class="like-count">
+                                                <div class="like-count1">
+                                                    <a href="">12.546 likes</a>
+                                                </div>
                                             </section>
-                                            <div>
-                                                <h4>1111111</h4>
+
+                                            <!--                       댓글 컨텐츠                             -->
+
+                                            <div class="comments">
+                                                <div class="explanation">
+
+                                                    <!--                       유저 아이디랑 설명                            -->
+
+                                                    <div class="comment-explanation">
+                                                        <div class="explan-ID"><a href="">Tottenham Hotspur</a></div>
+                                                        <div>explanation : 손흥민(토트넘 핫스퍼)이 득점왕 경쟁을 벌이고 있는 모하메드 살라(리버풀)가
+                                                            지켜보는 앞에서 잉글랜드 프리미어리그(EPL) 20번째 골을 쏘아올렸다. 손흥민의 선제골에 토트넘도 승리의
+                                                            기운을 모았지만 아쉬운 무승부로 경기를 마감했다. 토트넘은 8일(한국시간) 영국 리버풀 안필드에서 열린
+                                                            리버풀과 2021~22 EPL 원정경기에서 후반 11분 손흥민의 선제골로 앞서나갔지만 후반 29분 루이스
+                                                            디아즈에게 동점골을 내줘 1-1로 비겼다.
+                                                        </div>
+                                                    </div>
+
+                                                    <!--                       첫번째 댓글                            -->
+
+                                                    <div>
+                                                        <div><a href="">salah</a></div>
+                                                        <div>Sonny is outstanding player
+                                                        </div>
+                                                    </div>
+
+                                                    <!--                       두번째 댓글                            -->
+
+                                                    <div>
+                                                        <div>h_genie7</div>
+                                                        <div>국뽕이 차오른다</div>
+                                                    </div>
+
+                                                    <!--                       더보기 버튼 - 클릭시 피드 모달창 띄워줘야 함                            -->
+
+                                                    <span>...
+                                                        <div aria-disabled="false" role="button" tabindex="0"
+                                                             onclick="">more
+                                                        </div>
+                                                    </span>
+                                                </div>
                                             </div>
-                                            <div>
-                                                <h4>11111111</h4>
-                                            </div>
-                                            <section>
-                                                <h4>11111111</h4>
+
+                                            <!--                       댓글 입력 창                           -->
+
+                                            <section class="comments-input">
+                                                <div class="comment-input">
+                                                    <input class="form-control form-control-sm comment-input"
+                                                           type="text" placeholder="Post your comments"
+                                                           aria-label=".form-control-sm example">
+                                                </div>
+
+                                                <!--                       댓글 달기 버튼                            -->
+                                                <!--                       댓글 temp_html                            -->
+
+                                                <div class="comment-post">
+                                                    <a href="" class="comment-post-icon"><i
+                                                            class="fa-solid fa-angles-up fa-2xl"></i></a>
+                                                </div>
                                             </section>
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
                         </div>
                     </div>
@@ -462,19 +651,23 @@
                 <div class="main-side-bar">
 
                     <!--            사이드 바 라인 내 프로필           -->
+
                     <div class="msb-profile">
                         <div class="msb-profile-area">
                             <div class="msd-profile-border">
 
                                 <!--            사이드 바 라인 내 프로필 사진          -->
+                                <!--            개별 프로필 사진 불러와야 함           -->
+
                                 <div class="msd-profile-user-pic">
                                     <a class="mpup-1"></a>
                                 </div>
 
                                 <!--            사이드 바 라인 내 프로필 ID랑 ID태그           -->
+
                                 <div class="msd-profile-user-id">
                                     <div class-="mpui-1">
-                                        <a class="mpui-1-id" href="" tabindex="0">김혁진</a>
+                                        <a class="mpui-1-id" href="profilepage_김혁진.html" tabindex="0">김혁진</a>
                                     </div>
                                     <div class="mpui-2">
                                         <div>21-22 챔스 우승 리버풀</div>
@@ -482,48 +675,66 @@
                                 </div>
 
                                 <!--            사이드 바 라인 내 프로필 계정전환          -->
+                                <!--            클릭시 로그아웃          -->
+
                                 <div class="msd-profile-user-account">
-                                    <button class="mpua-btn">Switch</button>
+                                    <button class="mpua-btn" onclick="location.href='loginpage.html'">Switch</button>
                                 </div>
                             </div>
                         </div>
                     </div>
 
                     <!--            사이드 바 라인 추천 프로필          -->
+
                     <hr style="width: 340px; border: 1px solid rgb(180, 180, 180)">
                     <div class="msb-suggest">
 
                         <!--            사이드 바 라인 추천 프로필 See all          -->
+
                         <div class="msbs-text-area">
                             <div class="msbs-text">
                                 <div class="msbs-text-1">
                                     <p>Suggestions For You</p>
                                 </div>
+
+                                <!--            See all 버튼 클릭시 어디로 갈지 ??          -->
+
                                 <div class="msbs-seeall">
-                                    <button class="mapua-btn-seeall">See All</button>
+                                    <button class="mapua-btn-seeall" onclick="">See All</button>
                                 </div>
                             </div>
                         </div>
 
                         <!--            사이드 바 라인 추천 개별 프로필모음           -->
+
                         <div class="msbap-area">
                             <div class="msb-another-profile-1">
 
                                 <!--            사이드 바 라인 추천 개별 프로필 1           -->
+
                                 <div class="msb-another-profile">
                                     <div class="msb-another-profile-area">
                                         <div class="msd-another-profile-border">
+
+                                            <!--            유저 프로필 이미지          -->
+
                                             <div class="msd-another-profile-user-pic">
                                                 <a class="mapup-1"></a>
                                             </div>
+
+                                            <!--            유저 이름 클릭시 유저 프로필 페이지로 이동          -->
+
                                             <div class="masd-profile-user-id">
                                                 <div class-="mapui-1">
-                                                    <a class="mapui-1-id" href="" tabindex="0">안정환</a>
+                                                    <a class="mapui-1-id" href="profilepage_안정환.html" tabindex="0">안정환</a>
                                                 </div>
                                                 <div class="mapui-2">
                                                     <div>경기 수원</div>
                                                 </div>
                                             </div>
+
+                                            <!--            팔로우 할지 말지          -->
+
                                             <div class="msd-another-profile-user-follow">
                                                 <button class="mapua-btn">follow</button>
                                             </div>
@@ -532,20 +743,30 @@
                                 </div>
 
                                 <!--            사이드 바 라인 추천 개별 프로필 2           -->
+
                                 <div class="msb-another-profile">
                                     <div class="msb-another-profile-area">
                                         <div class="msd-another-profile-border">
+
+                                            <!--            유저 프로필 이미지          -->
+
                                             <div class="msd-another-profile-user-pic">
                                                 <a class="mapup-1"></a>
                                             </div>
+
+                                            <!--            유저 이름 클릭시 유저 프로필 페이지로 이동          -->
+
                                             <div class="masd-profile-user-id">
                                                 <div class-="mapui-1">
-                                                    <a class="mapui-1-id" href="" tabindex="0">서정인</a>
+                                                    <a class="mapui-1-id" href="profilepage_서정인.html" tabindex="0">서정인</a>
                                                 </div>
                                                 <div class="mapui-2">
                                                     <div>충북 청주</div>
                                                 </div>
                                             </div>
+
+                                            <!--            팔로우 할지 말지          -->
+
                                             <div class="msd-another-profile-user-follow">
                                                 <button class="mapua-btn">follow</button>
                                             </div>
@@ -554,20 +775,30 @@
                                 </div>
 
                                 <!--            사이드 바 라인 추천 개별 프로필 3           -->
+
                                 <div class="msb-another-profile">
                                     <div class="msb-another-profile-area">
                                         <div class="msd-another-profile-border">
+
+                                            <!--            유저 프로필 이미지          -->
+
                                             <div class="msd-another-profile-user-pic">
                                                 <a class="mapup-1"></a>
                                             </div>
+
+                                            <!--            유저 이름 클릭시 유저 프로필 페이지로 이동          -->
+
                                             <div class="masd-profile-user-id">
                                                 <div class-="mapui-1">
-                                                    <a class="mapui-1-id" href="" tabindex="0">김정후</a>
+                                                    <a class="mapui-1-id" href="profilepage_김정후.html" tabindex="0">김정후</a>
                                                 </div>
                                                 <div class="mapui-2">
                                                     <div>경기 김포</div>
                                                 </div>
                                             </div>
+
+                                            <!--            팔로우 할지 말지          -->
+
                                             <div class="msd-another-profile-user-follow">
                                                 <button class="mapua-btn">follow</button>
                                             </div>
@@ -576,20 +807,30 @@
                                 </div>
 
                                 <!--            사이드 바 라인 추천 개별 프로필 4           -->
+
                                 <div class="msb-another-profile">
                                     <div class="msb-another-profile-area">
                                         <div class="msd-another-profile-border">
+
+                                            <!--            유저 프로필 이미지          -->
+
                                             <div class="msd-another-profile-user-pic">
                                                 <a class="mapup-1"></a>
                                             </div>
+
+                                            <!--            유저 이름 클릭시 스파르타 홈페이지 이동          -->
+
                                             <div class="masd-profile-user-id">
                                                 <div class-="mapui-1">
-                                                    <a class="mapui-1-id" href="" tabindex="0">이범규</a>
+                                                    <a class="mapui-1-id" href="https://spartacodingclub.kr/" tabindex="0">이범규</a>
                                                 </div>
                                                 <div class="mapui-2">
                                                     <div>스파르타 코딩클럽 대표</div>
                                                 </div>
                                             </div>
+
+                                            <!--            팔로우 할지 말지          -->
+
                                             <div class="msd-another-profile-user-follow">
                                                 <button class="mapua-btn">follow</button>
                                             </div>
@@ -602,10 +843,14 @@
                     </div>
 
                     <hr style="width: 340px; border: 1px solid rgb(180, 180, 180)">
+
+
                     <!--            사이드 바 라인 풋터               -->
+
                     <div class="msb-footer">
 
                         <!--            사이드 바 라인 풋터 관련링크모음               -->
+
                         <div class="msbf-nav">
                             <ul class="msbf-nav-ul">
                                 <li class="msbf-nav-li">About</li>
@@ -623,6 +868,7 @@
                         </div>
 
                         <!--            사이드 바 라인 풋터 copy-right는 3팀에게               -->
+
                         <div class="msbf-copyright">
                             <p>㏇ 2022 Sparta Coding Club AI 3team</p>
                         </div>
@@ -632,9 +878,7 @@
         </div>
     </div>
 </div>
-<script>
 
-</script>
 
 </body>
 
