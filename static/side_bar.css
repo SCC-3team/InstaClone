@@ -115,7 +115,9 @@
     position: relative;
     width: 56px;
 
-    background-color: rgb(255, 255, 255);
+    background-image: url("../static/h_genie7_image/정사각형/0B1CD144-A109-47D8-89B7-D5F4B9ABC55B.JPEG");
+    background-size: cover;
+    background-position: center;
 
     border-bottom-left-radius: 50%;
     border-bottom-right-radius: 50%;

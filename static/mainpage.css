@@ -650,7 +650,7 @@ auto : 내용 잘림, 스크롤 바 O(필요할 때만)*/
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
-.main-contents-nav-profile-pic {
+.main-contents-nav-profile-pic1 {
     box-sizing: border-box;
     display: block;
     flex-basis: auto;
@@ -665,12 +665,35 @@ auto : 내용 잘림, 스크롤 바 O(필요할 때만)*/
     width: 41px;
     border-radius: 50%;
 
-    background-color: #3b5fbf;
+    background-image: url("../static/h_genie7_image/정사각형/0B1CD144-A109-47D8-89B7-D5F4B9ABC55B.JPEG");
+    background-position: center;
+    background-size: cover;
 
     -webkit-box-direction: normal;
     -webkit-box-flex: 0;
+}
 
+.main-contents-nav-profile-pic2 {
+    box-sizing: border-box;
+    display: block;
+    flex-basis: auto;
+    flex-grow: 0;
+    flex-shrink: 0;
+    height: 41px;
 
+    overflow-x: hidden;
+    overflow-y: hidden;
+
+    position: relative;
+    width: 41px;
+    border-radius: 50%;
+
+    background-image: url("https://1000logos.net/wp-content/uploads/2018/06/tottenham-logo.jpg");
+    background-position: center;
+    background-size: cover;
+
+    -webkit-box-direction: normal;
+    -webkit-box-flex: 0;
 }
 
 /*---------------------------------------------*/
@@ -974,7 +997,7 @@ auto : 내용 잘림, 스크롤 바 O(필요할 때만)*/
     align-items: stretch;
     box-sizing: border-box;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     flex-grow: 1;
     flex-shrink: 1;
     overflow-y: scroll;
@@ -1014,15 +1037,29 @@ auto : 내용 잘림, 스크롤 바 O(필요할 때만)*/
     align-content: stretch;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: stretch;
     position: relative;
+    margin-right: 20px;
+
+    max-width: 800px;
+    width: 100%;
+}
+
+.comment-explanation2 {
+    align-items: stretch;
+    align-content: stretch;
+    display: flex;
+    flex-direction: row;
+    justify-content: stretch;
+    position: relative;
+    margin-left: 20px;
 
     max-width: 800px;
     width: 100%;
 }
 
 .explan-ID {
-    margin-right: 30px;
+    margin-left: 30px;
     display: flex;
     flex-direction: row;
     position: relative;
