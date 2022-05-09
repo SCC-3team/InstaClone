@@ -2,6 +2,13 @@
     display: block;
     overflow-y: scroll;
     overflow-x: auto;
+    height: 100vh;
+    max-width: 1000vh;
+
+    background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9)), url("https://static.india.com/wp-content/uploads/2021/11/META.jpg");
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
 }
 
 /*overflow의 속성값
@@ -23,7 +30,7 @@ auto : 내용 잘림, 스크롤 바 O(필요할 때만)*/
     flex-grow: 1;
     flex-shrink: 0;
     order: 4;
-    top: 100px;
+    top: 80px;
     position: relative;
 
     -webkit-box-align: stretch;
@@ -52,9 +59,9 @@ auto : 내용 잘림, 스크롤 바 O(필요할 때만)*/
 
     max-width: 1300px;
     width: 100%;
-    padding: 30px 0 0 0;
+    padding: 0 0 0 0;
     position: relative;
-    margin: auto;
+    margin: 20px auto 0 auto;
 
     -webkit-box-align: stretch;
     -webkit-box-direction: normal;
@@ -75,6 +82,7 @@ auto : 내용 잘림, 스크롤 바 O(필요할 때만)*/
     height: 9000px;
     position: relative;
     margin-right: 25px;
+    margin-top: 70px;
 
     transform: matrix(1, 0, 0, 1, 0, -36);
     -webkit-box-align: stretch;
@@ -117,8 +125,7 @@ auto : 내용 잘림, 스크롤 바 O(필요할 때만)*/
     height: 9000px;
     position: relative;
 
-    background-color: rgb(255, 255, 255);
-    border: 1px solid rgb(210, 210, 210);
+    background: rgba(50, 50, 50, 0.5);
 
     -webkit-box-align: stretch;
     -webkit-box-direction: normal;
@@ -133,9 +140,7 @@ auto : 내용 잘림, 스크롤 바 O(필요할 때만)*/
     flex-shrink: 0;
 
     position: relative;
-    height: 9000px;
     justify-content: center;
-    padding-bottom: 7700px;
     max-width: 900px;
     width: 100%;
 
@@ -146,26 +151,6 @@ auto : 내용 잘림, 스크롤 바 O(필요할 때만)*/
 
 /* -------------------------------------------------------*/
 
-.article {
-    align-items: stretch;
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    flex-shrink: 0;
-    height: 1200px;
-    margin: 0 0px 90px 0px;
-    max-height: none;
-
-    position: relative;
-    max-width: 900px;
-    width: 100%;
-
-    -webkit-box-align: stretch;
-    -webkit-box-direction: normal;
-    -webkit-box-orient: vertical;
-
-}
-
 .article1 {
     align-content: stretch;
     align-items: stretch;
@@ -175,19 +160,39 @@ auto : 내용 잘림, 스크롤 바 O(필요할 때만)*/
     flex-direction: column;
     flex-grow: 0;
     flex-shrink: 0;
+
     justify-content: center;
-    margin: 0 0 50px 0;
+    margin: 0 0 100px 0;
     max-height: none;
     max-width: none;
-    padding: 0 0 0 0;
     position: relative;
     width: 100%;
+
+    border-style: solid;
+    border-width: 1px;
+    border-color: rgb(220, 220, 220);
 
     -webkit-box-align: stretch;
     -webkit-box-direction: normal;
     -webkit-box-flex: 0;
     -webkit-box-orient: vertical;
     -webkit-box-pack: center;
+}
+
+.article1 > .carousel-inner {
+    width: auto;
+    height: 600px;
+}
+
+.article1 > .carousel-inner > .carousel-item {
+    width: auto;
+    height: 100%;
+}
+
+.article1 > .carousel-inner > .carousel-item > .d-block {
+    display: block;
+    width: auto;
+    height: 100%;
 }
 
 /*------------------------------------------------------------*/
@@ -265,8 +270,9 @@ auto : 내용 잘림, 스크롤 바 O(필요할 때만)*/
     justify-content: center;
     padding-right: 30px;
     position: relative;
-    background-color: rgb(255, 255, 255);
     border-style: none;
+
+    background-color: transparent;
 
     -webkit-box-align: stretch;
     -webkit-box-direction: normal;
@@ -290,14 +296,13 @@ auto : 내용 잘림, 스크롤 바 O(필요할 때만)*/
     word-spacing: 0px;
     cursor: pointer;
 
-    background-color: rgb(255, 255, 255);
     background-attachment: scroll;
     background-clip: border-box;
-    background-image: none;
     background-origin: padding-box;
 
     border-style: none;
 
+    background-color: transparent;
 
     text-rendering: auto;
     writing-mode: horizontal-tb;
@@ -362,9 +367,14 @@ auto : 내용 잘림, 스크롤 바 O(필요할 때만)*/
     width: 24px;
     text-rendering: auto;
     writing-mode: horizontal-tb;
-    fill: rgb(38, 38, 38);
+    fill: rgb(220, 220, 220);
     -webkit-box-direction: normal;
     outline: none;
+    text-decoration: none;
+}
+
+.fnt-btn-svg:hover {
+    fill: rgb(255, 255, 255);
     text-decoration: none;
 }
 
@@ -749,9 +759,10 @@ auto : 내용 잘림, 스크롤 바 O(필요할 때만)*/
     display: inline-block;
     height: 30px;
     font-size: large;
+    text-decoration: none;
 
     outline: none;
-    color: rgb(80, 80, 80);
+    color: rgb(220, 220, 220);
 
     position: relative;
     width: 300px;
@@ -762,8 +773,8 @@ auto : 내용 잘림, 스크롤 바 O(필요할 때만)*/
 }
 
 .fbntu-span:hover {
-    color: rgb(0, 0, 0);
-    text-decoration: underline;
+    color: rgb(255, 255, 255);
+    text-decoration: none;
 }
 
 /*---------------------------------------------*/
@@ -841,16 +852,16 @@ auto : 내용 잘림, 스크롤 바 O(필요할 때만)*/
     height: auto;
     width: auto;
 
-    fbntu-Atag-decoration: none;
+    text-decoration: none;
     outline: none;
-    color: rgb(80, 80, 80);
+    color: rgb(220, 220, 220);
 
     -webkit-box-direction: normal;
 }
 
 .fbntd-Atag:hover {
-    color: rgb(0, 0, 0);
-    text-decoration: underline;
+    color: rgb(255, 255, 255);
+    text-decoration: none;
 }
 
 /* ----------------------------- carousel ------------------------------- */
@@ -876,7 +887,7 @@ auto : 내용 잘림, 스크롤 바 O(필요할 때만)*/
     width: 100%;
 
     border: 1px solid rgb(210, 210, 210);
-    background-color: rgb(255, 255, 255);
+    background-color: transparent;
 
     -webkit-box-align: stretch;
     -webkit-box-direction: normal;
@@ -895,12 +906,13 @@ auto : 내용 잘림, 스크롤 바 O(필요할 때만)*/
     position: relative;
     width: 900px;
 
+    color: rgb(255, 255, 255);
+
     pointer-events: auto;
     -webkit-box-align: stretch;
     -webkit-box-direction: normal;
     -webkit-box-orient: vertical;
 }
-
 
 .content {
     max-width: 614px;

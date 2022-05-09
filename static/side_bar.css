@@ -8,16 +8,15 @@
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
+    flex-grow: 1;
     flex-shrink: 0;
     height: 1122px;
     left: 950px;
     margin: 0 auto 0 auto;
     max-width: 340px;
-    width: auto;
     padding: 0 0 0 0;
     position: fixed;
     right: 0;
-    top: 93px;
 
     -webkit-box-align: stretch;
     -webkit-box-direction: normal;
@@ -30,7 +29,6 @@
     display: flex;
     flex-direction: row;
     flex-shrink: 0;
-    height: 75px;
     justify-content: space-between;
     margin-bottom: 10px;
     margin-top: 18px;
@@ -53,7 +51,6 @@
     flex-direction: column;
     flex-grow: 0;
     flex-shrink: 0;
-    height: 75px;
     justify-content: flex-start;
 
     margin-right: 4px;
@@ -118,7 +115,7 @@
     position: relative;
     width: 56px;
 
-    background-color: red;
+    background-color: rgb(255, 255, 255);
 
     border-bottom-left-radius: 50%;
     border-bottom-right-radius: 50%;
@@ -162,14 +159,13 @@
 
 .mpui-1-id {
     font-size: 25px;
-    mpui-1-id-decoration: none;
+    text-decoration: none;
     outline: none;
-    color: rgb(0, 0, 0);
+    color: rgb(220, 220, 220);
 }
 
 .mpui-1-id:hover {
-    color: rgb(0, 0, 0);
-    text-decoration: underline;
+    color: rgb(255, 255, 255);
 }
 
 .mpui-2 {
@@ -179,9 +175,9 @@
     position: relative;
 
     font-size: 13px;
-    mpua-btn-decoration: none;
+    text-decoration: none;
     outline: none;
-    color: rgb(80, 80, 80);
+    color: rgb(220, 220, 220);
 }
 
 .msd-profile-user-account {
@@ -210,9 +206,9 @@
     cursor: pointer;
     border-style: none;
 
-    mpua-btn-decoration: none;
+    background-color: transparent;
     outline: none;
-    color: rgb(80, 80, 80);
+    color: rgb(220, 220, 220);
 
     font-size: 14px;
 
@@ -223,7 +219,7 @@
 }
 
 .mpua-btn:hover {
-    color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
     text-decoration: none;
 }
 
@@ -247,7 +243,7 @@
 }
 
 .msbs-text-area {
-    height: 30px;
+    height: 40px;
 }
 
 .msbs-text {
@@ -260,8 +256,8 @@
     height: 40px;
 
     position: relative;
-    font-size: 15px;
-    color: rgb(80, 80, 80);
+    font-size: 18px;
+    color: rgb(220, 220, 220);
 
     -webkit-box-align: center;
     -webkit-box-direction: normal;
@@ -277,7 +273,7 @@
     flex-direction: column;
     position: relative;
 
-    width: 289px;
+    width: 270px;
 
     margin: -3px 0 -4px 0;
 
@@ -287,19 +283,55 @@
 }
 
 .msbs-seeall {
-    align-items: stretch;
+    align-content: stretch;
+    align-items: center;
     box-sizing: border-box;
-    display: block;
-    flex-direction: column;
+    display: flex;
+    flex-direction: row;
     position: relative;
 
-    width: 50px;
+    width: 70px;
 
     margin: -3px 0 -4px 0;
 
     -webkit-box-align: stretch;
     -webkit-box-direction: normal;
     -webkit-box-orient: vertical;
+}
+
+.mapua-btn-seeall {
+    display: flex;
+    height: 40px;
+
+    position: relative;
+    width: 80px;
+
+    cursor: pointer;
+    border-style: none;
+    background-color: transparent;
+
+    mpua-btn-decoration: none;
+    outline: none;
+    color: rgb(220, 220, 220);
+
+    font-size: 18px;
+
+    appearance: none;
+    user-select: none;
+    -webkit-box-direction: normal;
+    -webkit-border-image: none;
+}
+
+.mapua-btn-seeall:hover {
+    background-color: transparent;
+    color: rgb(250, 250, 250);
+
+    font-size: 18px;
+
+    appearance: none;
+    user-select: none;
+    -webkit-box-direction: normal;
+    -webkit-border-image: none;
 }
 
 /*-------------------------------------------------*/
@@ -419,7 +451,7 @@
     position: relative;
     width: 50px;
 
-    background-color: red;
+    background-color: rgb(255, 255, 255);
 
     border-bottom-left-radius: 50%;
     border-bottom-right-radius: 50%;
@@ -463,14 +495,13 @@
 
 .mapui-1-id {
     font-size: 20px;
-    mpui-1-id-decoration: none;
+    text-decoration: none;
     outline: none;
-    color: rgb(0, 0, 0);
+    color: rgb(220, 220, 220);
 }
 
 .mapui-1-id:hover {
-    color: rgb(0, 0, 0);
-    text-decoration: underline;
+    color: rgb(255, 255, 255);
 
 }
 
@@ -487,7 +518,7 @@
     font-size: 13px;
     mpua-btn-decoration: none;
     outline: none;
-    color: rgb(80, 80, 80);
+    color: rgb(220, 220, 220);
 }
 
 .mapua-btn {
@@ -499,10 +530,11 @@
 
     cursor: pointer;
     border-style: none;
+    background-color: transparent;
 
     mpua-btn-decoration: none;
     outline: none;
-    color: rgb(80, 80, 80);
+    color: rgb(220, 220, 220);
 
     font-size: 15px;
 
@@ -513,7 +545,7 @@
 }
 
 .mapua-btn:hover {
-    color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
 }
 
 .msd-another-profile-user-follow {
@@ -600,7 +632,7 @@
     display: inline-block;
 
     font-size: 14px;
-    color: rgb(50, 50, 50);
+    color: rgb(200, 200, 200);
 
     -webkit-box-direction: normal;
 }
@@ -612,7 +644,7 @@
 
     text-align: left;
     font-size: 14px;
-    color: rgb(50, 50, 50);
+    color: rgb(200, 200, 200);
 }
 
 

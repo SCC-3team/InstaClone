@@ -81,7 +81,9 @@
     position: fixed;
     top: 0px;
 
-    background-color: rgb(255, 255, 255);
+    background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9)), url("https://api.time.com/wp-content/uploads/2022/02/meta-smartphone.jpg");
+    background-position: center;
+    background-size: cover;
     border-bottom: 0.5mm solid rgb(150, 150, 150);
 
     z-index: 3;
@@ -107,7 +109,9 @@
     flex-shrink: 0;
     position: relative;
 
-    background-color: rgb(255, 255, 255);
+    background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9)), url("https://api.time.com/wp-content/uploads/2022/02/meta-smartphone.jpg");
+    background-position: center;
+    background-size: cover;
 
     z-index: 10;
     /*flex-direction은 안에 아이콘을 row로 두겠다는 것.*/
@@ -197,9 +201,8 @@
 
     margin-top: 14px;
 
-    text-decoration: none;
     outline: none;
-    color: rgb(80, 80, 80);
+    color: rgb(220, 220, 220);
 
     object-fit: contain;
     -webkit-box-direction: normal;
@@ -208,7 +211,7 @@
 .logo-align:hover {
     width: 120px;
     height: 100%;
-    color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
     text-decoration-line: none;
 }
 
@@ -379,7 +382,7 @@ input:focus {
 .icon-deco {
     icon3-decoration: none;
     outline: none;
-    color: rgb(80, 80, 80);
+    color: rgb(220, 220, 220);
     -webkit-box-flex: 0;
 
     -webkit-box-direction: normal;
@@ -388,7 +391,7 @@ input:focus {
 .icon-deco:hover {
     width: 40px;
     height: 100%;
-    color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
     text-decoration-line: none;
 }
 
