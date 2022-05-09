@@ -904,7 +904,8 @@ auto : 내용 잘림, 스크롤 바 O(필요할 때만)*/
     flex-shrink: 0;
     height: 190px;
     position: relative;
-    width: 900px;
+    max-width: 895px;
+    width: 100%;
 
     color: rgb(255, 255, 255);
 
@@ -912,6 +913,177 @@ auto : 내용 잘림, 스크롤 바 O(필요할 때만)*/
     -webkit-box-align: stretch;
     -webkit-box-direction: normal;
     -webkit-box-orient: vertical;
+}
+
+.fsl-buttons {
+    align-items: stretch;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    flex-shrink: 0;
+    padding: 20px;
+    position: relative;
+    height: 55px;
+    max-width: 895px;
+    width: 100%;
+
+    pointer-events: auto;
+    -webkit-box-align: stretch;
+    -webkit-box-direction: normal;
+    -webkit-box-orient: horizontal;
+}
+
+.span-like {
+    display: block;
+    margin-left: -8px;
+    -webkit-box-direction: normal;
+    pointer-events: auto;
+}
+
+.span-post1 {
+    padding-left: 640px;
+    max-width: 640px;
+    width: 100%;
+}
+
+.span-post {
+    display: block;
+}
+
+.like-count {
+    align-items: stretch;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    flex-shrink: 0;
+    justify-content: flex-end;
+    padding-left: 30px;
+    padding-right: 16px;
+    position: relative;
+}
+
+.like-count1 {
+    flex-basis: auto;
+    flex-grow: 1;
+    flex-shrink: 1;
+    justify-content: flex-start;
+    position: relative;
+}
+
+.comments {
+    align-items: stretch;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    flex-shrink: 1;
+    overflow-y: scroll;
+    position: relative;
+    margin-top: 10px;
+
+    max-width: 895px;
+    width: 100%;
+    min-height: 140px;
+
+    padding-left: 30px;
+    padding-right: 20px;
+}
+
+.comments::-webkit-scrollbar {
+    display: none;
+}
+
+.explanation {
+    align-content: stretch;
+    align-items: stretch;
+    box-sizing: border-box;
+    display: flex;
+    flex-basis: auto;
+    flex-direction: column;
+    flex-grow: 0;
+    flex-shrink: 0;
+    justify-content: flex-start;
+    position: relative;
+
+    max-width: 895px;
+    width: 100%;
+}
+
+.comment-explanation {
+    align-items: stretch;
+    align-content: stretch;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    position: relative;
+
+    max-width: 800px;
+    width: 100%;
+}
+
+.explan-ID {
+    margin-right: 30px;
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    align-items: stretch;
+    align-content: stretch;
+    justify-content: flex-start;
+}
+
+.comments-input {
+    align-items: stretch;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    flex-shrink: 0;
+    justify-content: space-between;
+    padding: 25px 20px 10px 20px;
+    position: relative;
+
+    height: 60px;
+
+    max-width: 895px;
+    width: 100%;
+}
+
+.comment-input {
+    max-width: 795px;
+    width: 100%;
+    background-color: transparent;
+    color: rgb(220, 220, 220);
+}
+
+.comment-post {
+    max-width: 30px;
+    width: 100%;
+    height: 20px;
+    margin: 5px auto 0 15px;
+}
+
+.comment-post-icon {
+    text-decoration: none;
+    color: rgb(220, 220, 220);
+}
+
+.comment-post-icon:hover {
+    color: rgb(255, 255, 255);
+}
+
+.like-btn {
+    align-items: center;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    margin-left: 15px;
+    margin-top: 10px;
+    background-color: transparent;
+    border-style: none;
+    color: rgb(220, 220, 220);
+}
+
+.like-btn:hover {
+    color: rgb(255, 255, 255);
 }
 
 .content {
@@ -927,6 +1099,7 @@ auto : 내용 잘림, 스크롤 바 O(필요할 때만)*/
     box-sizing: border-box;
     /*    fixed         */
 }
+
 
 /* ---------------------------------------------------------*/
 /* -------------------  content design   -------------------*/
