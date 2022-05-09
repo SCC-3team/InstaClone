@@ -7,4 +7,7 @@ https://www.figma.com/proto/QScFRsrLzYQXii5taYGYHi/3%EC%A1%B0-%EC%99%80%EC%9D%B4
 
 ## DB의 구성
 
+<<<<<<< HEAD
 ![스크린샷 2022-05-04 18 06 11 17 21 46](https://user-images.githubusercontent.com/102138834/167136066-397af815-08e4-4f1d-9396-d00ea90898e0.png)
+=======
+>>>>>>> 62a326ce61f7842d287edc33916fa08897423e9a

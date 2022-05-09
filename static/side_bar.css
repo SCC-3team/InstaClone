@@ -1,0 +1,653 @@
+/* ---------------------------------------------------------*/
+/* -------------------  side bar design   ------------------*/
+/* ---------------------------------------------------------*/
+
+
+.main-side-bar {
+    align-items: stretch;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    flex-shrink: 0;
+    height: 1122px;
+    left: 950px;
+    margin: 0 auto 0 auto;
+    max-width: 340px;
+    padding: 0 0 0 0;
+    position: fixed;
+    right: 0;
+
+    -webkit-box-align: stretch;
+    -webkit-box-direction: normal;
+    -webkit-box-orient: vertical;
+}
+
+.msb-profile {
+    align-items: center;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    flex-shrink: 0;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    margin-top: 18px;
+
+    position: relative;
+    width: 340px;
+
+    -webkit-box-align: center;
+    -webkit-box-direction: normal;
+    -webkit-box-orient: horizontal;
+    -webkit-box-pack: justify;
+}
+
+.msb-profile-area {
+    align-content: stretch;
+    align-items: stretch;
+    box-sizing: border-box;
+    display: flex;
+    flex-basis: auto;
+    flex-direction: column;
+    flex-grow: 0;
+    flex-shrink: 0;
+    justify-content: flex-start;
+
+    margin-right: 4px;
+    position: relative;
+    width: 340px;
+
+    -webkit-box-align: stretch;
+    -webkit-box-direction: normal;
+    -webkit-box-flex: 0;
+    -webkit-box-orient: vertical;
+    -webkit-box-pack: start;
+}
+
+.msd-profile-border {
+    align-content: stretch;
+    align-items: center;
+    box-sizing: border-box;
+    display: flex;
+    flex-basis: auto;
+    flex-direction: row;
+    flex-grow: 0;
+    flex-shrink: 0;
+    height: 75px;
+    justify-content: flex-start;
+
+    position: relative;
+    width: auto;
+
+    -webkit-box-align: center;
+    -webkit-box-direction: normal;
+    -webkit-box-flex: 0;
+    -webkit-box-orient: horizontal;
+    -webkit-box-pack: start;
+}
+
+.msd-profile-user-pic {
+    align-content: stretch;
+    align-items: stretch;
+    box-sizing: border-box;
+    display: flex;
+    flex-basis: auto;
+    flex-direction: column;
+    flex-grow: 0;
+    flex-shrink: 0;
+    height: 56px;
+    justify-content: flex-start;
+    margin-right: 12px;
+    position: relative;
+    width: 56px;
+
+    -webkit-box-align: stretch;
+    -webkit-box-direction: normal;
+    -webkit-box-flex: 0;
+    -webkit-box-orient: vertical;
+    -webkit-box-pack: start;
+}
+
+.mpup-1 {
+    box-sizing: border-box;
+    display: block;
+    height: 56px;
+    position: relative;
+    width: 56px;
+
+    background-color: rgb(255, 255, 255);
+
+    border-bottom-left-radius: 50%;
+    border-bottom-right-radius: 50%;
+    border-top-left-radius: 50%;
+    border-top-right-radius: 50%;
+
+    -webkit-box-direction: normal;
+    -webkit-box-flex: 0;
+}
+
+/*------------------------------------------------*/
+
+.msd-profile-user-id {
+    align-content: stretch;
+    align-items: stretch;
+    box-sizing: border-box;
+    display: flex;
+    flex-basis: auto;
+    flex-direction: column;
+    flex-grow: 1;
+    flex-shrink: 1;
+    height: 56px;
+    justify-content: center;
+
+    position: relative;
+    width: auto;
+
+    -webkit-box-align: stretch;
+    -webkit-box-direction: normal;
+    -webkit-box-flex: 1;
+    -webkit-box-orient: vertical;
+    -webkit-box-pack: center;
+}
+
+.mpui-1 {
+    display: flex;
+    flex-basis: auto;
+    justify-content: flex-start;
+    position: relative;
+}
+
+.mpui-1-id {
+    font-size: 25px;
+    text-decoration: none;
+    outline: none;
+    color: rgb(220, 220, 220);
+}
+
+.mpui-1-id:hover {
+    color: rgb(255, 255, 255);
+}
+
+.mpui-2 {
+    display: flex;
+    flex-basis: auto;
+    justify-content: flex-start;
+    position: relative;
+
+    font-size: 13px;
+    text-decoration: none;
+    outline: none;
+    color: rgb(220, 220, 220);
+}
+
+.msd-profile-user-account {
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    height: 20px;
+
+    position: relative;
+    width: 50px;
+
+    -webkit-box-align: center;
+    -webkit-box-direction: normal;
+    -webkit-box-flex: 0;
+    -webkit-box-orient: horizontal;
+    -webkit-box-pack: center;
+}
+
+.mpua-btn {
+    display: block;
+    height: 25px;
+
+    position: relative;
+    width: 50px;
+
+    cursor: pointer;
+    border-style: none;
+
+    background-color: transparent;
+    outline: none;
+    color: rgb(220, 220, 220);
+
+    font-size: 14px;
+
+    appearance: none;
+    user-select: none;
+    -webkit-box-direction: normal;
+    -webkit-border-image: none;
+}
+
+.mpua-btn:hover {
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+}
+
+/*-------------------------------------------------*/
+
+.msb-suggest {
+    align-items: stretch;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    height: 291px;
+    margin-bottom: 12px;
+
+    position: relative;
+    width: 340px;
+
+    -webkit-box-align: stretch;
+    -webkit-box-direction: normal;
+    -webkit-box-orient: vertical;
+}
+
+.msbs-text-area {
+    height: 40px;
+}
+
+.msbs-text {
+    align-content: stretch;
+    align-items: center;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+
+    height: 40px;
+
+    position: relative;
+    font-size: 18px;
+    color: rgb(220, 220, 220);
+
+    -webkit-box-align: center;
+    -webkit-box-direction: normal;
+    -webkit-box-flex: 0;
+    -webkit-box-orient: horizontal;
+    -webkit-box-pack: start;
+}
+
+.msbs-text-1 {
+    align-items: stretch;
+    box-sizing: border-box;
+    display: block;
+    flex-direction: column;
+    position: relative;
+
+    width: 270px;
+
+    margin: -3px 0 -4px 0;
+
+    -webkit-box-align: stretch;
+    -webkit-box-direction: normal;
+    -webkit-box-orient: vertical;
+}
+
+.msbs-seeall {
+    align-content: stretch;
+    align-items: center;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    position: relative;
+
+    width: 70px;
+
+    margin: -3px 0 -4px 0;
+
+    -webkit-box-align: stretch;
+    -webkit-box-direction: normal;
+    -webkit-box-orient: vertical;
+}
+
+.mapua-btn-seeall {
+    display: flex;
+    height: 40px;
+
+    position: relative;
+    width: 80px;
+
+    cursor: pointer;
+    border-style: none;
+    background-color: transparent;
+
+    mpua-btn-decoration: none;
+    outline: none;
+    color: rgb(220, 220, 220);
+
+    font-size: 18px;
+
+    appearance: none;
+    user-select: none;
+    -webkit-box-direction: normal;
+    -webkit-border-image: none;
+}
+
+.mapua-btn-seeall:hover {
+    background-color: transparent;
+    color: rgb(250, 250, 250);
+
+    font-size: 18px;
+
+    appearance: none;
+    user-select: none;
+    -webkit-box-direction: normal;
+    -webkit-border-image: none;
+}
+
+/*-------------------------------------------------*/
+
+.msbap-area {
+    margin-bottom: 10px;
+    margin-left: 10px;
+}
+
+.msb-another-profile-1 {
+    align-items: stretch;
+    align-content: stretch;
+    box-sizing: border-box;
+    display: flex;
+    flex-basis: auto;
+    flex-direction: column;
+    justify-content: flex-start;
+    position: relative;
+
+    -webkit-box-align: stretch;
+    -webkit-box-direction: normal;
+    -webkit-box-flex: 0;
+    -webkit-box-orient: vertical;
+    -webkit-box-pack: start;
+}
+
+.msb-another-profile {
+    align-items: center;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    flex-shrink: 0;
+    height: 50px;
+    justify-content: space-between;
+    margin-bottom: 5px;
+    margin-top: 5px;
+
+    position: relative;
+    width: 330px;
+
+    -webkit-box-align: center;
+    -webkit-box-direction: normal;
+    -webkit-box-orient: horizontal;
+    -webkit-box-pack: justify;
+}
+
+.msb-another-profile-area {
+    align-items: stretch;
+    box-sizing: border-box;
+    display: flex;
+    flex-basis: auto;
+    flex-direction: column;
+    flex-grow: 0;
+    flex-shrink: 0;
+    height: 50px;
+    justify-content: flex-start;
+
+    margin-right: 4px;
+    position: relative;
+    width: 330px;
+
+    -webkit-box-align: stretch;
+    -webkit-box-direction: normal;
+    -webkit-box-flex: 0;
+    -webkit-box-orient: vertical;
+    -webkit-box-pack: start;
+}
+
+.msd-another-profile-border {
+    align-content: stretch;
+    align-items: center;
+    box-sizing: border-box;
+    display: flex;
+    flex-basis: auto;
+    flex-direction: row;
+    flex-grow: 0;
+    flex-shrink: 0;
+    height: 50px;
+    justify-content: flex-start;
+
+    position: relative;
+    width: auto;
+
+    -webkit-box-align: center;
+    -webkit-box-direction: normal;
+    -webkit-box-flex: 0;
+    -webkit-box-orient: horizontal;
+    -webkit-box-pack: start;
+}
+
+.msd-another-profile-user-pic {
+    align-content: stretch;
+    align-items: stretch;
+    box-sizing: border-box;
+    display: flex;
+    flex-basis: auto;
+    flex-direction: column;
+    flex-grow: 0;
+    flex-shrink: 0;
+    height: 50px;
+    justify-content: flex-start;
+    margin-right: 12px;
+    position: relative;
+    width: 50px;
+
+    -webkit-box-align: stretch;
+    -webkit-box-direction: normal;
+    -webkit-box-flex: 0;
+    -webkit-box-orient: vertical;
+    -webkit-box-pack: start;
+}
+
+.mapup-1 {
+    box-sizing: border-box;
+    display: block;
+    height: 50px;
+    position: relative;
+    width: 50px;
+
+    background-color: rgb(255, 255, 255);
+
+    border-bottom-left-radius: 50%;
+    border-bottom-right-radius: 50%;
+    border-top-left-radius: 50%;
+    border-top-right-radius: 50%;
+
+    -webkit-box-direction: normal;
+    -webkit-box-flex: 0;
+}
+
+/*------------------------------------------------*/
+
+.masd-profile-user-id {
+    align-content: stretch;
+    align-items: stretch;
+    box-sizing: border-box;
+    display: flex;
+    flex-basis: auto;
+    flex-direction: column;
+    flex-grow: 1;
+    flex-shrink: 1;
+    height: 50px;
+    justify-content: center;
+
+    position: relative;
+    width: auto;
+
+    -webkit-box-align: stretch;
+    -webkit-box-direction: normal;
+    -webkit-box-flex: 1;
+    -webkit-box-orient: vertical;
+    -webkit-box-pack: center;
+}
+
+.mapui-1 {
+    display: flex;
+    flex-basis: auto;
+    justify-content: flex-start;
+    position: relative;
+}
+
+.mapui-1-id {
+    font-size: 20px;
+    text-decoration: none;
+    outline: none;
+    color: rgb(220, 220, 220);
+}
+
+.mapui-1-id:hover {
+    color: rgb(255, 255, 255);
+
+}
+
+/** 마우스를 올리고 있는 동안 : hover
+* 마우스를 클릭하고 있는 동안 : active
+* 마우스를 한번 클릭 한 이후 : visited*/
+
+.mapui-2 {
+    display: flex;
+    flex-basis: auto;
+    justify-content: flex-start;
+    position: relative;
+
+    font-size: 13px;
+    mpua-btn-decoration: none;
+    outline: none;
+    color: rgb(220, 220, 220);
+}
+
+.mapua-btn {
+    display: block;
+    height: 25px;
+
+    position: relative;
+    width: 50px;
+
+    cursor: pointer;
+    border-style: none;
+    background-color: transparent;
+
+    mpua-btn-decoration: none;
+    outline: none;
+    color: rgb(220, 220, 220);
+
+    font-size: 15px;
+
+    appearance: none;
+    user-select: none;
+    -webkit-box-direction: normal;
+    -webkit-border-image: none;
+}
+
+.mapua-btn:hover {
+    color: rgb(255, 255, 255);
+}
+
+.msd-another-profile-user-follow {
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    height: 20px;
+
+    position: relative;
+    width: 50px;
+
+    -webkit-box-align: center;
+    -webkit-box-direction: normal;
+    -webkit-box-flex: 0;
+    -webkit-box-orient: horizontal;
+    -webkit-box-pack: center;
+}
+
+
+/*-------------------------------------------------*/
+
+.msb-footer {
+    align-items: stretch;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    flex-shrink: 0;
+    flex-wrap: wrap;
+    height: 87px;
+    justify-content: space-between;
+    position: relative;
+
+    margin-bottom: 38px;
+    text-align: left;
+    max-width: 100%;
+    width: 340px;
+
+    -webkit-box-align: stretch;
+    -webkit-box-direction: normal;
+    -webkit-box-orient: horizontal;
+    -webkit-box-pack: justify;
+}
+
+.msbf-nav {
+    align-items: stretch;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0;
+    height: 41px;
+
+    max-width: 340%;
+    width: 100%;
+    position: relative;
+    vertical-align: baseline;
+
+    -webkit-box-align: stretch;
+    -webkit-box-direction: normal;
+    -webkit-box-orient: vertical;
+}
+
+.msbf-nav-ul {
+    display: block;
+    box-sizing: border-box;
+    flex-grow: 1;
+    height: 38px;
+    margin-bottom: 3px;
+    max-width: 340px;
+    width: 100%;
+
+    list-style-image: none;
+    list-style-position: outside;
+    list-style-type: none;
+    margin-block-end: 3px;
+    margin-block-start: 0px;
+    margin-inline-end: 0px;
+    margin-inline-start: 0px;
+    padding-inline-start: 0px;
+    -webkit-box-direction: normal;
+    -webkit-box-flex: 1;
+}
+
+.msbf-nav-li {
+    display: inline-block;
+
+    font-size: 14px;
+    color: rgb(200, 200, 200);
+
+    -webkit-box-direction: normal;
+}
+
+.msbf-copyright {
+    height: 20px;
+    max-width: 340px;
+    width: 100%;
+
+    text-align: left;
+    font-size: 14px;
+    color: rgb(200, 200, 200);
+}
+
+
+/* ---------------------------------------------------------*/
+/* -------------------  side bar design   ------------------*/
+/* ---------------------------------------------------------*/
