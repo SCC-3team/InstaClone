@@ -38,6 +38,8 @@
     <link rel="stylesheet" href="fontawesome-free-5.15.1/css/all.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <!--    js 파일 script-->
+    <script src="{{ url_for('static', filename='myjs.js') }}"></script>
     <!--    fontawesome script-->
 
     <script src="https://kit.fontawesome.com/993c2cba92.js" crossorigin="anonymous"></script>
@@ -50,6 +52,14 @@
 </head>
 
 <script>
+
+    <!--    로그아웃 함수-->
+     function logout(){
+        $.removeCookie('mytoken', {path: '/'});
+        alert('로그아웃 하셨습니다')
+        window.location.replace("/login")
+      }
+
 
 </script>
 
@@ -90,9 +100,10 @@
 
                                 <!--               인스타그램 로고 텍스트 디자인                  -->
                                 <!--               텍스트 클릭시 메인페이지 소환          -->
+                                <!--               텍스트 클릭시 메인페이지 소환(플라스크 서버연결)          -->
 
                                 <div class="logo-area3">
-                                    <a href="mainpage.html"><img alt="Instagram" class="s4Iyt logo-align"
+                                    <a href="/"><img alt="Instagram" class="s4Iyt logo-align"
                                                                  src="https://www.edigitalagency.com.au/wp-content/uploads/new-Instagram-logo-white-png-font.png"></a>
                                 </div>
                             </div>
@@ -157,6 +168,10 @@
                                             </li>
                                         </div>
                                     </div>
+                                </div>
+                                <!--               임시 로그아욱 기늧 추가  -->
+                                <div class="login-btn" style="text-align:center;">
+                                <button onclick=logout() type="button" class="btn btn-outline-primary">logout</button>
                                 </div>
                             </div>
                         </div>
