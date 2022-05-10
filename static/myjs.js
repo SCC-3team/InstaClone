@@ -68,55 +68,225 @@ function time2str(date) {
     return `${date.getFullYear()}년 ${date.getMonth() + 1}월 ${date.getDate()}일`
 }
 
-function num2str(count) {
-    if (count > 10000) {
-        return parseInt(count / 1000) + "k"
+
+function get_upload(username) {
+    if (username == undefined) {
+        username = ""
     }
-    if (count > 500) {
-        return parseInt(count / 100) / 10 + "k"
-    }
-    if (count == 0) {
-        return ""
-    }
-    return count
+    $("#feed-box").empty()
+    $.ajax({
+        type: "GET",
+        url: `/get_upload?username_give=${username}`,
+        data: {},
+        success: function (response) {
+            if (response["result"] == "success") {
+                let feeds = response["feeds"]
+                for (let i = 0; i < feeds.length; i++) {
+                    let feed = feeds[i]
+                    let time_feed = new Date(feed["date"])
+                    let time_before = time2str(time_feed)
+                    let html_temp = `<div class="article1" id="${feed["_id"]}">
+
+                                    <!--              메인 피드 창 프로필 표시                          -->
+
+                                    <div class="feedback-name">
+                                        <div class="feedback-name2">
+
+                                            <!--              피드 창 프로필 이름 해더                    -->
+
+                                            <div class="feedback-name-header">
+
+                                                <!--              피드 창 프로필 사진                    -->
+                                                <!--              src를 변경할지 백그라운드 이미지를 변경할지 ??                    -->
+                                                <!--              백그라운드 이미지 변경일 경우 CSS를 바꾸는 JQuery필요한데 상당히 번거로움 CSS를 개별적으로 하나씩 다 붙여야 함               -->
+                                                <!--              scr를 변경할 경우 이미지 캔버스를 통째로 temp_html해야함                    -->
+
+                                                <div class="fn-b-pic">
+                                                    <div class="fb-n-pic1">
+                                                        <canvas class="canvas-b"></canvas>
+                                                        <span class="main-contents-nav-profile-pic1" role="link"
+                                                              tabindex="-1">
+                                                                <img alt="" class="main-contents-nave-profile-pic2"
+                                                                     crossorigin="anonymous" data-testid="user-avatar"
+                                                                     draggable="false" src="">
+                                                            </span>
+                                                    </div>
+                                                </div>
+
+                                                <!--              피드 창 프로필 이름                    -->
+                                                <!--              피드 창 프로필 이름 Id                 -->
+
+                                                <div class="fb-n-title">
+                                                    <div class="fb-n-title-up">
+                                                        <div class="fbntu-1">
+                                                            <div class="fbntu-2">
+                                                                <a class="fbntu-span" tabindex="0"> ${feed['profile_name']} <small>${time_before}</small></a>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <!--              피드 창 프로필 이름 테그                -->
+
+                                                    <div class="fb-n-title-down">
+                                                        <div class="fbntd-1">
+                                                            <div class="fbntd-2">
+                                                                <div class="fbntd-3">
+                                                                    <a class="fbntd-Atag"
+                                                                       href="https://www.jejusi.go.kr/index.ac"
+                                                                       tabindex="0">Jeju Island</a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <!--              피드 창 프로필 모달 쩜쩜쩜                   -->
+                                            <!--               기능은 없음                   -->
+
+                                            <div class="feedback-name-tag">
+                                                <button class="fnt-btn">
+                                                    <div class="fnt-btn-1">
+                                                        <div class="fnt-btn-2">
+                                                            <svg class="fnt-btn-svg" aria-label="More options"
+                                                                 role="img" viewBox="0 0 24 24">
+                                                                <circle cx="4" cy="12" r="1.5"></circle>
+                                                                <circle cx="12" cy="12" r="1.5"></circle>
+                                                                <circle cx="20" cy="12" r="1.5"></circle>
+                                                            </svg>
+                                                        </div>
+                                                    </div>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!--              피드 창 부트스트랩 캐러셀                          -->
+                                    <!--              아이디 값 바꿔주고 밑에 data-bs-target 아이디 같이 가줘야 작동함                     -->
+
+                                    <div class="feed_img">
+                                        <div id="carouselExampleControlsNoTouching" class="carousel slide"
+                                             data-bs-touch="false" data-bs-interval="false">
+                                            <div class="carousel-inner">
+
+                                                <!--             첫번째 사진 src 경로 입력               -->
+
+                                                <div class="carousel-item active">
+                                                    <img src="${feed['image']}"                                                         
+                                                         class="d-block w-100" alt="...">
+                                                </div>
+
+                                                <!--             왠만하면 두번째 사진까지라도 같이 가져가서 temp_html 해야함               -->
+                                                <!--             div 클래스가 다르기 때문임.               -->
+
+                                                <div class="carousel-item">
+                                                    <img src="${feed['image']}"
+                                                         class="d-block w-100" alt="...">
+                                                </div>
+                                                <div class="carousel-item">
+                                                    <img src=src="/static/${feed['image']}"
+                                                         class="d-block w-100" alt="...">
+                                                </div>
+                                            </div>
+
+                                            <!--             캐러셀 사진 이동 버튼임               -->
+                                            <!--             data-bs-target을 해당 캐러셀과 같은 값을 줘야함               -->
+                                            <!--             보통 타겟아이디 뒤에 숫자를 붙이는게 쉬움               -->
+                                            <!--             ex) target1 , target1-1, target1-2               -->
+
+                                            <button class="carousel-control-prev" type="button"
+                                                    data-bs-target="#carouselExampleControlsNoTouching"
+                                                    data-bs-slide="prev">
+                                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                                <span class="visually-hidden">Previous</span>
+                                            </button>
+                                            <button class="carousel-control-next" type="button"
+                                                    data-bs-target="#carouselExampleControlsNoTouching"
+                                                    data-bs-slide="next">
+                                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                                <span class="visually-hidden">Next</span>
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                    <!--              피드 창 컨텐츠 표시                          -->
+
+                                    <div class="feedback-contents">
+                                        <div class="feedback-contents-layout">
+                                            <section class="fsl-buttons">
+
+                                                <!--                   좋아요 버튼 - 기능없음                           -->
+
+                                                <span class="span-like">
+                                                        <button class="like-btn">
+                                                            <i class="fa-regular fa-heart fa-2xl">
+                                                        </i>
+                                                        </button>
+                                                    </span>
+
+                                                <!--                   메세지보내기 버튼 - 생각없이 만듬                            -->
+
+                                                <span class="span-like">
+                                                        <button class="like-btn">
+                                                            <i class="fa-regular fa-envelope fa-2xl"></i>
+                                                            </i>
+                                                        </button>
+                                                    </span>
+
+                                                <!--                   댓글 달기 버튼 - 피드 모달 창 띄워주기                             -->
+
+                                                <span class="span-like">
+                                                        <button class="like-btn">
+                                                            <i class="fa-regular fa-comment fa-2xl"></i>
+                                                            </i>
+                                                        </button>
+                                                    </span>
+
+                                                <!--                   POST 버튼 - 기능 없음                             -->
+
+                                                <div class="span-post1">
+                                                        <span class="span-post">
+                                                        <button class="like-btn">
+                                                            <i class="fa-regular fa-bookmark fa-2xl"></i>
+                                                            </i>
+                                                        </button>
+                                                    </span>
+                                                </div>
+                                            </section>
+
+                                            <!--                     좋아요 카운트                        -->
+
+                                            <section class="like-count">
+                                                <div class="like-count1">
+                                                    <a href="">60 likes</a>
+                                                </div>
+                                            </section>
+
+                                            <!--                     컨텐츠 텍스트랑 설명                        -->
+
+                                            <div class="comments">
+                                                <div class="explanation">
+
+                                                    <!--                     등록 유저 아이디랑 설명                        -->
+
+                                                    <div>
+                                                        <div class="explan-ID"> ${feed['profile_name']} </a></div>
+                                                        <div class="comment-explanation"> ${feed['content']}
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>`
+                    $("#feed-box").append(html_temp)
+                }
+            }
+        }
+    })
 }
 
-function toggle_like(post_id, type) {
-    console.log(post_id, type)
-    let $a_like = $(`#${post_id} a[aria-label='${type}']`)
-    let $i_like = $a_like.find("i")
-    let class_s = {"heart": "fa-heart", "star": "fa-star", "like": "fa-thumbs-up"}
-    let class_o = {"heart": "fa-heart-o", "star": "fa-star-o", "like": "fa-thumbs-o-up"}
-    if ($i_like.hasClass(class_s[type])) {
-        $.ajax({
-            type: "POST",
-            url: "/update_like",
-            data: {
-                post_id_give: post_id,
-                type_give: type,
-                action_give: "unlike"
-            },
-            success: function (response) {
-                console.log("unlike")
-                $i_like.addClass(class_o[type]).removeClass(class_s[type])
-                $a_like.find("span.like-num").text(num2str(response["count"]))
-            }
-        })
-    } else {
-        $.ajax({
-            type: "POST",
-            url: "/update_like",
-            data: {
-                post_id_give: post_id,
-                type_give: type,
-                action_give: "like"
-            },
-            success: function (response) {
-                console.log("like")
-                $i_like.addClass(class_s[type]).removeClass(class_o[type])
-                $a_like.find("span.like-num").text(num2str(response["count"]))
-            }
-        })
 
-    }
-}
+

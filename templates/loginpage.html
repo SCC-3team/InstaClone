@@ -11,9 +11,9 @@
 
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js">
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
             integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
             crossorigin="anonymous"></script>
@@ -22,14 +22,35 @@
 
     <!--  insta css  -->
     <link rel="stylesheet" href="../static/loginpage.css">
+    <script>
+        function sign_in() {
+                let username = $("#input-username").val()
+                let password = $("#input-password").val()
+                $.ajax({
+                    type: "POST",
+                    url: "/sign_in",
+                    data: {
+                        username_give: username,
+                        password_give: password
+                    },
+                    success: function (response) {
+                        if (response['result'] == 'success') {
+                            $.cookie('mytoken', response['token'], {path:'/'});
+                            alert("로그인에 성공하셨습니다")
+                            window.location.replace("/")
 
+                        } else {
+                            alert(response['msg'])
+                        }
+                    }
+                });
+            }
+    </script>
 </head>
 
-<script>
+<style>
 
-
-
-</script>
+</style>
 
 <body>
 <div>
@@ -44,8 +65,8 @@
 
                             <div class="mb-3" style="text-align:center;">
                                 <label for="exampleInputEmail1" class="form-label"></label>
-                                <input type="email" class="form-control" id="exampleInputEmail1"
-                                       aria-describedby="emailHelp" placeholder="사용자 ID 또는 이메일">
+                                <input type="email" class="form-control" id="input-username"
+                                       aria-describedby="emailHelp" placeholder="사용자 ID">
                                 <div id="emailHelp" class="form-text">
                                 </div>
                             </div>
@@ -54,14 +75,14 @@
 
                             <div class="mb-3" style="text-align:center;">
                                 <label for="exampleInputPassword1" class="form-label"></label>
-                                <input type="password" class="form-control" id="exampleInputPassword1"
+                                <input type="password" class="form-control" id="input-password"
                                        placeholder="비밀번호">
                             </div>
 
                             <!--            로그인 버튼 / 일단 클릭시 메인페이지로 이동         -->
 
                             <div class="login-btn" style="text-align:center;">
-                                <button type="button" class="btn btn-outline-primary" onclick="location.href='mainpage.html'">Login</button>
+                                <button onclick="sign_in()" type="button" class="btn btn-outline-primary">Login</button>
                             </div>
 
 
@@ -70,7 +91,7 @@
                             <!--            회원가입 버튼 / 일단 클릭시 회원가입 페이지로 이동          -->
 
                             <div class="login-btn" style="text-align:center;">
-                                <button type="button" class="btn btn-outline-primary" onclick="location.href='signup_page.html'">Sign Up</button>
+                                <button onclick=window.location.href='/signup' type="button" class="btn btn-outline-primary">Sign Up</button>
                             </div>
                         </div>
                     </div>

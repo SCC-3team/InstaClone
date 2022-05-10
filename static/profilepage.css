@@ -3464,10 +3464,6 @@ input:focus {
     -webkit-box-align: stretch;
     -webkit-box-direction: normal;
     -webkit-box-orient: vertical;
-
-    background-image: url("https://cdn0.iconfinder.com/data/icons/instagram-ui-1/24/Instagram-UI_account-512.png");
-    background-size: cover;
-    background-position: center;
 }
 
 /*-------------------------------------------------------*/
@@ -3504,6 +3500,10 @@ input:focus {
     -webkit-box-direction: normal;
 }
 
+.pph-1-1 {
+    margin-left: 30px;
+}
+
 .pph-2 {
     display: flex;
     flex-direction: row;
@@ -3516,6 +3516,10 @@ input:focus {
 
     -webkit-box-direction: normal;
     -webkit-box-orient: horizontal;
+}
+
+.pph-2-1 {
+    margin-left: 30px;
 }
 
 .pph-3 {

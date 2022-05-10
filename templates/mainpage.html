@@ -1,12 +1,13 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
+
+    <title>Main Feed Page</title>
 
     <!-- Required meta tags -->
 
     <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 
@@ -24,15 +25,19 @@
     <link rel="stylesheet"
           href="https://fonts.sandbox.google.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"/>
 
+
     <!--  CSS  -->
 
     <link rel="stylesheet" type="text/css" href="../static/mainpage.css">
     <link rel="stylesheet" href="../static/side_bar.css">
     <link rel="stylesheet" href="../static/header.css">
+    <link rel="stylesheet" href="../static/sji-modal.css">
+
 
     <!--search bar link -->
 
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="fontawesome-free-5.15.1/css/all.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <!--    fontawesome script-->
@@ -43,142 +48,10 @@
         <link rel="stylesheet" href="assets/css/noscript.css"/>
     </noscript>
 
-    <title>Main Feed Page</title>
 
 </head>
 
 <script>
-
-    function posting() {
-        let comment = $("#textarea-post").val()
-        let today = new Date().toISOString()
-        $.ajax({
-            type: "POST",
-            url: "/posting",
-            data: {
-                comment_give: comment,
-                date_give: today
-            },
-            success: function (response) {
-                window.location.reload()
-                alert(response['msg'])
-
-            }
-        })
-    }
-
-    function get_posts(username) {
-        if (username == undefined) {
-            username = ""
-        }
-        $("#post-box").empty()
-        $.ajax({
-            type: "GET",
-            url: `/get_posts?username_give=${username}`,
-            data: {},
-            success: function (response) {
-                if (response["result"] == "success") {
-                    let posts = response["posts"]
-                    for (let i = 0; i < posts.length; i++) {
-                        let post = posts[i]
-                        let time_post = new Date(post["date"])
-                        let time_before = time2str(time_post)
-                        let html_temp = `<div class="comment-explanation" id="${post["_id"]}">
-                                        <article class="comment-explanation">
-                                              <div>
-                                              <p>
-                                                    <strong>${post['profile_name']}</strong> <small>${time_before}</small>
-                                                    <br>
-                                                        ${post['comment']}
-                                              </p>
-                                              </div>
-                                        </article>
-                                    </div>`
-                        $("#post-box").append(html_temp)
-                    }
-                }
-            }
-        })
-    }
-
-    function time2str(date) {
-        let today = new Date()
-        let time = (today - date) / 1000 / 60  // 분
-
-        if (time < 60) {
-            return parseInt(time) + "분 전"
-        }
-        time = time / 60  // 시간
-        if (time < 24) {
-            return parseInt(time) + "시간 전"
-        }
-        time = time / 24
-        if (time < 7) {
-            return parseInt(time) + "일 전"
-        }
-        return `${date.getFullYear()}년 ${date.getMonth() + 1}월 ${date.getDate()}일`
-    }
-
-    function num2str(count) {
-        if (count > 10000) {
-            return parseInt(count / 1000) + "k"
-        }
-        if (count > 500) {
-            return parseInt(count / 100) / 10 + "k"
-        }
-        if (count == 0) {
-            return ""
-        }
-        return count
-    }
-
-    function toggle_like(post_id, type) {
-        console.log(post_id, type)
-        let $a_like = $(`#${post_id} a[aria-label='${type}']`)
-        let $i_like = $a_like.find("i")
-        let class_s = {"heart": "fa-heart", "star": "fa-star", "like": "fa-thumbs-up"}
-        let class_o = {"heart": "fa-heart-o", "star": "fa-star-o", "like": "fa-thumbs-o-up"}
-        if ($i_like.hasClass(class_s[type])) {
-            $.ajax({
-                type: "POST",
-                url: "/update_like",
-                data: {
-                    post_id_give: post_id,
-                    type_give: type,
-                    action_give: "unlike"
-                },
-                success: function (response) {
-                    console.log("unlike")
-                    $i_like.addClass(class_o[type]).removeClass(class_s[type])
-                    $a_like.find("span.like-num").text(num2str(response["count"]))
-                }
-            })
-        } else {
-            $.ajax({
-                type: "POST",
-                url: "/update_like",
-                data: {
-                    post_id_give: post_id,
-                    type_give: type,
-                    action_give: "like"
-                },
-                success: function (response) {
-                    console.log("like")
-                    $i_like.addClass(class_s[type]).removeClass(class_o[type])
-                    $a_like.find("span.like-num").text(num2str(response["count"]))
-                }
-            })
-
-        }
-    }
-
-    $(document).ready(function () {
-        get_posts()
-    })
-
-    $(document).ready(function () {
-        show_comments();
-    });
 
 </script>
 
@@ -238,15 +111,13 @@
                         <div class="nav-layout">
                             <div class="nav-icons">
 
-                                <!--               게시물 추가 모달 연결 아이콘                 -->
-
-
+                                <!--               게시물 추가 아이콘                 -->
+                                <!--                  모달 추가                     -->
                                 <div class="icons">
                                     <div class="icon">
                                         <div class="icon2">
-                                            <li class="icon3" id="add_feed">
-                                                <i class="fa-solid fa-square-plus fa-2xl icon-deco"></i>
-                                            </li>
+                                            <li id="add_feed" class="icon3"><i
+                                                    class="fa-solid fa-square-plus fa-2xl icon-deco"></i></li>
                                         </div>
                                     </div>
                                 </div>
@@ -257,7 +128,7 @@
                                 <div class="icons">
                                     <div class="icon">
                                         <div class="icon2">
-                                            <li class="icon3"><i
+                                            <li class="icon3" id=""><i
                                                     class="fa-solid fa-heart fa-2xl icon-deco"></i>
                                             </li>
                                         </div>
@@ -270,8 +141,8 @@
                                 <div class="icons">
                                     <div class="icon">
                                         <div class="icon2">
-                                            <li class="icon3"><a href=""><i
-                                                    class="fa-solid fa-comments fa-2xl icon-deco"></i></a>
+                                            <li class="icon3"><i
+                                                    class="fa-solid fa-comments fa-2xl icon-deco"></i>
                                             </li>
                                         </div>
                                     </div>
@@ -333,7 +204,7 @@
                                                               tabindex="-1">
                                                                 <img alt="" class="main-contents-nave-profile-pic2"
                                                                      crossorigin="anonymous" data-testid="user-avatar"
-                                                                     draggable="false" src="">
+                                                                     draggable="false" src="" id="">
                                                             </span>
                                                     </div>
                                                 </div>
@@ -368,6 +239,7 @@
                                             </div>
 
                                             <!--              피드 창 프로필 모달 쩜쩜쩜                   -->
+                                            <!--               기능은 없음                   -->
 
                                             <div class="feedback-name-tag">
                                                 <button class="fnt-btn">
@@ -462,7 +334,7 @@
 
                                                 <span class="span-like">
                                                         <button class="like-btn">
-                                                            <i class="fa-regular fa-comment fa-2xl"></i>
+                                                            <i id="" class="fa-regular fa-comment fa-2xl"></i>
                                                             </i>
                                                         </button>
                                                     </span>
@@ -483,7 +355,7 @@
 
                                             <section class="like-count">
                                                 <div class="like-count1">
-                                                    <a href="">60 likes</a>
+                                                    <div><a id="" class="like-counts">60</a>count</div>
                                                 </div>
                                             </section>
 
@@ -495,45 +367,30 @@
                                                     <!--                     등록 유저 아이디랑 설명                        -->
 
                                                     <div>
-                                                        <div class="comment-explanation explan-ID"><a
-                                                                href="profilepage.html">김혁진</a> 부트캠프 끝나면 일단 제주도로
-                                                            모래반지 빵야빵야
-                                                        </div>
+                                                        <div class="explan-ID"><a href="profilepage.html" class="explain-ID-1">h_genie7</a>
+                                                        부트캠프 끝나면 비행기타고 제일 먼저 제주도 갈거야</div>
                                                     </div>
 
                                                     <!--                     첫번째 댓글란                       -->
                                                     <!--          여기부턴 temp_html해서 하나씩 붙여 나가기           -->
                                                     <!--            팬명록 프로젝트 참고하면 좋을 듯                  -->
 
-                                                    <div id="comments_list">
-
-                                                        <!--                          첫번재 코멘트                              -->
-                                                        <div>
-                                                            <div class="comment-explanation2">
-                                                                <a class="comment-explanation-atag"
-                                                                   href="profilepage_안정환.html">ajh1531</a>
-                                                                ㅇㄹㅇㄹㅁㄴㅇㄹㅁㄴㅇㄹㅁㄴㅇㄹㅁㄴㅇㄹㅁㅇㄴㄹㅁㄴㅇㄹㅁㄴㅇㄹㅁㄴㅇㄹㅁㄴㅇㄹㅁㄴㅇㄹㅁㄴㅇㄹㅁㄴㅇㄹㅁㄴㅇㄹㅁㄴㅇㄹㅁㄴㅇㄹㅁㄴㅇㄹㅁㄴㅇㄹㅁㄴㅇㄹ
-                                                                <div class="comment-delete">
-                                                                    <i class="fa-solid fa-xmark"></i>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-
-                                                        <div>
-                                                            <div class="comment-explanation2"><a
-                                                                    href="profilepage_안정환.html"> </a>
-                                                            </div>
-                                                        </div>
-
+                                                    <div class="comments-Id2-a">
+                                                        <div class="comments-ID2"><a href="profilepage.html" class="explain-ID-2">ajh1531</a>
+                                                        저도 가고 싶네요 제주도</div>
+                                                        <i class="fa-solid fa-xmark delete-btn" id=""></i>
                                                     </div>
 
 
+                                                    <div class="comments-Id2-a">
+                                                        <div class="comments-ID2"><a href="profilepage.html" class="explain-ID-2">lgj61111</a>
+                                                        ㄱㄱㄱ</div>
+                                                        <i class="fa-solid fa-xmark delete-btn" id=""></i>
+                                                    </div>
+
                                                     <!--                     더보기 테그 - 피드 모달 띄워주기                        -->
 
-                                                    <span>...
-                                                            <div aria-disabled="false" role="button" tabindex="0"
-                                                                 id="btn-open-popup">more
-                                                            </div>
+                                                    <span aria-disabled="false" role="button" tabindex="0" class="more-modal">...  more
                                                         </span>
                                                 </div>
                                             </div>
@@ -544,16 +401,13 @@
                                                 <div class="comment-input">
                                                     <input class="form-control form-control-sm comment-input"
                                                            type="text" placeholder="Post your comments"
-                                                           aria-label=".form-control-sm example"
-                                                           id="comments">
+                                                           aria-label=".form-control-sm example">
                                                 </div>
 
                                                 <!--                     댓글 달기 버튼                        -->
 
                                                 <div class="comment-post">
-                                                    <a href="" class="comment-post-icon"
-                                                       type="button"
-                                                       onclick="save_comments()"><i
+                                                    <a href="" class="comment-post-icon"><i
                                                             class="fa-solid fa-angles-up fa-2xl"></i></a>
                                                 </div>
                                             </section>
@@ -573,7 +427,7 @@
 
                     <div class="msb-profile">
                         <div class="msb-profile-area">
-                            <div class="msd-profile-border">
+                            <div class="msd-profile-border" id="">
 
                                 <!--            사이드 바 라인 내 프로필 사진          -->
                                 <!--            개별 프로필 사진 불러와야 함           -->
@@ -586,10 +440,10 @@
 
                                 <div class="msd-profile-user-id">
                                     <div class-="mpui-1">
-                                        <a class="mpui-1-id" href="profilepage.html" tabindex="0">김혁진</a>
+                                        <a class="mpui-1-id" href="profilepage.html" tabindex="0">h_genie7</a>
                                     </div>
                                     <div class="mpui-2">
-                                        <div>21-22 챔스 우승 리버풀</div>
+                                        <div id="">21-22 챔스 우승 리버풀</div>
                                     </div>
                                 </div>
 
@@ -613,7 +467,7 @@
                         <div class="msbs-text-area">
                             <div class="msbs-text">
                                 <div class="msbs-text-1">
-                                    <p>Your Followers</p>
+                                    <p>Your follower friends</p>
                                 </div>
 
                                 <!--            See all 버튼 클릭시 어디로 갈지 ??          -->
@@ -645,7 +499,7 @@
 
                                             <div class="masd-profile-user-id">
                                                 <div class-="mapui-1">
-                                                    <a class="mapui-1-id" href="profilepage_안정환.html"
+                                                    <a class="mapui-1-id" href="profilepage.html"
                                                        tabindex="0">안정환</a>
                                                 </div>
                                                 <div class="mapui-2">
@@ -656,7 +510,7 @@
                                             <!--            팔로우 할지 말지          -->
 
                                             <div class="msd-another-profile-user-follow">
-                                                <button class="mapua-btn">visit</button>
+                                                <button class="mapua-btn">follow</button>
                                             </div>
                                         </div>
                                     </div>
@@ -678,7 +532,7 @@
 
                                             <div class="masd-profile-user-id">
                                                 <div class-="mapui-1">
-                                                    <a class="mapui-1-id" href="profilepage_서정인.html"
+                                                    <a class="mapui-1-id" href="profilepage.html"
                                                        tabindex="0">서정인</a>
                                                 </div>
                                                 <div class="mapui-2">
@@ -689,7 +543,7 @@
                                             <!--            팔로우 할지 말지          -->
 
                                             <div class="msd-another-profile-user-follow">
-                                                <button class="mapua-btn">visit</button>
+                                                <button class="mapua-btn">follow</button>
                                             </div>
                                         </div>
                                     </div>
@@ -711,7 +565,7 @@
 
                                             <div class="masd-profile-user-id">
                                                 <div class-="mapui-1">
-                                                    <a class="mapui-1-id" href="profilepage_김정후.html"
+                                                    <a class="mapui-1-id" href="profilepage.html"
                                                        tabindex="0">김정후</a>
                                                 </div>
                                                 <div class="mapui-2">
@@ -722,7 +576,7 @@
                                             <!--            팔로우 할지 말지          -->
 
                                             <div class="msd-another-profile-user-follow">
-                                                <button class="mapua-btn">visit</button>
+                                                <button class="mapua-btn">follow</button>
                                             </div>
                                         </div>
                                     </div>
@@ -755,7 +609,7 @@
                                             <!--            팔로우 할지 말지          -->
 
                                             <div class="msd-another-profile-user-follow">
-                                                <button class="mapua-btn">visit</button>
+                                                <button class="mapua-btn">follow</button>
                                             </div>
                                         </div>
                                     </div>
@@ -802,29 +656,25 @@
     </div>
 </div>
 
+
 </body>
 
 
-<!--     추가 모달 창      -->
-
-
 <body>
-
 <div id="modal_add_feed" class="modal modal_overlay">
     <div class="modal_window">
         <div class="modal_title">
             <div class="modal_title_side"></div>
             <div> 새 게시물</div>
             <div class="modal_title_side">
-                <span id="close_modal" class="close_modal material-icons-outlined"
-                      style="font-size: 30px">
+                <span id="close_modal" class="close_modal material-icons-outlined" style="font-size: 30px">
                     close
                 </span>
             </div>
         </div>
         <div class="modal_image_upload">
+            <br><br><br><br><br><br><br><br><br><br>
             <span style="text-align: center"> 사진을 여기에 끌어다 놓으세요. </span>
-
         </div>
     </div>
 </div>
@@ -834,34 +684,28 @@
             <div class="modal_title_side"></div>
             <div style="margin: 5px"> 새 게시물</div>
             <div class="modal_title_side">
-                <span id="close_modal2" class="close_modal material-icons-outlined"
-                      style="font-size: 30px">
+                <span id="close_modal2" class="close_modal material-icons-outlined" style="font-size: 30px">
                     close
                 </span>
             </div>
         </div>
         <div class="modal_image_content">
             <div id="input_image" class="modal_image_upload_content">
-
             </div>
             <div class="modal_content_write">
                 <div class="feed_name">
                     <div class="profile_box">
                         <img id="input_profile_image" class="profile_img"
-                             src="">
+                             src="https://scontent-ssn1-1.xx.fbcdn.net/v/t1.6435-9/s1080x2048/165180104_277246477102900_6106347261862438192_n.jpg?_nc_cat=102&ccb=1-5&_nc_sid=730e14&_nc_ohc=1sN4d8i7rn8AX-7aKYN&_nc_ht=scontent-ssn1-1.xx&oh=5049b7cd176848e330b0f5ea95f28172&oe=615A08D1">
                     </div>
-                    <span id="input_user_id" class="feed_name_txt"> jeongin </span>
+                    <span id="input_user_id" class="feed_name_txt"> jeongin.00 </span>
                 </div>
-                <div style="height: 440px">
-                    <textarea id="feed_contents"
-                              class="feed_content_textarea form-control col-sm-5"
-                              rows="10"
+                <div style="height: 600px">
+                    <textarea id="input_content" class="feed_content_textarea form-control col-sm-5" rows="10"
                               placeholder="설명을 입력하세요..."></textarea>
                 </div>
                 <div style="width: 100%; text-align: center">
-                    <button id="upload" type="button" class="btn btn-primary"
-                            style="width: 268px"
-                            onclick="upload()"> 공유하기
+                    <button id="button_write_feed" type="button" class="btn btn-primary" style="width: 268px"> 공유하기
                     </button>
                 </div>
             </div>
@@ -872,447 +716,10 @@
 </body>
 
 
-<!--           정후님이 보내주신 피드 모달 창 html         -->
-
-
-<body>
-
-<div class="feed_details_wrap">
-    <div class="feed_details_btn">
-        <div class="feed_details_exit">
-            <div class="feed_details_exit_btn">
-                <a class="anchor" href="">
-                    <i class="fa-solid fa-x fa-2xl"></i>
-                </a>
-            </div>
-        </div>
-    </div>
-    <div class="feed_details">
-        <div class="feed_details_box">
-            <div class="feed_details_box_left">
-                <div class="article1">
-
-                    <!--              피드 창 부트스트랩 캐러셀                          -->
-                    <!--              아이디 값 바꿔주고 밑에 data-bs-target 아이디 같이 가줘야 작동함                     -->
-
-                    <div class="feed_img">
-                        <div id="carouselExampleControlsNoTouchingFeedModal" class="carousel slide"
-                             data-bs-touch="false" data-bs-interval="false">
-                            <div class="carousel-inner">
-
-                                <!--             첫번째 사진 src 경로 입력               -->
-
-                                <div class="carousel-item active">
-                                    <img src="https://www.giantfreakinrobot.com/wp-content/uploads/2021/02/emma-stone-easy-a.jpg"
-                                         class="d-block w-100" alt="...">
-                                </div>
-
-                                <!--             왠만하면 두번째 사진까지라도 같이 가져가서 temp_html 해야함               -->
-                                <!--             div 클래스가 다르기 때문임.               -->
-
-                                <div class="carousel-item">
-                                    <img src="https://www.giantfreakinrobot.com/wp-content/uploads/2021/02/emma-stone-easy-a.jpg"
-                                         class="d-block w-100" alt="...">
-                                </div>
-                                <div class="carousel-item">
-                                    <img src="https://www.giantfreakinrobot.com/wp-content/uploads/2021/02/emma-stone-easy-a.jpg"
-                                         class="d-block w-100" alt="...">
-                                </div>
-                            </div>
-
-                            <!--             캐러셀 사진 이동 버튼임               -->
-                            <!--             data-bs-target을 해당 캐러셀과 같은 값을 줘야함               -->
-                            <!--             보통 타겟아이디 뒤에 숫자를 붙이는게 쉬움               -->
-                            <!--             ex) target1 , target1-1, target1-2               -->
-
-                            <button class="carousel-control-prev" type="button"
-                                    data-bs-target="#carouselExampleControlsNoTouchingFeedModal"
-                                    data-bs-slide="prev">
-                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                                <span class="visually-hidden">Previous</span>
-                            </button>
-                            <button class="carousel-control-next" type="button"
-                                    data-bs-target="#carouselExampleControlsNoTouchingFeedModal"
-                                    data-bs-slide="next">
-                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                                <span class="visually-hidden">Next</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-
-                <!--모달 왼쪽 div-->
-
-            </div>
-            <div class="feed_details_box_right">
-                <div class="feed_details_box_writer">
-                    <div class="feed_details_header">
-                        <div class="feed_details_header_profile">
-                            <div class="feed_details_header_img">
-                                <a class="anchor" href="/">
-                                    <img class="all_profile_img" src="1.jpeg"/></a>
-                            </div>
-                            <div class="feed_details_profile_follow">
-                                <div class="box_profile feed_details_profile_nick">
-                                    <a class="anchor" href="/"><b>2022studian</b></a>
-                                </div>
-                                <div class="box_profile feed_details_profile_dot"><b>
-                                    •</b>
-                                </div>
-                                <div class="box_profile feed_details_profile_f_status">
-                                    <button class="btn_i"><b style="color:#006fff;">팔로우</b></button>
-                                </div>
-                            </div> <!--헤더 프로파일 팔로우 상태-->
-                        </div>
-                    </div>
-                </div>  <!-- 이미지 닉네임 모달버튼 --->
-
-
-                <div class="feed_details_box_ct">
-                    <div class="feed_details_box_text">
-                        <div class="box_account_text">
-                            <div class="account_text_left">
-                                <a class="anchor" href="/">
-                                    <img class="all_profile_img" src="1.jpeg"/></a>
-                            </div>
-                            <div class="account_text_right">
-                                <div class="account_text_right_ac"><a class="anchor" href=""><b>여기에계정</b></a></div>
-                                <div>
-                                    asldkfj;lasdfkas;ldkfas;dkfjlas;dkfjsal;dkfjs;lakfsla;dkfs;aldkfsal;dkfjsa;ldkfjsadl;kfjsda;lkfjsl;k
-                                </div>
-                            </div>
-                        </div>
-                        <div class="account_comment_list">
-                            <div class="account_comment_left_width">
-                                <div class="account_comment_list_img ">
-                                    <a class="anchor" href="1.jpeg">
-                                        <img class="all_profile_img" src="1.jpeg"/>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="account_comment_list_text">
-                                <div class="account_comment_list_id">
-                                    <div class="account_text_right_ac">
-                                        <a class="anchor" href=""><b>여기에계정</b></a>
-                                    </div>
-                                    <div>asldkjaoiufdj</div>
-                                </div>
-                                <div class="account_comment_list_date">
-                                    <div class="box_date">2일 전</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="account_comment_list">
-                            <div class="account_comment_left_width">
-                                <div class="account_comment_list_img ">
-                                    <a class="anchor" href="1.jpeg">
-                                        <img class="all_profile_img" src="1.jpeg"/>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="account_comment_list_text">
-                                <div class="account_comment_list_id">
-                                    <div class="account_text_right_ac">
-                                        <a class="anchor" href=""><b>여기에계정</b></a>
-                                    </div>
-                                    <div>asldkjaoiufdj</div>
-                                </div>
-                                <div class="account_comment_list_date">
-                                    <div class="box_date">2일 전</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="account_comment_list">
-                            <div class="account_comment_left_width">
-                                <div class="account_comment_list_img ">
-                                    <a class="anchor" href="1.jpeg">
-                                        <img class="all_profile_img" src="1.jpeg"/>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="account_comment_list_text">
-                                <div class="account_comment_list_id">
-                                    <div class="account_text_right_ac">
-                                        <a class="anchor" href=""><b>여기에계정</b></a>
-                                    </div>
-                                    <div>asldkjaoiufdj</div>
-                                </div>
-                                <div class="account_comment_list_date">
-                                    <div class="box_date">2일 전</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="account_comment_list">
-                            <div class="account_comment_left_width">
-                                <div class="account_comment_list_img ">
-                                    <a class="anchor" href="1.jpeg">
-                                        <img class="all_profile_img" src="1.jpeg"/>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="account_comment_list_text">
-                                <div class="account_comment_list_id">
-                                    <div class="account_text_right_ac">
-                                        <a class="anchor" href=""><b>여기에계정</b></a>
-                                    </div>
-                                    <div>asldkjaoiufdj</div>
-                                </div>
-                                <div class="account_comment_list_date">
-                                    <div class="box_date">2일 전</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="account_comment_list">
-                            <div class="account_comment_left_width">
-                                <div class="account_comment_list_img ">
-                                    <a class="anchor" href="1.jpeg">
-                                        <img class="all_profile_img" src="1.jpeg"/>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="account_comment_list_text">
-                                <div class="account_comment_list_id">
-                                    <div class="account_text_right_ac">
-                                        <a class="anchor" href=""><b>여기에계정</b></a>
-                                    </div>
-                                    <div>asldkjaoiufdj</div>
-                                </div>
-                                <div class="account_comment_list_date">
-                                    <div class="box_date">2일 전</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="account_comment_list">
-                            <div class="account_comment_left_width">
-                                <div class="account_comment_list_img ">
-                                    <a class="anchor" href="1.jpeg">
-                                        <img class="all_profile_img" src="1.jpeg"/>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="account_comment_list_text">
-                                <div class="account_comment_list_id">
-                                    <div class="account_text_right_ac">
-                                        <a class="anchor" href=""><b>여기에계정</b></a>
-                                    </div>
-                                    <div>asldkjaoiufdj</div>
-                                </div>
-                                <div class="account_comment_list_date">
-                                    <div class="box_date">2일 전</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="account_comment_list">
-                            <div class="account_comment_left_width">
-                                <div class="account_comment_list_img ">
-                                    <a class="anchor" href="1.jpeg">
-                                        <img class="all_profile_img" src="1.jpeg"/>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="account_comment_list_text">
-                                <div class="account_comment_list_id">
-                                    <div class="account_text_right_ac">
-                                        <a class="anchor" href=""><b>여기에계정</b></a>
-                                    </div>
-                                    <div>asldkjaoiufdj</div>
-                                </div>
-                                <div class="account_comment_list_date">
-                                    <div class="box_date">2일 전</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="account_comment_list">
-                            <div class="account_comment_left_width">
-                                <div class="account_comment_list_img ">
-                                    <a class="anchor" href="1.jpeg">
-                                        <img class="all_profile_img" src="1.jpeg"/>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="account_comment_list_text">
-                                <div class="account_comment_list_id">
-                                    <div class="account_text_right_ac">
-                                        <a class="anchor" href=""><b>여기에계정</b></a>
-                                    </div>
-                                    <div>asldkjaoiufdj</div>
-                                </div>
-                                <div class="account_comment_list_date">
-                                    <div class="box_date">2일 전</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="account_comment_list">
-                            <div class="account_comment_left_width">
-                                <div class="account_comment_list_img ">
-                                    <a class="anchor" href="1.jpeg">
-                                        <img class="all_profile_img" src="1.jpeg"/>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="account_comment_list_text">
-                                <div class="account_comment_list_id">
-                                    <div class="account_text_right_ac">
-                                        <a class="anchor" href=""><b>여기에계정</b></a>
-                                    </div>
-                                    <div>asldkjaoiufdj</div>
-                                </div>
-                                <div class="account_comment_list_date">
-                                    <div class="box_date">2일 전</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="account_comment_list">
-                            <div class="account_comment_left_width">
-                                <div class="account_comment_list_img ">
-                                    <a class="anchor" href="1.jpeg">
-                                        <img class="all_profile_img" src="1.jpeg"/>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="account_comment_list_text">
-                                <div class="account_comment_list_id">
-                                    <div class="account_text_right_ac">
-                                        <a class="anchor" href=""><b>여기에계정</b></a>
-                                    </div>
-                                    <div>asldkjaoiufdj</div>
-                                </div>
-                                <div class="account_comment_list_date">
-                                    <div class="box_date">2일 전</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="account_comment_list">
-                            <div class="account_comment_left_width">
-                                <div class="account_comment_list_img ">
-                                    <a class="anchor" href="1.jpeg">
-                                        <img class="all_profile_img" src="1.jpeg"/>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="account_comment_list_text">
-                                <div class="account_comment_list_id">
-                                    <div class="account_text_right_ac">
-                                        <a class="anchor" href=""><b>여기에계정</b></a>
-                                    </div>
-                                    <div>asldkjaoiufdj</div>
-                                </div>
-                                <div class="account_comment_list_date">
-                                    <div class="box_date">2일 전</div>
-                                </div>
-                            </div>
-                        </div>
-
-
-                    </div>
-
-                    <div class="feed_details_box_btns">
-                        <div class="box_btns">
-                            <button class="btn_i"><i class="box_i fa-solid fa-heart fa-lg icon-deco"></i></button>
-                        </div>
-                        <div class="box_btns">
-                            <button class="btn_i"><i class="box_i fa-solid fa-comments fa-lg icon-deco"></i></button>
-
-                        </div>
-                        <div class="box_btns">
-                            <button class="btn_i"><i class="box_i fa-solid fa-lg fa-paper-plane"></i></button>
-
-                        </div>
-                        <div class="box_btns feed_details_box_btn4">
-                            <button class="btn_i"><i class="box_i fa-solid fa-heart fa-lg icon-deco"></i></button>
-
-                        </div>
-                    </div>
-
-                    <div class="feed_details_box_likes">
-                        <div>
-                            <button class="btn_i btn-open-popup"><b style="font-size:14px;">좋아요 12,231개</b></button>
-                        </div>
-
-                        <!--모달 버튼-->
-
-                    </div>
-                    <div class="feed_details_box_date">
-                        <div class="box_date"><b>1일 전</b></div>
-                    </div>
-                    <div class="feed_details_box_comment_insert">
-                        <div class="feed_details_box_comment_pad">
-                            <div class="feed_details_box_comment_form">
-                                <div class="comment_text">
-                                    <input class="inputborder comment_textt" type="text" placeholder="댓글을 입력하세요"/>
-                                </div>
-                                <div class="comment_writebtn">
-                                    <button class="comment_writebtnn">
-                                        <b>게시</b>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>  <!-- 게시글내용 댓글 좋아요버튼 게시일 이모지버튼 댓글작성란 게시버튼  --->
-            </div> <!--모달 오른쪽 div-->
-        </div>
-    </div>
-</div>
-
-<div class="modal">
-    <div class="feed_like_wrap">
-        <div class="feed_like">
-            <div class="feed_like_upper">
-                <div class="feed_like_text">
-                    <div class="feed_like_text_b"><b>좋아요</b></div>
-                </div>
-                <div class="feed_like_exit">
-                    <div class="feed_like_exit_btn">
-                        <a class="anchor" href="">
-                            <i class="fa-solid fa-x "></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div class="feed_like_lower">
-                <div class="feed_like_lower_list">
-                    <div class="feed_like_lower_sep">
-                        <div class="feed_like_lower_img">
-                            <a class="anchor" href="">
-                                <img class="feed_like_lower_img_size"
-                                     src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fd8nSgN%2FbtrAYt0iXBr%2FZho1yiQHDSOZU0MDmdiopK%2Fimg.webp"/></a>
-                        </div>
-                        <div class="feed_like_lower_accounts">
-                            <div class="feed_like_lower_account">
-                                <a class="anchor" href=""><b>lllylll</b></a>
-                            </div>
-                            <div class="feed_like_lower_account_follow">
-                                <div>
-                                    <a class="anchor" href="">j_h_84님 외 1명이 팔로우합니다</a>
-                                </div>
-                            </div>
-                        </div>
-                        <a class="anchor" href="">
-                            <div class="feed_like_lower_btn_follow">
-                                <b>팔로우</b>
-                            </div>
-                        </a>
-                    </div>
-
-                </div>
-
-            </div>
-        </div>
-
-    </div>
-</div>
-
-</body>
-
-
-<!--       서정인님이 보내주신 피드업로드 모달          -->
-
-
 <script>
     // 모달 띄우기 코드
     const modal = document.getElementById("modal_add_feed");
+    const modal2 = document.getElementById("modal_add_feed_content");
     const buttonAddFeed = document.getElementById("add_feed");
     buttonAddFeed.addEventListener("click", e => {
         modal.style.top = window.pageYOffset + 'px'; // top을 이용해 시작 y위치를 바꿔줌
@@ -1323,6 +730,11 @@
     const buttonCloseModal = document.getElementById("close_modal");
     buttonCloseModal.addEventListener("click", e => {
         modal.style.display = "none";
+        document.body.style.overflowY = "visible";
+    });
+    const buttonCloseModal2 = document.getElementById("close_modal2");
+    buttonCloseModal2.addEventListener("click", e => {
+        modal2.style.display = "none";
         document.body.style.overflowY = "visible";
     });
 
@@ -1382,13 +794,13 @@
         }
     };
 
-    function upload() {
-        const image = $('#input_image').css("background-image").replace(/^url\(['"](.+)['"]\)/, '$1');
-        const content = $('#input_content').val();
-        const profile_image = $('#input_profile_image').attr('src');
-        const user_id = $('#input_user_id').text();
+    $('#button_write_feed').on('click', () => {
+        let image = $('#input_image').css("background-image").replace(/^url\(['"](.+)['"]\)/, '$1');
+        let content = $('#input_content').val();
+        let profile_image = $('#input_profile_image').attr('src');
+        let user_id = $('#input_user_id').text();
 
-        const file = files[0];
+        let file = files[0];
 
         let fd = new FormData();
 
@@ -1398,48 +810,43 @@
         fd.append('profile_image', profile_image);
         fd.append('user_id', user_id);
 
+        if (image.length <= 0) {
+            alert("이미지가 비어있습니다.");
+        } else if (content.length <= 0) {
+            alert("설명을 입력하세요");
+        } else if (profile_image.length <= 0) {
+            alert("프로필 이미지가 비어있습니다.");
+        } else if (user_id.length <= 0) {
+            alert("사용자 id가 없습니다.");
+        } else {
+            writeFeed(fd);
+            console.log(files[0]);
+        }
+    });
+
+    function writeFeed(fd) {
         $.ajax({
-            type: "POST",
+            url: "/upload",
+            data: fd,
+            method: "POST",
             processData: false,
             contentType: false,
-            url: "upload",
-            data: fd,
-            success: function (response) {
-                if (response['result'] == 'success') {
-                    alert('게시물이 업로드 되었습니다.')
-                    window.location.href = '/'
-                }
+            success: function (data) {
+                console.log("성공");
+            },
+            error: function (request, status, error) {
+                console.log("에러");
+            },
+            complete: function () {
+                console.log("무조건실행");
+                modal2.style.display = "none";
+                document.body.style.overflowY = "visible";
+                window.location.reload();
+                alert('업로드가 완료되었습니다!');
             }
         })
-    }
-
+    };
 </script>
 
-
-<!--                 정후님이 보내주신 피드모달창                 -->
-
-<script>
-    const body = document.querySelector('body');
-    const modal = document.querySelector('.modal');
-    const btnOpenPopup = document.querySelector('.btn-open-popup');
-
-    btnOpenPopup.addEventListener('click', () => {
-        modal.classList.toggle('show');
-
-        if (modal.classList.contains('show')) {
-            body.style.overflow = 'hidden';
-        }
-    });
-
-    modal.addEventListener('click', (event) => {
-        if (event.target === modal) {
-            modal.classList.toggle('show');
-
-            if (!modal.classList.contains('show')) {
-                body.style.overflow = 'auto';
-            }
-        }
-    });
-</script>
 
 </html>
