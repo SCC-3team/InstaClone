@@ -56,6 +56,9 @@
     $(document).ready(function(){
         get_posts()
     })
+    $(document).ready(function(){
+        get_upload()
+    })
 
 </script>
 
@@ -117,11 +120,12 @@
                             <div class="nav-icons">
 
                                 <!--               게시물 추가 아이콘                 -->
+                                <!--               업로드.html 연결                -->
                                 <!--                  모달 추가                     -->
                                 <div class="icons">
                                     <div class="icon">
                                         <div class="icon2">
-                                            <li class="icon3"><a href="......"><i
+                                            <li class="icon3"><a href="{{url_for('uploading')}}"><i
                                                     class="fa-solid fa-square-plus fa-2xl icon-deco"></i></a></li>
                                         </div>
                                     </div>
@@ -186,7 +190,8 @@
 
                                 <!--              캐러셀                  -->
 
-                                <div class="article1">
+                                <div id="feed-box" class="article1>
+
 
                                     <!--              메인 피드 창 프로필 표시                          -->
 
@@ -737,7 +742,7 @@
 
                                             <div class="masd-profile-user-id">
                                                 <div class-="mapui-1">
-                                                    <a class="mapui-1-id" href="profilepage_ajh1531.html" tabindex="0">안정환</a>
+                                                    <a class="mapui-1-id" href="profilepage,.html" tabindex="0">안정환</a>
                                                 </div>
                                                 <div class="mapui-2">
                                                     <div>경기 수원</div>

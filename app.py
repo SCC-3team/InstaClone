@@ -122,6 +122,7 @@ def posting():
     except (jwt.ExpiredSignatureError, jwt.exceptions.DecodeError):
         return redirect(url_for("home"))
 
+
 @app.route("/get_posts", methods=['GET'])
 def get_posts():
     # 댓글 받아오는 get
@@ -142,60 +143,55 @@ def get_posts():
     except (jwt.ExpiredSignatureError, jwt.exceptions.DecodeError):
         return redirect(url_for("home"))
 
+@app.route('/uploading')
+def uploading():
+    return render_template('upload.html')
 
-""" 좋아요 수 계산 및 이미지 세이브 파일 아직 진행중
-@app.route('/update_like', methods=['POST'])
-def update_like():
+
+@app.route('/upload', methods=['POST'])
+def UploadReceive():
     token_receive = request.cookies.get('mytoken')
     try:
         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
-        # 좋아요 수 변경
         user_info = db.users.find_one({"username": payload["id"]})
-        post_id_receive = request.form["post_id_give"]
-        type_receive = request.form["type_give"]
-        action_receive = request.form["action_give"]
+
+        picture_receive = request.form['image']
+        contents_receive = request.form['content']
+        date_receive = request.form["date_give"]
+        print(type(date_receive))
+
         doc = {
-            "post_id": post_id_receive,
             "username": user_info["username"],
-            "type": type_receive
+            "profile_name": user_info["profile_name"],
+            "image": picture_receive,
+            "content": contents_receive,
+            "date": date_receive
         }
-        if action_receive =="like":
-            db.likes.insert_one(doc)
-        else:
-            db.likes.delete_one(doc)
-        count = db.likes.count_documents({"post_id": post_id_receive, "type": type_receive})
-        print(count)
-        return jsonify({"result": "success", 'msg': 'updated', "count": count})
+
+        db.feeds.insert_one(doc)
+        return jsonify({"result": "success", 'msg': '게시물이 업로도 되었습니다'})
     except (jwt.ExpiredSignatureError, jwt.exceptions.DecodeError):
         return redirect(url_for("home"))
 
-@app.route('/update_profile', methods=['POST'])
-def save_img():
+@app.route("/get_upload", methods=['GET'])
+def get_upload():
+    # 댓글 받아오는 get
     token_receive = request.cookies.get('mytoken')
     try:
         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
-        username = payload["id"]
-        name_receive = request.form["name_give"]
-        about_receive = request.form["about_give"]
-        new_doc = {
-            "profile_name": name_receive,
-            "profile_info": about_receive
-        }
-        if 'file_give' in request.files:
-            file = request.files["file_give"]
-            filename = secure_filename(file.filename)
-            extension = filename.split(".")[-1]
-            file_path = f"profile_pics/{username}.{extension}"
-            file.save("./static/"+file_path)
-            new_doc["profile_pic"] = filename
-            new_doc["profile_pic_real"] = file_path
-        db.users.update_one({'username': payload['id']}, {'$set':new_doc})
-        return jsonify({"result": "success", 'msg': '프로필을 업데이트했습니다.'})
+        my_username = payload["id"]
+        username_receive = request.args.get("username_give")
+        if username_receive=="":
+            feeds = list(db.feeds.find({}).sort("date", -1).limit(20))
+        else:
+            feeds = list(db.feeds.find({"username":username_receive}).sort("date", -1).limit(20))
+
+        for feed in feeds:
+            feed["_id"] = str(feed["_id"])
+
+        return jsonify({"result": "success", "msg": "피드를 가져왔습니다.", "feeds": feeds})
     except (jwt.ExpiredSignatureError, jwt.exceptions.DecodeError):
         return redirect(url_for("home"))
-"""
-
-
 
 if __name__ == '__main__':
     app.run('0.0.0.0', port=5000, debug=True)
