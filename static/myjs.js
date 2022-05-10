@@ -1,82 +1,122 @@
-    <!--    코멘트 포스트 함수-->
-     function comment() {
-         let comment = $("#textarea-comment").val()
-         let today = new Date().toISOString()
+function posting() {
+    let comment = $("#textarea-post").val()
+    let today = new Date().toISOString()
+    $.ajax({
+        type: "POST",
+        url: "/posting",
+        data: {
+            comment_give: comment,
+            date_give: today
+        },
+        success: function (response) {
+            window.location.reload()
+            alert(response['msg'])
 
-         if (comment == "") {
-             alert('텍스트를 입력하세요.')
-         } else {
-             $.ajax({
-                 type: "POST",
-                 url: "/comment",
-                 data: {
-                     comment_give: comment,
-                     date_give: today
-                 },
-                 success: function (response) {
-                     alert(response['msg'])
-                     window.location.reload()
-                 }
-             })
-         }
-     }
-
-     function get_comment(username) {
-        if (username == undefined) {
-            username = ""
         }
-        $("#comment-box").empty()
-        $.ajax({
-             type: "GET",
-             url: '/get_comment?username_give=${username}',
-             data: {},
-             success: function (response) {
-                 if (response["result"] == "success") {
-                     let comments = response["comments"]
-                     for (let i = 0; i < comments.length; i++) {
-                         let comment = comments[i]
-                         let time_comment = new Date(comment["date"])
-                         let time_before = time2str(time_comment)
-                         let temp_html = <div class="box" id="${comment["id"]}">
+    })
+}
 
-                                            <article className="media">
-                                                <div className="media-content">
-                                                    <div className="content">
-                                                        <p>
-                                                            <strong>${comment['profile_name']}</strong>
-                                                            <small>@${comment['username']}</small>
-                                                            <small>${time_before}</small>
-                                                            <br>
-                                                                ${comment['comment']}
-                                                            </br>
-                                                        </p>
-                                                    </div>
-                                                </div>
-                                            </article>
-                                        </div>
-                         $("#comment-box").append(temp_html)
-                     }
-                 }
-             }
-        })
-     }
-
-
-    function time2str(date) {
-        let today = new Date()
-        let time = (today - date) / 1000 / 60 //분
-
-        if (time < 60) {
-            return parseInt(time) + "분 전"
-        }
-
-        time = time / 60 // 시간
-        if (time < 24) {
-            return parseInt(time) + "시간 전"
-        }
-        time = time / 24
-        if (time < 7) {
-            return parseInt(time) + "일 전"
-        }
-        return `${date.getFullYear()}년 ${date.getMonth() + 1}월 ${date.getDate()}일`
+function get_posts(username) {
+    if (username == undefined) {
+        username = ""
     }
+    $("#post-box").empty()
+    $.ajax({
+        type: "GET",
+        url: `/get_posts?username_give=${username}`,
+        data: {},
+        success: function (response) {
+            if (response["result"] == "success") {
+                let posts = response["posts"]
+                for (let i = 0; i < posts.length; i++) {
+                    let post = posts[i]
+                    let time_post = new Date(post["date"])
+                    let time_before = time2str(time_post)
+                    let html_temp = `<div class="comment-explanation" id="${post["_id"]}">
+                                        <article class="comment-explanation">                                           
+                                              <div> 
+                                              <p>                        
+                                                    <strong>${post['profile_name']}</strong> <small>${time_before}</small>
+                                                    <br>                                           
+                                                        ${post['comment']}
+                                              </p>                                                                                                     
+                                              </div>                                     
+                                        </article>
+                                    </div>`
+                    $("#post-box").append(html_temp)
+                }
+            }
+        }
+    })
+}
+
+function time2str(date) {
+    let today = new Date()
+    let time = (today - date) / 1000 / 60  // 분
+
+    if (time < 60) {
+        return parseInt(time) + "분 전"
+    }
+    time = time / 60  // 시간
+    if (time < 24) {
+        return parseInt(time) + "시간 전"
+    }
+    time = time / 24
+    if (time < 7) {
+        return parseInt(time) + "일 전"
+    }
+    return `${date.getFullYear()}년 ${date.getMonth() + 1}월 ${date.getDate()}일`
+}
+
+function num2str(count) {
+    if (count > 10000) {
+        return parseInt(count / 1000) + "k"
+    }
+    if (count > 500) {
+        return parseInt(count / 100) / 10 + "k"
+    }
+    if (count == 0) {
+        return ""
+    }
+    return count
+}
+
+function toggle_like(post_id, type) {
+    console.log(post_id, type)
+    let $a_like = $(`#${post_id} a[aria-label='${type}']`)
+    let $i_like = $a_like.find("i")
+    let class_s = {"heart": "fa-heart", "star": "fa-star", "like": "fa-thumbs-up"}
+    let class_o = {"heart": "fa-heart-o", "star": "fa-star-o", "like": "fa-thumbs-o-up"}
+    if ($i_like.hasClass(class_s[type])) {
+        $.ajax({
+            type: "POST",
+            url: "/update_like",
+            data: {
+                post_id_give: post_id,
+                type_give: type,
+                action_give: "unlike"
+            },
+            success: function (response) {
+                console.log("unlike")
+                $i_like.addClass(class_o[type]).removeClass(class_s[type])
+                $a_like.find("span.like-num").text(num2str(response["count"]))
+            }
+        })
+    } else {
+        $.ajax({
+            type: "POST",
+            url: "/update_like",
+            data: {
+                post_id_give: post_id,
+                type_give: type,
+                action_give: "like"
+            },
+            success: function (response) {
+                console.log("like")
+                $i_like.addClass(class_s[type]).removeClass(class_o[type])
+                $a_like.find("span.like-num").text(num2str(response["count"]))
+            }
+        })
+
+    }
+}

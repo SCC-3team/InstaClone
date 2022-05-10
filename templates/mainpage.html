@@ -12,6 +12,7 @@
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-cookie/1.4.1/jquery.cookie.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
             integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
             crossorigin="anonymous"></script>
@@ -38,8 +39,7 @@
     <link rel="stylesheet" href="fontawesome-free-5.15.1/css/all.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!--    js 파일 script-->
-    <script src="{{ url_for('static', filename='myjs.js') }}"></script>
+
     <!--    fontawesome script-->
 
     <script src="https://kit.fontawesome.com/993c2cba92.js" crossorigin="anonymous"></script>
@@ -47,19 +47,15 @@
     <noscript>
         <link rel="stylesheet" href="assets/css/noscript.css"/>
     </noscript>
-
-
+    <!--    js 파일 script-->
+    <script src="{{ url_for('static', filename='myjs.js') }}"></script>
 </head>
 
 <script>
 
-    <!--    로그아웃 함수-->
-     function logout(){
-        $.removeCookie('mytoken', {path: '/'});
-        alert('로그아웃 하셨습니다')
-        window.location.replace("/login")
-      }
-
+    $(document).ready(function(){
+        get_posts()
+    })
 
 </script>
 
@@ -90,7 +86,7 @@
 
                                             <!--           로고 아이콘 클릭시 메인페이지 소환          -->
 
-                                            <li class="icon3"><a href="mainpage.html">
+                                            <li class="icon3"><a href="/">
                                                 <i class="fa-brands fa-instagram fa-2xl icon-deco"></i>
                                                 </i></a>
                                             </li>
@@ -168,10 +164,6 @@
                                             </li>
                                         </div>
                                     </div>
-                                </div>
-                                <!--               임시 로그아욱 기늧 추가  -->
-                                <div class="login-btn" style="text-align:center;">
-                                <button onclick=logout() type="button" class="btn btn-outline-primary">logout</button>
                                 </div>
                             </div>
                         </div>
@@ -389,10 +381,13 @@
                                                     <!--          여기부턴 temp_html해서 하나씩 붙여 나가기           -->
                                                     <!--            팬명록 프로젝트 참고하면 좋을 듯                  -->
 
+                                                     <!--          DB에 있는 POST DB에서 댓글을 GET으로 끌어옴      -->
                                                     <div>
-                                                        <div><a href="">lcolb987</a></div>
-                                                        <div class="comment-explanation2">잘가라
+                                                        <p>
+                                                        <div id="post-box" class="comment-explanation1">
                                                         </div>
+                                                        </p>
+
                                                     </div>
 
                                                     <!--                     두번째 댓글란                        -->
@@ -413,10 +408,11 @@
                                             </div>
 
                                             <!--                     댓글입력 창                        -->
-
+                                            <!-- input을 textarea로 받음     -->
                                             <section class="comments-input">
                                                 <div class="comment-input">
                                                     <input class="form-control form-control-sm comment-input"
+                                                           id="textarea-post"
                                                            type="text" placeholder="Post your comments"
                                                            aria-label=".form-control-sm example">
                                                 </div>
@@ -424,7 +420,7 @@
                                                 <!--                     댓글 달기 버튼                        -->
 
                                                 <div class="comment-post">
-                                                    <a href="" class="comment-post-icon"><i
+                                                    <a href="javascript:posting();" class="comment-post-icon"><i
                                                             class="fa-solid fa-angles-up fa-2xl"></i></a>
                                                 </div>
                                             </section>
@@ -741,7 +737,7 @@
 
                                             <div class="masd-profile-user-id">
                                                 <div class-="mapui-1">
-                                                    <a class="mapui-1-id" href="profilepage_안정환.html" tabindex="0">안정환</a>
+                                                    <a class="mapui-1-id" href="profilepage_ajh1531.html" tabindex="0">안정환</a>
                                                 </div>
                                                 <div class="mapui-2">
                                                     <div>경기 수원</div>

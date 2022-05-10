@@ -50,7 +50,7 @@ def user(username):
         status = (username == payload["id"])  # 내 프로필이면 True, 다른 사람 프로필 페이지면 False
 
         user_info = db.users.find_one({"username": username}, {"_id": False})
-        return render_template('user.html', user_info=user_info, status=status)
+        return render_template('profilepage.html', user_info=user_info, status=status)
     except (jwt.ExpiredSignatureError, jwt.exceptions.DecodeError):
         return redirect(url_for("home"))
 
@@ -67,7 +67,7 @@ def sign_in():
 
     if result is not None:
         payload = {
-            # JWT 토큰에는, payload와 시크릿키가 필요하다. (이게 필요한 이유는 상세하게 위에 소개한 링크에 나와있다.)
+            # JWT 토큰에는, payload와 시크릿키가 필요하다.
             # 시크릿키가 있어야 토큰을 복호화해서 payload 값을 볼 수 있다.
             # id와 exp를 담는다. JWT 토큰을 풀면 유저ID 값을 알 수 있다.
             # exp에는 만료시간을 넣어준다. 만료시간이 지나면, 시크릿키로 토큰을 풀때 만료되었다고 에러가 난다.
@@ -90,80 +90,110 @@ def sign_up():
     password_receive = request.form['password_give']
     password_hash = hashlib.sha256(password_receive.encode('utf-8')).hexdigest()
     doc = {
-        "username": username_receive,
-        "usermail": usermail_receive,
-        "password": password_hash,
-        "profile_name": username_receive,
+        "username": username_receive,     # 아이디
+        "usermail": usermail_receive,     # 이메일
+        "password": password_hash,        # 비밀번호
+        "profile_name": username_receive, # 프로필 이름 기본갑
+        "profile_pic": "",                # 프로필 사진 파일
+        "profile_pic_real": "profile_pics.profile_placeholder.png",  # 프로필 사진 기본
     }
     db.users.insert_one(doc)
     return jsonify({'result': 'success'})
 
-@app.route('/comment', methods=['POST'])
-def comment():
+@app.route('/posting', methods=['POST'])
+def posting():
     token_receive = request.cookies.get('mytoken')
     try:
         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+        # 포스팅(댓글)하기
         user_info = db.users.find_one({"username": payload["id"]})
         comment_receive = request.form["comment_give"]
         date_receive = request.form["date_give"]
+        print(type(date_receive))
         doc = {
             "username": user_info["username"],
             "profile_name": user_info["profile_name"],
+            "profile_pic_real": user_info["profile_pic_real"],
             "comment": comment_receive,
             "date": date_receive
         }
-        #코멘트 db에 저장
-        db.comments.insert_one(doc)
+        db.posts.insert_one(doc)
         return jsonify({"result": "success", 'msg': '댓글 성공'})
     except (jwt.ExpiredSignatureError, jwt.exceptions.DecodeError):
         return redirect(url_for("home"))
 
-@app.route("/get_comment", methods=['GET'])
-def get_comment():
+@app.route("/get_posts", methods=['GET'])
+def get_posts():
+    # 댓글 받아오는 get
     token_receive = request.cookies.get('mytoken')
     try:
         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+        my_username = payload["id"]
         username_receive = request.args.get("username_give")
-        if username_receive == "":
-            comments = list(db.comments.find({}).sort("date", -1).limit(20))
+        if username_receive=="":
+            posts = list(db.posts.find({}).sort("date", -1).limit(20))
         else:
-            comments = list(db.comments.find({"username": username_receive}).sort("date", -1).limit(20))
-        """
-        for comment in comments:
-            #문자열 변환하기
-            comment["_id"] = str(comment["_id"])
+            posts = list(db.posts.find({"username":username_receive}).sort("date", -1).limit(20))
 
-            좋아요 엄지척 구현부분 일단 제외
-            comment["count_heart"] = db.likes.count_documents({"comment_id": comment["_id"], "type": "heart"})
-            comment["heart_by_me"] = bool(
-                db.likes.find_one({"comment_id": comment["_id"], "type": "heart", "username": payload['id']}))
+        for post in posts:
+            post["_id"] = str(post["_id"])
 
-            comment["count_star"] = db.likes.count_documents({"comment_id": comment["_id"], "type": "star"})
-            comment["star_by_me"] = bool(
-                db.likes.find_one({"comment_id": comment["_id"], "type": "star", "username": payload['id']}))
-
-            comment["count_thumbs"] = db.likes.count_documents({"comment_id": comment["_id"], "type": "thumbs"})
-            comment["thumbs_by_me"] = bool(
-                db.likes.find_one({"comment_id": comment["_id"], "type": "thumbs", "username": payload['id']}))
-            """
-        return jsonify({"result": "success", "msg": "댓글을 가져왔습니다.", "comments": comments})
-
+        return jsonify({"result": "success", "msg": "댓글을 가져왔습니다.", "posts": posts})
     except (jwt.ExpiredSignatureError, jwt.exceptions.DecodeError):
         return redirect(url_for("home"))
 
 
+""" 좋아요 수 계산 및 이미지 세이브 파일 아직 진행중
+@app.route('/update_like', methods=['POST'])
+def update_like():
+    token_receive = request.cookies.get('mytoken')
+    try:
+        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+        # 좋아요 수 변경
+        user_info = db.users.find_one({"username": payload["id"]})
+        post_id_receive = request.form["post_id_give"]
+        type_receive = request.form["type_give"]
+        action_receive = request.form["action_give"]
+        doc = {
+            "post_id": post_id_receive,
+            "username": user_info["username"],
+            "type": type_receive
+        }
+        if action_receive =="like":
+            db.likes.insert_one(doc)
+        else:
+            db.likes.delete_one(doc)
+        count = db.likes.count_documents({"post_id": post_id_receive, "type": type_receive})
+        print(count)
+        return jsonify({"result": "success", 'msg': 'updated', "count": count})
+    except (jwt.ExpiredSignatureError, jwt.exceptions.DecodeError):
+        return redirect(url_for("home"))
 
-
-
-#중복조회 관련 함수 아직 미구현
-@app.route('/sign_up/check_dup', methods=['POST'])
-def check_dup():
-    username_receive = request.form['username_give']
-    exists = bool(db.users.find_one({"username": username_receive}))
-    return jsonify({'result': 'success', 'exists': exists})
-
-
-
+@app.route('/update_profile', methods=['POST'])
+def save_img():
+    token_receive = request.cookies.get('mytoken')
+    try:
+        payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
+        username = payload["id"]
+        name_receive = request.form["name_give"]
+        about_receive = request.form["about_give"]
+        new_doc = {
+            "profile_name": name_receive,
+            "profile_info": about_receive
+        }
+        if 'file_give' in request.files:
+            file = request.files["file_give"]
+            filename = secure_filename(file.filename)
+            extension = filename.split(".")[-1]
+            file_path = f"profile_pics/{username}.{extension}"
+            file.save("./static/"+file_path)
+            new_doc["profile_pic"] = filename
+            new_doc["profile_pic_real"] = file_path
+        db.users.update_one({'username': payload['id']}, {'$set':new_doc})
+        return jsonify({"result": "success", 'msg': '프로필을 업데이트했습니다.'})
+    except (jwt.ExpiredSignatureError, jwt.exceptions.DecodeError):
+        return redirect(url_for("home"))
+"""
 
 
 
