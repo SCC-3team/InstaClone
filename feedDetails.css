@@ -1,0 +1,540 @@
+ /*모달 부분*/
+        .modal {
+            position: absolute;
+            top: 0;
+            left: 0;
+
+            width: 100%;
+            height: 100%;
+
+            display: none;
+
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+
+        .modal.show {
+            display: block;
+        }
+
+        /*   -----------------------  */
+
+        body {
+            margin: 0px;
+            overflow: hidden;
+        }
+
+        .anchor {
+            text-decoration: none;
+            color: black;
+        }
+
+        .anchor:hover {
+            color: black;
+        }
+
+        .all_profile_img {
+            border-radius: 50%;
+            width: 34px;
+            height: 34px;
+        }
+
+        .inputborder {
+            border: none;
+        }
+
+        .inputborder:focus {
+            outline: none;
+        }
+
+        .feed_details_wrap {
+            z-index: 100;
+            position: fixed;
+            background-color: rgba(0, 0, 0, 0.65);
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            margin: 0px auto;
+            justify-content: center;
+            align-items: center;
+
+        }
+
+        .feed_details_exit_btn {
+            z-index: 100;
+            position: fixed;
+            display: flex;
+            left: 95%;
+            bottom: 95%;
+            width: 40px;
+            height: 40px;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .feed_details {
+            background-color: rgba(0, 0, 0, 0.1);
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: absolute;
+
+        }
+
+        .feed_details_box {
+            width: 1573px;
+            height: 1071px;
+            display: flex;
+            flex-direction: row;
+            background-color: white;
+            border-radius: 10px;
+        }
+
+        @media all and (max-width: 1573px) {
+            .feed_details_box {
+                display: block;
+                width: 1071px;
+            }
+        }
+
+        .feed_details_box_left {
+            display: flex;
+            width: 1071px;
+            height: 1071px;
+        }
+
+        .feed_details_box_right {
+            width: 503px;
+            height: 1071px;
+        }
+
+        @media all and (max-width: 1573px) {
+            .feed_details_box_right {
+                display: none;
+            }
+        }
+
+        .feed_details_box_writer {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            max-width: 503px;
+            max-height: 63px;
+            border-bottom: 2px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .feed_details_header {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            max-width: 503px;
+            max-height: 63px;
+            align-items: center;
+            padding: 0 16px;
+
+
+        }
+
+        .feed_details_header_profile {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+            max-width: 455px;
+            max-height: 63px;
+        }
+
+        .feed_details_header_img {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            max-width: 32px;
+            max-height: 32px;
+            margin-right: 15px;
+        }
+
+        .feed_details_profile_follow {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            max-width: 380px;
+            max-height: 26px;
+            margin-right: 10px;
+            margin-top: 7px;
+            font-size: 15px;
+        }
+
+        .box_profile {
+            margin: 0 5px;
+        }
+
+
+        .feed_details_box_ct {
+            width: 100%;
+            height: 100%;
+            max-width: 503px;
+            max-height: 1008px;
+            overflow: scroll;
+        }
+
+
+        .feed_details_box_text {
+            display: block;
+            width: 100%;
+            height: 100%;
+            max-width: 503px;
+            max-height: 844px;
+            padding: 0 16px;
+            align-items: center;
+        }
+
+        .box_account_text {
+            display: flex;
+            width: 100%;
+            height: auto;
+            max-width: 485px;
+            max-height: 185px;
+            padding-top: 30px;
+            margin-bottom: 40px;
+            word-break: break-all;
+            overflow-y: scroll;
+        }
+
+        .account_text_left {
+            display: flex;
+            width: 53px;
+            height: 32px;
+            margin-left: 3px;
+        }
+
+        .account_text_right {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            max-width: 450px;
+            max-height: 185px;
+            font-size: 13px;
+
+        }
+
+        .account_text_right_ac {
+            width: 100%;
+            max-width: 100px;
+            min-width: 70px;
+        }
+
+        .account_comment_list {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            min-height: 62px;
+            max-width: 485px;
+            max-height: 62px;
+            word-break: break-all;
+        }
+
+        .account_comment_list_img {
+            width: 50px;
+            height: 34px;
+            margin-left: 3px;
+        }
+
+        .account_comment_list_text {
+            display: block;
+            width: 100%;
+            height: 100%;
+            max-width: 453px;
+            max-height: 185px;
+            font-size: 13px;
+        }
+
+        .account_comment_list_id {
+            display: flex;
+            width: 100%;
+            height: 35%;
+        }
+
+        .account_comment_list_date {
+            display: flex;
+            width: 100%;
+            height: 50%;
+        }
+
+        .feed_details_box_btns {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            max-width: 503px;
+            max-height: 55px;
+            padding: 0 16px;
+            align-items: center;
+            border-top: 2px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .box_btns {
+            display: flex;
+            align-items: center;
+            width: 40px;
+            height: 40px;
+        }
+
+        .box_i {
+            width: 24px;
+            height: 24px;
+            margin-top: 50%;
+
+        }
+
+        .btn_i {
+            border: none;
+            background-color: white;
+        }
+
+        .feed_details_box_btn4 {
+            margin-left: auto;
+            margin-right: -10px;
+        }
+
+        .feed_details_box_likes {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            max-width: 503px;
+            max-height: 18px;
+            padding-left: 16px;
+        }
+
+        .feed_details_box_date {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            max-width: 503px;
+            max-height: 18px;
+            padding-left: 16px;
+            padding-top: 8px;
+        }
+
+        .box_date {
+            color: rgba(0, 0, 0, 0.5);
+            font-size: 10.1px;
+            margin-left: 8px;
+        }
+
+        .feed_details_box_comment_insert {
+            display: flex;
+            align-items: flex-end;
+            width: 100%;
+            height: 100%;
+            max-width: 503px;
+            max-height: 73px;
+
+        }
+
+        .feed_details_box_comment_pad {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            max-width: 503px;
+            max-height: 53px;
+            justify-content: center;
+            align-items: center;
+
+        }
+
+        .feed_details_box_comment_form {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            height: 100%;
+            max-width: 470px;
+            max-height: 40px;
+            padding: 0 16px;
+
+        }
+
+        .comment_text {
+            display: flex;
+            align-items: center;
+            width: 404px;
+            height: 40px;
+        }
+
+        .comment_textt {
+            width: 404px;
+            height: 40px;
+        }
+
+
+        .comment_writebtn {
+            display: flex;
+            width: 40px;
+            height: 18px;
+            padding-right: -10px;
+        }
+
+        .comment_writebtnn {
+            display: flex;
+            width: 40px;
+            height: 18px;
+            font-size: 15px;
+            text-decoration: none;
+            color: #006fff;
+            border: none;
+            background-color: white;
+        }
+
+
+        /* 좋아요 모달*/
+        .feed_like_wrap {
+            z-index: 100;
+            position: fixed;
+            background-color: rgba(0, 0, 0, 0.65);
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            margin: 0px auto;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .feed_like {
+            width: 400px;
+            height: 400px;
+            display: block;
+            background-color: white;
+            border-radius: 10px;
+        }
+
+        .feed_like_upper {
+            display: flex;
+            width: 400px;
+            height: 40px;
+            border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .feed_like_text {
+            display: flex;
+            height: 100%;
+            width: 90%;
+        }
+
+        .feed_like_text_b {
+            display: flex;
+            height: 100%;
+            margin-left: 50%;
+            align-items: center;
+        }
+
+        .feed_like_exit_btn {
+            display: flex;
+            width: 40px;
+            height: 40px;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .feed_like_lower {
+            width: 400px;
+            height: 360px;
+        }
+
+        .feed_like_lower_sep {
+            display: flex;
+            width: 400px;
+            height: 60px;
+            align-items: center;
+        }
+
+        .feed_like_lower_img {
+            display: flex;
+            width: 55px;
+            height: 50px;
+            align-items: center;
+            padding-left: 8px;
+        }
+
+        .feed_like_lower_img_size {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            margin-left: 5px;
+        }
+
+        .feed_like_lower_accounts {
+            width: 280px;
+            height: 40px;
+            padding-left: 20px;
+        }
+
+        .feed_like_lower_account {
+            width: 280px;
+            height: 20px;
+            font-size: 14px;
+        }
+
+        .feed_like_lower_account_follow {
+            width: 280px;
+            height: 11px;
+            font-size: 13px;
+            color: rgba(0, 0, 0, 0.5);
+        }
+
+        .feed_like_lower_btn_follow {
+            width: 50px;
+            height: 30px;
+            font-size: 12.015px;
+            color: white;
+            background-color: #006fff;
+            padding-left: 9px;
+            padding-top: 6px;
+            border-radius: 10px;
+        }
+
+        /* 캐러셀 */
+        .article1 {
+            align-content: stretch;
+            align-items: stretch;
+            box-sizing: border-box;
+            display: flex;
+            flex-basis: auto;
+            flex-direction: column;
+            flex-grow: 0;
+            flex-shrink: 0;
+
+            justify-content: center;
+            margin: 0 0 100px 0;
+            max-height: none;
+            max-width: none;
+            position: relative;
+            width: 100%;
+            height: 1071px;
+
+            border-style: solid;
+            border-width: 1px;
+            border-color: rgb(220, 220, 220);
+
+            -webkit-box-align: stretch;
+            -webkit-box-direction: normal;
+            -webkit-box-flex: 0;
+            -webkit-box-orient: vertical;
+            -webkit-box-pack: center;
+        }
+
+        .article1 > .carousel-inner {
+            width: auto;
+            height: 600px;
+        }
+
+        .article1 > .carousel-inner > .carousel-item {
+            width: auto;
+            height: 100%;
+        }
+
+        .article1 > .carousel-inner > .carousel-item > .d-block {
+            display: block;
+            width: auto;
+            height: 100%;
+        }
