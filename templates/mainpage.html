@@ -49,63 +49,136 @@
 
 <script>
 
+    function posting() {
+        let comment = $("#textarea-post").val()
+        let today = new Date().toISOString()
+        $.ajax({
+            type: "POST",
+            url: "/posting",
+            data: {
+                comment_give: comment,
+                date_give: today
+            },
+            success: function (response) {
+                window.location.reload()
+                alert(response['msg'])
+
+            }
+        })
+    }
+
+    function get_posts(username) {
+        if (username == undefined) {
+            username = ""
+        }
+        $("#post-box").empty()
+        $.ajax({
+            type: "GET",
+            url: `/get_posts?username_give=${username}`,
+            data: {},
+            success: function (response) {
+                if (response["result"] == "success") {
+                    let posts = response["posts"]
+                    for (let i = 0; i < posts.length; i++) {
+                        let post = posts[i]
+                        let time_post = new Date(post["date"])
+                        let time_before = time2str(time_post)
+                        let html_temp = `<div class="comment-explanation" id="${post["_id"]}">
+                                        <article class="comment-explanation">
+                                              <div>
+                                              <p>
+                                                    <strong>${post['profile_name']}</strong> <small>${time_before}</small>
+                                                    <br>
+                                                        ${post['comment']}
+                                              </p>
+                                              </div>
+                                        </article>
+                                    </div>`
+                        $("#post-box").append(html_temp)
+                    }
+                }
+            }
+        })
+    }
+
+    function time2str(date) {
+        let today = new Date()
+        let time = (today - date) / 1000 / 60  // 분
+
+        if (time < 60) {
+            return parseInt(time) + "분 전"
+        }
+        time = time / 60  // 시간
+        if (time < 24) {
+            return parseInt(time) + "시간 전"
+        }
+        time = time / 24
+        if (time < 7) {
+            return parseInt(time) + "일 전"
+        }
+        return `${date.getFullYear()}년 ${date.getMonth() + 1}월 ${date.getDate()}일`
+    }
+
+    function num2str(count) {
+        if (count > 10000) {
+            return parseInt(count / 1000) + "k"
+        }
+        if (count > 500) {
+            return parseInt(count / 100) / 10 + "k"
+        }
+        if (count == 0) {
+            return ""
+        }
+        return count
+    }
+
+    function toggle_like(post_id, type) {
+        console.log(post_id, type)
+        let $a_like = $(`#${post_id} a[aria-label='${type}']`)
+        let $i_like = $a_like.find("i")
+        let class_s = {"heart": "fa-heart", "star": "fa-star", "like": "fa-thumbs-up"}
+        let class_o = {"heart": "fa-heart-o", "star": "fa-star-o", "like": "fa-thumbs-o-up"}
+        if ($i_like.hasClass(class_s[type])) {
+            $.ajax({
+                type: "POST",
+                url: "/update_like",
+                data: {
+                    post_id_give: post_id,
+                    type_give: type,
+                    action_give: "unlike"
+                },
+                success: function (response) {
+                    console.log("unlike")
+                    $i_like.addClass(class_o[type]).removeClass(class_s[type])
+                    $a_like.find("span.like-num").text(num2str(response["count"]))
+                }
+            })
+        } else {
+            $.ajax({
+                type: "POST",
+                url: "/update_like",
+                data: {
+                    post_id_give: post_id,
+                    type_give: type,
+                    action_give: "like"
+                },
+                success: function (response) {
+                    console.log("like")
+                    $i_like.addClass(class_s[type]).removeClass(class_o[type])
+                    $a_like.find("span.like-num").text(num2str(response["count"]))
+                }
+            })
+
+        }
+    }
+
+    $(document).ready(function () {
+        get_posts()
+    })
+
     $(document).ready(function () {
         show_comments();
     });
-
-    function show_comments() {
-        $.ajax({
-            type: "GET",
-            url: "/instacomments",
-            data: {},
-            success: function (response) {
-                // 서버에 있는 큰 포괄적인 comments를 rows로 받고 rows의 무엇들을 꺼내올 건지 다시 for문
-                let rows = response['comments']
-                for (let i = 0; i < rows.length; i++) {
-                    let num = rows[i]['num']
-                    let comments = rows[i]['comments']
-                    let delete = rows[i]['delete']
-                    //    어떻게 어떤 변수이름으로 불러올 건지를 정하고 for문을 돌려서 서버에 있는 모든 데이터를 꺼내서
-                    //    rows의 i에 무엇을 변수이름으로 정해줘서 불러온다.
-
-
-                }
-            }
-        });
-    }
-
-    // app.py에서 코멘트 post 부분임. 함수 이름이 save 코멘트 니까 코멘트를 post해서 save하겠다.
-    // 연결된 것임. 서버 작업을 먼저 하고 넘어와서 함수를 작성하고
-    // 해당 댓글입력창에 id를 써주고 댓글 달기 버튼에 아래 함수를 입혀서
-    // 댓글입력 comments를 comment로 선언하고
-    // ajax를 작성.
-
-    function save_comments() {
-        let comment = $('#comments').val()
-
-        $.ajax({
-            type: "POST",
-            url: "/instacomments",
-            data: {comments_give: comment},
-            success: function (response) {
-                alert(response["msg"])
-                // 메세지 띄워주고
-                window.location.reload()
-                // 알러트 이후 윈도우를 다시 실행
-            }
-        });
-    }
-
-    function delete_comments(num) {
-        $.ajax({
-            type: "POST",
-            url: "/instacomments/delete",
-            data: {sameple_give: '데이터전송'},
-            success: function (response) {
-                alert(response["msg"])
-            }
-        });
-    }
 
 </script>
 
@@ -165,8 +238,7 @@
                         <div class="nav-layout">
                             <div class="nav-icons">
 
-                                <!--               게시물 추가 아이콘                 -->
-                                <!--                  모달 추가                     -->
+                                <!--               게시물 추가 모달 연결 아이콘                 -->
 
 
                                 <div class="icons">
@@ -211,7 +283,7 @@
                                 <div class="icons">
                                     <div class="icon">
                                         <div class="icon2">
-                                            <li class="icon3"><a href="profilepage_김혁진.html"><i
+                                            <li class="icon3"><a href="profilepage.html"><i
                                                     class="fa-solid fa-user fa-2xl icon-deco"></i></a>
                                             </li>
                                         </div>
@@ -273,7 +345,7 @@
                                                     <div class="fb-n-title-up">
                                                         <div class="fbntu-1">
                                                             <div class="fbntu-2">
-                                                                <a class="fbntu-span" href="profilepage_김혁진.html"
+                                                                <a class="fbntu-span" href="profilepage.html"
                                                                    tabindex="0">h_genie7</a>
                                                             </div>
                                                         </div>
@@ -424,7 +496,7 @@
 
                                                     <div>
                                                         <div class="comment-explanation explan-ID"><a
-                                                                href="profilepage_김혁진.html">김혁진</a> 부트캠프 끝나면 일단 제주도로
+                                                                href="profilepage.html">김혁진</a> 부트캠프 끝나면 일단 제주도로
                                                             모래반지 빵야빵야
                                                         </div>
                                                     </div>
@@ -459,7 +531,8 @@
                                                     <!--                     더보기 테그 - 피드 모달 띄워주기                        -->
 
                                                     <span>...
-                                                            <div aria-disabled="false" role="button" tabindex="0" id="btn-open-popup">more
+                                                            <div aria-disabled="false" role="button" tabindex="0"
+                                                                 id="btn-open-popup">more
                                                             </div>
                                                         </span>
                                                 </div>
@@ -513,7 +586,7 @@
 
                                 <div class="msd-profile-user-id">
                                     <div class-="mpui-1">
-                                        <a class="mpui-1-id" href="profilepage_김혁진.html" tabindex="0">김혁진</a>
+                                        <a class="mpui-1-id" href="profilepage.html" tabindex="0">김혁진</a>
                                     </div>
                                     <div class="mpui-2">
                                         <div>21-22 챔스 우승 리버풀</div>
@@ -730,7 +803,6 @@
 </div>
 
 </body>
-
 
 
 <!--     추가 모달 창      -->
