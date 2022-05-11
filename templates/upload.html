@@ -23,36 +23,6 @@
 
 </head>
 
-<!--<script>-->
-<!--        function upload() {-->
-<!--        let image = $('#input_image').css("background-image").replace(/^url\(['"](.+)['"]\)/, '$1');-->
-<!--        let content = $('#feed_contents').val();-->
-<!--        const profile_image = $('#input_profile_image').attr('src');-->
-<!--        const user_id = $('#input_user_id').text();-->
-
-<!--        const file = files[0];-->
-
-<!--        let fd = new FormData();-->
-
-<!--        fd.append('file', file);-->
-<!--        fd.append('image', image);-->
-<!--        fd.append('content', content);-->
-<!--        fd.append('profile_image', profile_image);-->
-<!--        fd.append('user_id', user_id);-->
-
-<!--        $.ajax({-->
-<!--            type: "POST",-->
-<!--            url: "upload",-->
-<!--            data: {picture_give:image,contents_give:content},-->
-<!--            success: function (response) {-->
-<!--                if (response['result'] == 'success') {-->
-<!--                    alert('게시물이 업로드 되었습니다.')-->
-<!--                    window.location.href = '/'-->
-<!--                }-->
-<!--            }-->
-<!--        })-->
-<!--    }-->
-<!--</script>-->
 <style>
 
     .modal_overlay {
@@ -168,6 +138,9 @@
         -webkit-box-direction: normal;
     }
 </style>
+
+
+
 <body>
 <div id="modal_add_feed" class="modal modal_overlay">
     <div class="modal_window">
@@ -230,6 +203,10 @@
     </div>
 </div>
 </body>
+
+
+
+
 <script>
     // 모달 띄우기 코드
     const modal = document.getElementById("modal_add_feed");
@@ -369,4 +346,5 @@
         })
     };
 </script>
+
 </html>

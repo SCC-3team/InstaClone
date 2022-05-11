@@ -1,24 +1,23 @@
+from pymongo import MongoClient
 import jwt
 import datetime
 import hashlib
-import certifi
-import pymongo
 from flask import Flask, render_template, jsonify, request, redirect, url_for
+from werkzeug.utils import secure_filename
 from datetime import datetime, timedelta
-from pymongo import MongoClient
 
 app = Flask(__name__)
 app.config["TEMPLATES_AUTO_RELOAD"] = True
 app.config['UPLOAD_FOLDER'] = "./static/profile_pics"
 
 SECRET_KEY = 'SPARTA'
+import certifi
 
 ca = certifi.where()
+client = MongoClient('mongodb+srv://test:sparta@cluster0.mdx5k.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
+                     tlsCAFile=ca)
+db = client.dbsparta
 
-client = MongoClient('mongodb+srv://test:sparta@cluster0.mdx5k.mongodb.net/myFirstDatabase?retryWrites=true&w=majority')
-db = client.test
-
-# 로그인
 
 @app.route('/')
 def home():
@@ -54,7 +53,7 @@ def user(username):
         status = (username == payload["id"])  # 내 프로필이면 True, 다른 사람 프로필 페이지면 False
 
         user_info = db.users.find_one({"username": username}, {"_id": False})
-        return render_template('profilepage.html', user_info=user_info, status=status)
+        return render_template('profile-page.html', user_info=user_info, status=status)
     except (jwt.ExpiredSignatureError, jwt.exceptions.DecodeError):
         return redirect(url_for("home"))
 
@@ -94,15 +93,16 @@ def sign_up():
     password_receive = request.form['password_give']
     password_hash = hashlib.sha256(password_receive.encode('utf-8')).hexdigest()
     doc = {
-        "username": username_receive,     # 아이디
-        "usermail": usermail_receive,     # 이메일
-        "password": password_hash,        # 비밀번호
-        "profile_name": username_receive, # 프로필 이름 기본갑
-        "profile_pic": "",                # 프로필 사진 파일
+        "username": username_receive,  # 아이디
+        "usermail": usermail_receive,  # 이메일
+        "password": password_hash,  # 비밀번호
+        "profile_name": username_receive,  # 프로필 이름 기본갑
+        "profile_pic": "",  # 프로필 사진 파일
         "profile_pic_real": "profile_pics.profile_placeholder.png",  # 프로필 사진 기본
     }
     db.users.insert_one(doc)
     return jsonify({'result': 'success'})
+
 
 @app.route('/posting', methods=['POST'])
 def posting():
@@ -113,7 +113,7 @@ def posting():
         user_info = db.users.find_one({"username": payload["id"]})
         comment_receive = request.form["comment_give"]
         date_receive = request.form["date_give"]
-        print(type(date_receive))
+
         doc = {
             "username": user_info["username"],
             "profile_name": user_info["profile_name"],
@@ -135,10 +135,10 @@ def get_posts():
         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
         my_username = payload["id"]
         username_receive = request.args.get("username_give")
-        if username_receive=="":
+        if username_receive == "":
             posts = list(db.posts.find({}).sort("date", -1).limit(20))
         else:
-            posts = list(db.posts.find({"username":username_receive}).sort("date", -1).limit(20))
+            posts = list(db.posts.find({"username": username_receive}).sort("date", -1).limit(20))
 
         for post in posts:
             post["_id"] = str(post["_id"])
@@ -146,6 +146,7 @@ def get_posts():
         return jsonify({"result": "success", "msg": "댓글을 가져왔습니다.", "posts": posts})
     except (jwt.ExpiredSignatureError, jwt.exceptions.DecodeError):
         return redirect(url_for("home"))
+
 
 @app.route('/uploading')
 def uploading():
@@ -155,19 +156,24 @@ def uploading():
 @app.route('/upload', methods=['POST'])
 def UploadReceive():
     token_receive = request.cookies.get('mytoken')
+
+    if request.method == 'POST': f = request.files['file']
+    image = f.filename.split('.')
+    save_to = f'static/img/profiles/.{image}'
+    f.save(save_to)
+
     try:
         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
         user_info = db.users.find_one({"username": payload["id"]})
 
-        picture_receive = request.form['image']
         contents_receive = request.form['content']
         date_receive = request.form["date_give"]
-        print(type(date_receive))
 
         doc = {
+            'profile_pic_real': save_to,
             "username": user_info["username"],
             "profile_name": user_info["profile_name"],
-            "image": picture_receive,
+
             "content": contents_receive,
             "date": date_receive
         }
@@ -177,6 +183,7 @@ def UploadReceive():
     except (jwt.ExpiredSignatureError, jwt.exceptions.DecodeError):
         return redirect(url_for("home"))
 
+
 @app.route("/get_upload", methods=['GET'])
 def get_upload():
     # 댓글 받아오는 get
@@ -185,10 +192,11 @@ def get_upload():
         payload = jwt.decode(token_receive, SECRET_KEY, algorithms=['HS256'])
         my_username = payload["id"]
         username_receive = request.args.get("username_give")
-        if username_receive=="":
+
+        if username_receive == "":
             feeds = list(db.feeds.find({}).sort("date", -1).limit(20))
         else:
-            feeds = list(db.feeds.find({"username":username_receive}).sort("date", -1).limit(20))
+            feeds = list(db.feeds.find({"username": username_receive}).sort("date", -1).limit(20))
 
         for feed in feeds:
             feed["_id"] = str(feed["_id"])
@@ -196,6 +204,7 @@ def get_upload():
         return jsonify({"result": "success", "msg": "피드를 가져왔습니다.", "feeds": feeds})
     except (jwt.ExpiredSignatureError, jwt.exceptions.DecodeError):
         return redirect(url_for("home"))
+
 
 if __name__ == '__main__':
     app.run('0.0.0.0', port=5000, debug=True)

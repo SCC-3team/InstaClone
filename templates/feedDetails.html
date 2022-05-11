@@ -1,0 +1,1010 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+            crossorigin="anonymous"></script>
+    <!-- Bootstrap Font Icon CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <script src="https://kit.fontawesome.com/452167c19f.js" crossorigin="anonymous"></script>
+    <meta charset="UTF-8">
+    <title>modal2</title>
+    <style>
+        /*모달 부분*/
+        .modal {
+            position: absolute;
+            top: 0;
+            left: 0;
+
+            width: 100%;
+            height: 100%;
+
+            display: none;
+
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+
+        .modal.show {
+            display: block;
+        }
+
+        /*   -----------------------  */
+
+        body {
+            margin: 0px;
+            overflow: hidden;
+        }
+
+        .anchor {
+            text-decoration: none;
+            color: black;
+        }
+
+        .anchor:hover {
+            color: black;
+        }
+
+        .all_profile_img {
+            border-radius: 50%;
+            width: 34px;
+            height: 34px;
+        }
+
+        .inputborder {
+            border: none;
+        }
+
+        .inputborder:focus {
+            outline: none;
+        }
+
+        .feed_details_wrap {
+            z-index: 100;
+            position: fixed;
+            background-color: rgba(0, 0, 0, 0.65);
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            margin: 0px auto;
+            justify-content: center;
+            align-items: center;
+
+        }
+
+        .feed_details_exit_btn {
+            z-index: 100;
+            position: fixed;
+            display: flex;
+            left: 95%;
+            bottom: 95%;
+            width: 40px;
+            height: 40px;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .feed_details {
+            background-color: rgba(0, 0, 0, 0.1);
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: absolute;
+
+        }
+
+        .feed_details_box {
+            width: 1573px;
+            height: 1071px;
+            display: flex;
+            flex-direction: row;
+            background-color: white;
+            border-radius: 10px;
+        }
+
+        @media all and (max-width: 1573px) {
+            .feed_details_box {
+                display: block;
+                width: 1071px;
+            }
+        }
+
+        .feed_details_box_left {
+            display: flex;
+            width: 1071px;
+            height: 1071px;
+        }
+
+        .feed_details_box_right {
+            width: 503px;
+            height: 1071px;
+        }
+
+        @media all and (max-width: 1573px) {
+            .feed_details_box_right {
+                display: none;
+            }
+        }
+
+        .feed_details_box_writer {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            max-width: 503px;
+            max-height: 63px;
+            border-bottom: 2px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .feed_details_header {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            max-width: 503px;
+            max-height: 63px;
+            align-items: center;
+            padding: 0 16px;
+
+
+        }
+
+        .feed_details_header_profile {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+            max-width: 455px;
+            max-height: 63px;
+        }
+
+        .feed_details_header_img {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            max-width: 32px;
+            max-height: 32px;
+            margin-right: 15px;
+        }
+
+        .feed_details_profile_follow {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            max-width: 380px;
+            max-height: 26px;
+            margin-right: 10px;
+            margin-top: 7px;
+            font-size: 15px;
+        }
+
+        .box_profile {
+            margin: 0 5px;
+        }
+
+
+        .feed_details_box_ct {
+            width: 100%;
+            height: 100%;
+            max-width: 503px;
+            max-height: 1008px;
+            overflow: scroll;
+        }
+
+
+        .feed_details_box_text {
+            display: block;
+            width: 100%;
+            height: 100%;
+            max-width: 503px;
+            max-height: 844px;
+            padding: 0 16px;
+            align-items: center;
+        }
+
+        .box_account_text {
+            display: flex;
+            width: 100%;
+            height: auto;
+            max-width: 485px;
+            max-height: 185px;
+            padding-top: 30px;
+            margin-bottom: 40px;
+            word-break: break-all;
+            overflow-y: scroll;
+        }
+
+        .account_text_left {
+            display: flex;
+            width: 53px;
+            height: 32px;
+            margin-left: 3px;
+        }
+
+        .account_text_right {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            max-width: 450px;
+            max-height: 185px;
+            font-size: 13px;
+
+        }
+
+        .account_text_right_ac {
+            width: 100%;
+            max-width: 100px;
+            min-width: 70px;
+        }
+
+        .account_comment_list {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            min-height: 62px;
+            max-width: 485px;
+            max-height: 62px;
+            word-break: break-all;
+        }
+
+        .account_comment_list_img {
+            width: 50px;
+            height: 34px;
+            margin-left: 3px;
+        }
+
+        .account_comment_list_text {
+            display: block;
+            width: 100%;
+            height: 100%;
+            max-width: 453px;
+            max-height: 185px;
+            font-size: 13px;
+        }
+
+        .account_comment_list_id {
+            display: flex;
+            width: 100%;
+            height: 35%;
+        }
+
+        .account_comment_list_date {
+            display: flex;
+            width: 100%;
+            height: 50%;
+        }
+
+        .feed_details_box_btns {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            max-width: 503px;
+            max-height: 55px;
+            padding: 0 16px;
+            align-items: center;
+            border-top: 2px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .box_btns {
+            display: flex;
+            align-items: center;
+            width: 40px;
+            height: 40px;
+        }
+
+        .box_i {
+            width: 24px;
+            height: 24px;
+            margin-top: 50%;
+
+        }
+
+        .btn_i {
+            border: none;
+            background-color: white;
+        }
+
+        .feed_details_box_btn4 {
+            margin-left: auto;
+            margin-right: -10px;
+        }
+
+        .feed_details_box_likes {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            max-width: 503px;
+            max-height: 18px;
+            padding-left: 16px;
+        }
+
+        .feed_details_box_date {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            max-width: 503px;
+            max-height: 18px;
+            padding-left: 16px;
+            padding-top: 8px;
+        }
+
+        .box_date {
+            color: rgba(0, 0, 0, 0.5);
+            font-size: 10.1px;
+            margin-left: 8px;
+        }
+
+        .feed_details_box_comment_insert {
+            display: flex;
+            align-items: flex-end;
+            width: 100%;
+            height: 100%;
+            max-width: 503px;
+            max-height: 73px;
+
+        }
+
+        .feed_details_box_comment_pad {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            max-width: 503px;
+            max-height: 53px;
+            justify-content: center;
+            align-items: center;
+
+        }
+
+        .feed_details_box_comment_form {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            height: 100%;
+            max-width: 470px;
+            max-height: 40px;
+            padding: 0 16px;
+
+        }
+
+        .comment_text {
+            display: flex;
+            align-items: center;
+            width: 404px;
+            height: 40px;
+        }
+
+        .comment_textt {
+            width: 404px;
+            height: 40px;
+        }
+
+
+        .comment_writebtn {
+            display: flex;
+            width: 40px;
+            height: 18px;
+            padding-right: -10px;
+        }
+
+        .comment_writebtnn {
+            display: flex;
+            width: 40px;
+            height: 18px;
+            font-size: 15px;
+            text-decoration: none;
+            color: #006fff;
+            border: none;
+            background-color: white;
+        }
+
+
+        /* 좋아요 모달*/
+        .feed_like_wrap {
+            z-index: 100;
+            position: fixed;
+            background-color: rgba(0, 0, 0, 0.65);
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            margin: 0px auto;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .feed_like {
+            width: 400px;
+            height: 400px;
+            display: block;
+            background-color: white;
+            border-radius: 10px;
+        }
+
+        .feed_like_upper {
+            display: flex;
+            width: 400px;
+            height: 40px;
+            border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .feed_like_text {
+            display: flex;
+            height: 100%;
+            width: 90%;
+        }
+
+        .feed_like_text_b {
+            display: flex;
+            height: 100%;
+            margin-left: 50%;
+            align-items: center;
+        }
+
+        .feed_like_exit_btn {
+            display: flex;
+            width: 40px;
+            height: 40px;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .feed_like_lower {
+            width: 400px;
+            height: 360px;
+        }
+
+        .feed_like_lower_sep {
+            display: flex;
+            width: 400px;
+            height: 60px;
+            align-items: center;
+        }
+
+        .feed_like_lower_img {
+            display: flex;
+            width: 55px;
+            height: 50px;
+            align-items: center;
+            padding-left: 8px;
+        }
+
+        .feed_like_lower_img_size {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            margin-left: 5px;
+        }
+
+        .feed_like_lower_accounts {
+            width: 280px;
+            height: 40px;
+            padding-left: 20px;
+        }
+
+        .feed_like_lower_account {
+            width: 280px;
+            height: 20px;
+            font-size: 14px;
+        }
+
+        .feed_like_lower_account_follow {
+            width: 280px;
+            height: 11px;
+            font-size: 13px;
+            color: rgba(0, 0, 0, 0.5);
+        }
+
+        .feed_like_lower_btn_follow {
+            width: 50px;
+            height: 30px;
+            font-size: 12.015px;
+            color: white;
+            background-color: #006fff;
+            padding-left: 9px;
+            padding-top: 6px;
+            border-radius: 10px;
+        }
+
+        /* 캐러셀 */
+        .article1 {
+            align-content: stretch;
+            align-items: stretch;
+            box-sizing: border-box;
+            display: flex;
+            flex-basis: auto;
+            flex-direction: column;
+            flex-grow: 0;
+            flex-shrink: 0;
+
+            justify-content: center;
+            margin: 0 0 100px 0;
+            max-height: none;
+            max-width: none;
+            position: relative;
+            width: 100%;
+            height: 1071px;
+
+            border-style: solid;
+            border-width: 1px;
+            border-color: rgb(220, 220, 220);
+
+            -webkit-box-align: stretch;
+            -webkit-box-direction: normal;
+            -webkit-box-flex: 0;
+            -webkit-box-orient: vertical;
+            -webkit-box-pack: center;
+        }
+
+        .article1 > .carousel-inner {
+            width: auto;
+            height: 600px;
+        }
+
+        .article1 > .carousel-inner > .carousel-item {
+            width: auto;
+            height: 100%;
+        }
+
+        .article1 > .carousel-inner > .carousel-item > .d-block {
+            display: block;
+            width: auto;
+            height: 100%;
+        }
+
+    </style>
+
+
+</head>
+<body>
+
+<div class="feed_details_wrap">
+    <div class="feed_details_btn">
+        <div class="feed_details_exit">
+            <div class="feed_details_exit_btn">
+                <a class="anchor" href="">
+                    <i class="fa-solid fa-x fa-2xl"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="feed_details">
+        <div class="feed_details_box">
+            <div class="feed_details_box_left">
+                <div class="article1">
+
+                    <!--              피드 창 부트스트랩 캐러셀                          -->
+                    <!--              아이디 값 바꿔주고 밑에 data-bs-target 아이디 같이 가줘야 작동함                     -->
+
+                    <div class="feed_img">
+                        <div id="carouselExampleControlsNoTouching" class="carousel slide"
+                             data-bs-touch="false" data-bs-interval="false">
+                            <div class="carousel-inner">
+
+                                <!--             첫번째 사진 src 경로 입력               -->
+
+                                <div class="carousel-item active">
+                                    <img src="https://www.giantfreakinrobot.com/wp-content/uploads/2021/02/emma-stone-easy-a.jpg"
+                                         class="d-block w-100" alt="...">
+                                </div>
+
+                                <!--             왠만하면 두번째 사진까지라도 같이 가져가서 temp_html 해야함               -->
+                                <!--             div 클래스가 다르기 때문임.               -->
+
+                                <div class="carousel-item">
+                                    <img src="https://www.giantfreakinrobot.com/wp-content/uploads/2021/02/emma-stone-easy-a.jpg"
+                                         class="d-block w-100" alt="...">
+                                </div>
+                                <div class="carousel-item">
+                                    <img src="https://www.giantfreakinrobot.com/wp-content/uploads/2021/02/emma-stone-easy-a.jpg"
+                                         class="d-block w-100" alt="...">
+                                </div>
+                            </div>
+
+                            <!--             캐러셀 사진 이동 버튼임               -->
+                            <!--             data-bs-target을 해당 캐러셀과 같은 값을 줘야함               -->
+                            <!--             보통 타겟아이디 뒤에 숫자를 붙이는게 쉬움               -->
+                            <!--             ex) target1 , target1-1, target1-2               -->
+
+                            <button class="carousel-control-prev" type="button"
+                                    data-bs-target="#carouselExampleControlsNoTouching"
+                                    data-bs-slide="prev">
+                                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Previous</span>
+                            </button>
+                            <button class="carousel-control-next" type="button"
+                                    data-bs-target="#carouselExampleControlsNoTouching"
+                                    data-bs-slide="next">
+                                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                <span class="visually-hidden">Next</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div> <!--모달 왼쪽 div-->
+            <div class="feed_details_box_right">
+                <div class="feed_details_box_writer">
+                    <div class="feed_details_header">
+                        <div class="feed_details_header_profile">
+                            <div class="feed_details_header_img">
+                                <a class="anchor" href="/">
+                                    <img class="all_profile_img" src="1.jpeg"/></a>
+                            </div>
+                            <div class="feed_details_profile_follow">
+                                <div class="box_profile feed_details_profile_nick">
+                                    <a class="anchor" href="/"><b>2022studian</b></a>
+                                </div>
+                                <div class="box_profile feed_details_profile_dot"><b>
+                                    •</b>
+                                </div>
+                                <div class="box_profile feed_details_profile_f_status">
+                                    <button class="btn_i"><b style="color:#006fff;">팔로우</b></button>
+                                </div>
+                            </div> <!--헤더 프로파일 팔로우 상태-->
+                        </div>
+                    </div>
+                </div>  <!-- 이미지 닉네임 모달버튼 --->
+
+
+                <div class="feed_details_box_ct">
+                    <div class="feed_details_box_text">
+                        <div class="box_account_text">
+                            <div class="account_text_left">
+                                <a class="anchor" href="/">
+                                    <img class="all_profile_img" src="1.jpeg"/></a>
+                            </div>
+                            <div class="account_text_right">
+                                <div class="account_text_right_ac"><a class="anchor" href=""><b>여기에계정</b></a></div>
+                                <div>
+                                    asldkfj;lasdfkas;ldkfas;dkfjlas;dkfjsal;dkfjs;lakfsla;dkfs;aldkfsal;dkfjsa;ldkfjsadl;kfjsda;lkfjsl;k
+                                </div>
+                            </div>
+                        </div>
+                        <div class="account_comment_list">
+                            <div class="account_comment_left_width">
+                                <div class="account_comment_list_img ">
+                                    <a class="anchor" href="1.jpeg">
+                                        <img class="all_profile_img" src="1.jpeg"/>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="account_comment_list_text">
+                                <div class="account_comment_list_id">
+                                    <div class="account_text_right_ac">
+                                        <a class="anchor" href=""><b>여기에계정</b></a>
+                                    </div>
+                                    <div>asldkjaoiufdj</div>
+                                </div>
+                                <div class="account_comment_list_date">
+                                    <div class="box_date">2일 전</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="account_comment_list">
+                            <div class="account_comment_left_width">
+                                <div class="account_comment_list_img ">
+                                    <a class="anchor" href="1.jpeg">
+                                        <img class="all_profile_img" src="1.jpeg"/>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="account_comment_list_text">
+                                <div class="account_comment_list_id">
+                                    <div class="account_text_right_ac">
+                                        <a class="anchor" href=""><b>여기에계정</b></a>
+                                    </div>
+                                    <div>asldkjaoiufdj</div>
+                                </div>
+                                <div class="account_comment_list_date">
+                                    <div class="box_date">2일 전</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="account_comment_list">
+                            <div class="account_comment_left_width">
+                                <div class="account_comment_list_img ">
+                                    <a class="anchor" href="1.jpeg">
+                                        <img class="all_profile_img" src="1.jpeg"/>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="account_comment_list_text">
+                                <div class="account_comment_list_id">
+                                    <div class="account_text_right_ac">
+                                        <a class="anchor" href=""><b>여기에계정</b></a>
+                                    </div>
+                                    <div>asldkjaoiufdj</div>
+                                </div>
+                                <div class="account_comment_list_date">
+                                    <div class="box_date">2일 전</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="account_comment_list">
+                            <div class="account_comment_left_width">
+                                <div class="account_comment_list_img ">
+                                    <a class="anchor" href="1.jpeg">
+                                        <img class="all_profile_img" src="1.jpeg"/>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="account_comment_list_text">
+                                <div class="account_comment_list_id">
+                                    <div class="account_text_right_ac">
+                                        <a class="anchor" href=""><b>여기에계정</b></a>
+                                    </div>
+                                    <div>asldkjaoiufdj</div>
+                                </div>
+                                <div class="account_comment_list_date">
+                                    <div class="box_date">2일 전</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="account_comment_list">
+                            <div class="account_comment_left_width">
+                                <div class="account_comment_list_img ">
+                                    <a class="anchor" href="1.jpeg">
+                                        <img class="all_profile_img" src="1.jpeg"/>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="account_comment_list_text">
+                                <div class="account_comment_list_id">
+                                    <div class="account_text_right_ac">
+                                        <a class="anchor" href=""><b>여기에계정</b></a>
+                                    </div>
+                                    <div>asldkjaoiufdj</div>
+                                </div>
+                                <div class="account_comment_list_date">
+                                    <div class="box_date">2일 전</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="account_comment_list">
+                            <div class="account_comment_left_width">
+                                <div class="account_comment_list_img ">
+                                    <a class="anchor" href="1.jpeg">
+                                        <img class="all_profile_img" src="1.jpeg"/>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="account_comment_list_text">
+                                <div class="account_comment_list_id">
+                                    <div class="account_text_right_ac">
+                                        <a class="anchor" href=""><b>여기에계정</b></a>
+                                    </div>
+                                    <div>asldkjaoiufdj</div>
+                                </div>
+                                <div class="account_comment_list_date">
+                                    <div class="box_date">2일 전</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="account_comment_list">
+                            <div class="account_comment_left_width">
+                                <div class="account_comment_list_img ">
+                                    <a class="anchor" href="1.jpeg">
+                                        <img class="all_profile_img" src="1.jpeg"/>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="account_comment_list_text">
+                                <div class="account_comment_list_id">
+                                    <div class="account_text_right_ac">
+                                        <a class="anchor" href=""><b>여기에계정</b></a>
+                                    </div>
+                                    <div>asldkjaoiufdj</div>
+                                </div>
+                                <div class="account_comment_list_date">
+                                    <div class="box_date">2일 전</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="account_comment_list">
+                            <div class="account_comment_left_width">
+                                <div class="account_comment_list_img ">
+                                    <a class="anchor" href="1.jpeg">
+                                        <img class="all_profile_img" src="1.jpeg"/>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="account_comment_list_text">
+                                <div class="account_comment_list_id">
+                                    <div class="account_text_right_ac">
+                                        <a class="anchor" href=""><b>여기에계정</b></a>
+                                    </div>
+                                    <div>asldkjaoiufdj</div>
+                                </div>
+                                <div class="account_comment_list_date">
+                                    <div class="box_date">2일 전</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="account_comment_list">
+                            <div class="account_comment_left_width">
+                                <div class="account_comment_list_img ">
+                                    <a class="anchor" href="1.jpeg">
+                                        <img class="all_profile_img" src="1.jpeg"/>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="account_comment_list_text">
+                                <div class="account_comment_list_id">
+                                    <div class="account_text_right_ac">
+                                        <a class="anchor" href=""><b>여기에계정</b></a>
+                                    </div>
+                                    <div>asldkjaoiufdj</div>
+                                </div>
+                                <div class="account_comment_list_date">
+                                    <div class="box_date">2일 전</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="account_comment_list">
+                            <div class="account_comment_left_width">
+                                <div class="account_comment_list_img ">
+                                    <a class="anchor" href="1.jpeg">
+                                        <img class="all_profile_img" src="1.jpeg"/>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="account_comment_list_text">
+                                <div class="account_comment_list_id">
+                                    <div class="account_text_right_ac">
+                                        <a class="anchor" href=""><b>여기에계정</b></a>
+                                    </div>
+                                    <div>asldkjaoiufdj</div>
+                                </div>
+                                <div class="account_comment_list_date">
+                                    <div class="box_date">2일 전</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="account_comment_list">
+                            <div class="account_comment_left_width">
+                                <div class="account_comment_list_img ">
+                                    <a class="anchor" href="1.jpeg">
+                                        <img class="all_profile_img" src="1.jpeg"/>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="account_comment_list_text">
+                                <div class="account_comment_list_id">
+                                    <div class="account_text_right_ac">
+                                        <a class="anchor" href=""><b>여기에계정</b></a>
+                                    </div>
+                                    <div>asldkjaoiufdj</div>
+                                </div>
+                                <div class="account_comment_list_date">
+                                    <div class="box_date">2일 전</div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                    <div class="feed_details_box_btns">
+                        <div class="box_btns">
+                            <button class="btn_i"><i class="box_i fa-solid fa-heart fa-lg icon-deco"></i></button>
+                        </div>
+                        <div class="box_btns">
+                            <button class="btn_i"><i class="box_i fa-solid fa-comments fa-lg icon-deco"></i></button>
+
+                        </div>
+                        <div class="box_btns">
+                            <button class="btn_i"><i class="box_i fa-solid fa-lg fa-paper-plane"></i></button>
+
+                        </div>
+                        <div class="box_btns feed_details_box_btn4">
+                            <button class="btn_i"><i class="box_i fa-solid fa-heart fa-lg icon-deco"></i></button>
+
+                        </div>
+                    </div>
+
+                    <div class="feed_details_box_likes">
+                        <div>
+                            <button class="btn_i btn-open-popup"><b style="font-size:14px;">좋아요 12,231개</b></button>
+                        </div>
+                        <!--모달 버튼-->
+                    </div>
+                    <div class="feed_details_box_date">
+                        <div class="box_date"><b>1일 전</b></div>
+                    </div>
+                    <div class="feed_details_box_comment_insert">
+                        <div class="feed_details_box_comment_pad">
+                            <div class="feed_details_box_comment_form">
+                                <div class="comment_text">
+                                    <input class="inputborder comment_textt" type="text" placeholder="댓글을 입력하세요"/>
+                                </div>
+                                <div class="comment_writebtn">
+                                    <button class="comment_writebtnn">
+                                        <b>게시</b>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>  <!-- 게시글내용 댓글 좋아요버튼 게시일 이모지버튼 댓글작성란 게시버튼  --->
+            </div> <!--모달 오른쪽 div-->
+        </div>
+    </div>
+</div>
+
+<div class="modal">
+    <div class="feed_like_wrap">
+        <div class="feed_like">
+            <div class="feed_like_upper">
+                <div class="feed_like_text">
+                    <div class="feed_like_text_b"><b>좋아요</b></div>
+                </div>
+                <div class="feed_like_exit">
+                    <div class="feed_like_exit_btn">
+                        <a class="anchor" href="">
+                            <i class="fa-solid fa-x "></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="feed_like_lower">
+                <div class="feed_like_lower_list">
+                    <div class="feed_like_lower_sep">
+                        <div class="feed_like_lower_img">
+                            <a class="anchor" href="">
+                                <img class="feed_like_lower_img_size"
+                                     src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2Fd8nSgN%2FbtrAYt0iXBr%2FZho1yiQHDSOZU0MDmdiopK%2Fimg.webp"/></a>
+                        </div>
+                        <div class="feed_like_lower_accounts">
+                            <div class="feed_like_lower_account">
+                                <a class="anchor" href=""><b>lllylll</b></a>
+                            </div>
+                            <div class="feed_like_lower_account_follow">
+                                <div>
+                                    <a class="anchor" href="">j_h_84님 외 1명이 팔로우합니다</a>
+                                </div>
+                            </div>
+                        </div>
+                        <a class="anchor" href="">
+                            <div class="feed_like_lower_btn_follow">
+                                <b>팔로우</b>
+                            </div>
+                        </a>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div> <!--버튼 누르면 나오는 부분-->
+<script>
+    const body = document.querySelector('body');
+    const modal = document.querySelector('.modal');
+    const btnOpenPopup = document.querySelector('.btn-open-popup');
+
+    btnOpenPopup.addEventListener('click', () => {
+        modal.classList.toggle('show');
+
+        if (modal.classList.contains('show')) {
+            body.style.overflow = 'hidden';
+        }
+    });
+
+    modal.addEventListener('click', (event) => {
+        if (event.target === modal) {
+            modal.classList.toggle('show');
+
+            if (!modal.classList.contains('show')) {
+                body.style.overflow = 'auto';
+            }
+        }
+    });
+</script> <!--모달 스크립트-->
+
+
+</body>
+</html>
